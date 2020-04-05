@@ -9,13 +9,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        cursorColor: Styles.darkOrange,
-        primarySwatch: Colors.blue,
-        fontFamily: 'Futura',
-      ),
-      home: LoginScreen(),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          cursorColor: Styles.darkOrange,
+          primarySwatch: Colors.blue,
+          fontFamily: 'Futura',
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => LoginScreen(),
+        });
   }
 }

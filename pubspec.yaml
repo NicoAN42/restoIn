@@ -24,6 +24,7 @@ dependencies:
     # Use with the CupertinoIcons class for iOS style icons.
     cupertino_icons: ^0.1.2
     font_awesome_flutter: "8.8.1"
+    email_validator: "0.1.4"
 
 dev_dependencies:
     flutter_test:
@@ -89,3 +90,6 @@ flutter:
               - asset: assets/fonts/Futura-Bk-BT-Book.ttf
                 weight: 300
                 style: italic
+        - family: CustomIcon
+          fonts:
+              - asset: assets/fonts/CustomIcon.ttf
