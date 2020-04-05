@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:restoin/screens/finger_register_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
@@ -36,19 +37,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _name = _newNameController.text;
       _email = _newEmailController.text;
       _pw = _newPasswordController.text;
-      // _loginCommand();
+      _loginCommand();
     } else {
       _newPasswordController.clear();
       _newConfirmPasswordController.clear();
     }
   }
 
-  // void _loginCommand() {
-  //   final snackbar = SnackBar(
-  //     content: Text('Email: $_email, password: $_pw'),
-  //   );
-  //   scaffoldKey.currentState.showSnackBar(snackbar);
-  // }
+  void _loginCommand() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FingerRegisterScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             "Create Account",
                             style: Styles.customStyle("xLargeBoldBlack"),
                           ),
-                          Text("Join us to explore more food!",
+                          Text("Join us to discover more food",
                               style: Styles.customStyle("mediumGray"))
                         ],
                       )),
@@ -136,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       alignment: Alignment.centerRight,
                       child: Padding(
                           padding: EdgeInsets.only(top: screenHeight * 0.03),
-                          child: FlatButton(
+                          child: RaisedButton(
                             child: Text("Next",
                                 style: Styles.customStyle("mediumBoldWhite")),
                             onPressed: () => _submitCommand(),

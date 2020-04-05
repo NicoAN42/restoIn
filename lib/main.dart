@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restoin/screens/login_screen.dart';
+// import 'package:restoin/screens/login_screen.dart';
 import 'package:restoin/styles.dart';
+
+import 'screens/finger_login_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => LoginScreen(),
+          '/': (context) => FingerLoginScreen(),
         });
   }
 }

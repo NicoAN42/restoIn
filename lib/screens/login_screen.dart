@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+// import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:restoin/screens/register_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _loginCommand(3);
       _passwordController.clear();
     } else {
-      _passwordController.clear();
+      //LOGIN
     }
   }
 
@@ -93,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             "Login",
                             style: Styles.customStyle("xLargeBoldBlack"),
                           ),
-                          Text("Please sign in to continue.",
+                          Text("Please sign in to continue",
                               style: Styles.customStyle("mediumGray"))
                         ],
                       )),
@@ -127,19 +128,35 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                          padding: EdgeInsets.only(top: screenHeight * 0.03),
-                          child: FlatButton(
-                            child: Text("Sign In",
-                                style: Styles.customStyle("mediumBoldWhite")),
-                            onPressed: () => _submitCommand(),
-                            color: Styles.orange,
-                            highlightColor: Styles.darkOrange,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                          ))),
+                  Padding(
+                    padding: EdgeInsets.only(top: screenHeight * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        // SizedBox(
+                        //   width: 60,
+                        //   child: RaisedButton(
+                        //     child: new Icon(MdiIcons.fingerprint,
+                        //         color: Styles.white),
+                        //     onPressed: () => _submitCommand(),
+                        //     color: Styles.orange,
+                        //     highlightColor: Styles.darkOrange,
+                        //     shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(10)),
+                        //   ),
+                        // ),
+                        RaisedButton(
+                          child: Text("Sign In",
+                              style: Styles.customStyle("mediumBoldWhite")),
+                          onPressed: () => _submitCommand(),
+                          color: Styles.orange,
+                          highlightColor: Styles.darkOrange,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                      ],
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.only(top: screenHeight * 0.18),
                     child: Column(

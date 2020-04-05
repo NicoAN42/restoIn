@@ -23,6 +23,7 @@ abstract class Styles {
     double size;
     Color color;
     FontWeight weight = FontWeight.w500;
+    TextDecoration deco = TextDecoration.none;
 
     if (s.contains("small"))
       size = 12;
@@ -48,10 +49,13 @@ abstract class Styles {
 
     if (s.contains("bold")) weight = FontWeight.w700;
 
+    if (s.contains("underline")) deco = TextDecoration.underline;
+
     return (TextStyle(
       fontSize: size,
       color: color,
       fontWeight: weight,
+      decoration: deco,
     ));
   }
 }
