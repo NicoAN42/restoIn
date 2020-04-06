@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else if (_email != _valEmail) {
       _loginCommand(2);
       _emailController.clear();
-    } else if (_pw != _valEmail) {
+    } else if (_pw != _valPw) {
       _loginCommand(3);
       _passwordController.clear();
     } else {
