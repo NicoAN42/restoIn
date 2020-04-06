@@ -10,7 +10,7 @@ abstract class Styles {
   static const Color lightOrange = Color(0xFFFECA57);
   static const Color orange = Color(0xFFFEBD51);
   static const Color darkOrange = Color(0xFFFF9F43);
-  static const Color green = Color(0xFFFF9F43);
+  static const Color green = Color(0xFF1DDB00);
   static const Color red = Color(0xFFDB0000);
 
   // static const TextStyle mediumGray = TextStyle(
