@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Futura',
       ),
-      initialRoute: '/searchResult',
+      initialRoute: '/',
       routes: {
         '/': (context) => FingerLoginScreen(),
         '/home': (context) => HomeScreen(),
