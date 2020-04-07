@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../styles.dart';
 
@@ -71,6 +72,60 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
                 ? Styles.customStyle("mediumBoldBlack")
                 : Styles.customStyle("mediumGray")),
       ),
+    );
+  }
+}
+
+class CustomSearchSortButton extends StatefulWidget {
+  final String text;
+  final bool isSortBy;
+
+  const CustomSearchSortButton({Key key, this.text, this.isSortBy = false})
+      : super(key: key);
+
+  @override
+  _CustomSearchSortButtonState createState() =>
+      new _CustomSearchSortButtonState();
+}
+
+class _CustomSearchSortButtonState extends State<CustomSearchSortButton> {
+  bool isPressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ButtonTheme(
+      minWidth: 10,
+      child: (FlatButton(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Row(children: <Widget>[
+          Text(widget.text,
+              style: widget.isSortBy
+                  ? Styles.customStyle("mediumGray")
+                  : isPressed
+                      ? Styles.customStyle("mediumWhite")
+                      : Styles.customStyle("mediumGray")),
+          widget.isSortBy
+              ? Icon(
+                  isPressed
+                      ? FontAwesomeIcons.sortUp
+                      : FontAwesomeIcons.sortDown,
+                  color: Styles.gray,
+                )
+              : Container(
+                  height: 0,
+                  width: 0,
+                ),
+        ]),
+        color: widget.isSortBy
+            ? Styles.white
+            : isPressed ? Styles.orange : Styles.white,
+        onPressed: () {
+          setState(() {
+            isPressed = !isPressed;
+          });
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      )),
     );
   }
 }

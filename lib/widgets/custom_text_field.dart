@@ -132,8 +132,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
 class CustomSearchField extends StatefulWidget {
   final TextEditingController controller;
+  final Function addHistory;
 
-  CustomSearchField({this.controller});
+  CustomSearchField({this.controller, this.addHistory});
 
   @override
   _CustomSearchFieldState createState() => new _CustomSearchFieldState();
@@ -163,6 +164,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
       style: Styles.customStyle("mediumBlack"),
       focusNode: _focus,
       controller: widget.controller,
+      onSubmitted: widget.addHistory(widget.controller.text),
       decoration: InputDecoration(
         hintText: "Search food or restaurant",
         hintStyle: Styles.customStyle("mediumGray"),
@@ -178,8 +180,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           borderSide: BorderSide(color: Styles.white),
         ),
-        prefixIcon: new Icon(FontAwesomeIcons.search,
-            color: _focus.hasFocus ? Styles.black : Styles.gray),
+        prefixIcon: new Icon(FontAwesomeIcons.search, color: Styles.gray),
       ),
     ));
   }

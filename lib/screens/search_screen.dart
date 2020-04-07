@@ -6,6 +6,8 @@ import 'package:restoin/widgets/custom_text_field.dart';
 
 TextEditingController _searchController = new TextEditingController();
 
+List<String> searchHistory = [];
+
 class SearchScreen extends StatefulWidget {
   @override
   _SearchScreenState createState() => new _SearchScreenState();
@@ -15,22 +17,40 @@ class _SearchScreenState extends State<SearchScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    searchHistory.clear();
+    searchHistory.insert(0, "Ice Cream Sandwich");
+    searchHistory.insert(0, "Dalgona Coffee");
+    searchHistory.insert(0, "Beef BBQ");
+    searchHistory.insert(0, "Vanilla Cake");
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    List<String> searchHistory = [
-      "Ice Cream Sandwich",
-      "Dalgona Coffee",
-      "Beef BBQ",
-      "Vanilla Cake"
-    ];
-    List<String> searchTimestamp = [
-      "13/04/20",
-      "Yesterday",
-      "Today",
-      "10 min ago"
-    ];
+    void _deleteHistory(String s) {
+      setState(() {
+        searchHistory.remove(s);
+      });
+    }
+
+    void _clearAllHistory() {
+      setState(() {
+        searchHistory.clear();
+      });
+    }
+
+    void _addHistory(String s) {
+      _searchController.clear();
+      s.trim();
+      if (s.isNotEmpty)
+        // setState(() {
+        searchHistory.insert(0, s);
+      // });
+    }
 
     return new Scaffold(
       key: scaffoldKey,
@@ -61,9 +81,10 @@ class _SearchScreenState extends State<SearchScreen> {
                           SizedBox(
                               width: screenWidth * 0.9 - 28,
                               height: 37,
-                              //TODO: get text from search and add to history
                               child: CustomSearchField(
-                                  controller: _searchController)),
+                                controller: _searchController,
+                                addHistory: _addHistory,
+                              )),
                         ],
                       )),
                   Padding(
@@ -103,11 +124,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         children: <Widget>[
                           Text("Latest Search",
                               style: Styles.customStyle("largeBoldBlack")),
-                          FlatButton(
+                          GestureDetector(
                             child: Text("Clear All",
                                 style: Styles.customStyle("mediumOrange")),
-                            //TODO: button clear all
-                            onPressed: () {},
+                            onTap: () => _clearAllHistory(),
                           ),
                         ]),
                   ),
@@ -116,9 +136,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         top: 0,
                         left: screenWidth * 0.03,
                         right: screenWidth * 0.03),
-                    itemCount: searchHistory.length,
+                    itemCount:
+                        searchHistory.length > 10 ? 10 : searchHistory.length,
                     shrinkWrap: true,
-                    reverse: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -127,15 +147,21 @@ class _SearchScreenState extends State<SearchScreen> {
                                 bottom:
                                     BorderSide(width: 1, color: Styles.gray))),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            CustomHistoryButton(
-                              text: "${searchHistory[index]}",
-                            ),
-                            Text("${searchTimestamp[index]}",
-                                style: Styles.customStyle("smallGray")),
-                          ],
-                        ),
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              CustomHistoryButton(
+                                text: "${searchHistory[index]}",
+                              ),
+                              GestureDetector(
+                                child: new Icon(
+                                  FontAwesomeIcons.times,
+                                  size: 16,
+                                  color: Styles.gray,
+                                ),
+                                onTap: () =>
+                                    _deleteHistory("${searchHistory[index]}"),
+                              ),
+                            ]),
                       );
                     },
                   )

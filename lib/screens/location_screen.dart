@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:restoin/styles.dart';
-import 'package:restoin/widgets/custom_button.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
 
 TextEditingController _locationController = new TextEditingController();

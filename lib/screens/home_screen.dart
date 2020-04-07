@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 
@@ -23,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    
 
+    //TODO: link to location screen
     DropdownButton _myLocation() => DropdownButton<String>(
           style: Styles.customStyle("mediumboldblack"),
           underline: SizedBox(),
@@ -80,33 +81,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   Container(
                     width: screenWidth * 0.8,
-                    child: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Search food or restaurant",
-                          filled: true,
-                          contentPadding: EdgeInsets.all(4),
-                          fillColor: Styles.lightGray,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                                width: 0, 
-                                style: BorderStyle.none,
-                              ),
+                    child: FlatButton(
+                        color: Styles.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, "/search"),
+                        child: Row(children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(right: 8.0),
+                            child: Icon(FontAwesomeIcons.search,
+                                color: Styles.gray),
                           ),
-                          prefixIcon: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Image.asset('assets/icon/g_search.png',
-                                width: 14, height: 14, fit: BoxFit.fill),
-                          )),
-                    ),
+                          Text(
+                            "Search food or restaurant",
+                            style: Styles.customStyle("mediumGray"),
+                          ),
+                        ])),
                   ),
                   Image.asset('assets/icon/g_filter.png', width: 24, height: 24)
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(
-                  screenWidth * 0.05, 0, 0, 20),
+              padding: EdgeInsets.fromLTRB(screenWidth * 0.05, 0, 0, 20),
               child: SizedBox(
                 height: 40,
                 child: ListView(
@@ -114,102 +112,121 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: FlatButton(
-                          child: Text("Food",
-                              style: _foodButton ?  Styles.customStyle("mediumwhite") : Styles.customStyle("mediumgray")),
-                          onPressed: () {
-                            setState(() {
-                              _foodButton = !_foodButton;
-                            });
-                          },
-                          color: _foodButton ? Styles.orange : Styles.white,
-                          highlightColor: _foodButton ? Styles.darkOrange : Styles.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: FlatButton(
+                        child: Text("Food",
+                            style: _foodButton
+                                ? Styles.customStyle("mediumwhite")
+                                : Styles.customStyle("mediumgray")),
+                        onPressed: () {
+                          setState(() {
+                            _foodButton = !_foodButton;
+                          });
+                        },
+                        color: _foodButton ? Styles.orange : Styles.white,
+                        highlightColor:
+                            _foodButton ? Styles.darkOrange : Styles.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: FlatButton(
-                          child: Text("Restaurant",
-                              style: _restaurantButton ?  Styles.customStyle("mediumwhite") : Styles.customStyle("mediumgray")),
-                          onPressed: () {
-                            setState(() {
-                              _restaurantButton = !_restaurantButton;
-                            });
-                          },
-                          color: _restaurantButton ? Styles.orange : Styles.white,
-                          highlightColor: _restaurantButton ? Styles.darkOrange : Styles.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: FlatButton(
+                        child: Text("Restaurant",
+                            style: _restaurantButton
+                                ? Styles.customStyle("mediumwhite")
+                                : Styles.customStyle("mediumgray")),
+                        onPressed: () {
+                          setState(() {
+                            _restaurantButton = !_restaurantButton;
+                          });
+                        },
+                        color: _restaurantButton ? Styles.orange : Styles.white,
+                        highlightColor: _restaurantButton
+                            ? Styles.darkOrange
+                            : Styles.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: FlatButton(
-                          child: Text("Near By",
-                              style: _nearbyButton ?  Styles.customStyle("mediumwhite") : Styles.customStyle("mediumgray")),
-                          onPressed: () {
-                            setState(() {
-                              _nearbyButton = !_nearbyButton;
-                            });
-                          },
-                          color: _nearbyButton ? Styles.orange : Styles.white,
-                          highlightColor: _nearbyButton ? Styles.darkOrange : Styles.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: FlatButton(
+                        child: Text("Near By",
+                            style: _nearbyButton
+                                ? Styles.customStyle("mediumwhite")
+                                : Styles.customStyle("mediumgray")),
+                        onPressed: () {
+                          setState(() {
+                            _nearbyButton = !_nearbyButton;
+                          });
+                        },
+                        color: _nearbyButton ? Styles.orange : Styles.white,
+                        highlightColor:
+                            _nearbyButton ? Styles.darkOrange : Styles.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: FlatButton(
-                          child: Text("Open Now",
-                              style: _opennowButton ?  Styles.customStyle("mediumwhite") : Styles.customStyle("mediumgray")),
-                          onPressed: () {
-                            setState(() {
-                              _opennowButton = !_opennowButton;
-                            });
-                          },
-                          color: _opennowButton ? Styles.orange : Styles.white,
-                          highlightColor: _opennowButton ? Styles.darkOrange : Styles.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: FlatButton(
+                        child: Text("Open Now",
+                            style: _opennowButton
+                                ? Styles.customStyle("mediumwhite")
+                                : Styles.customStyle("mediumgray")),
+                        onPressed: () {
+                          setState(() {
+                            _opennowButton = !_opennowButton;
+                          });
+                        },
+                        color: _opennowButton ? Styles.orange : Styles.white,
+                        highlightColor:
+                            _opennowButton ? Styles.darkOrange : Styles.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: FlatButton(
-                          child: Text("Rate: 4.0+",
-                              style: _rateButton ?  Styles.customStyle("mediumwhite") : Styles.customStyle("mediumgray")),
-                          onPressed: () {
-                            setState(() {
-                              _rateButton = !_rateButton;
-                            });
-                          },
-                          color: _rateButton ? Styles.orange : Styles.white,
-                          highlightColor: _rateButton ? Styles.darkOrange : Styles.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: FlatButton(
+                        child: Text("Rate: 4.0+",
+                            style: _rateButton
+                                ? Styles.customStyle("mediumwhite")
+                                : Styles.customStyle("mediumgray")),
+                        onPressed: () {
+                          setState(() {
+                            _rateButton = !_rateButton;
+                          });
+                        },
+                        color: _rateButton ? Styles.orange : Styles.white,
+                        highlightColor:
+                            _rateButton ? Styles.darkOrange : Styles.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 8),
-                        child: FlatButton(
-                          child: Text("Discount",
-                              style: _discountButton ?  Styles.customStyle("mediumwhite") : Styles.customStyle("mediumgray")),
-                          onPressed: () {
-                            setState(() {
-                              _discountButton = !_discountButton;
-                            });
-                          },
-                          color: _discountButton ? Styles.orange : Styles.white,
-                          highlightColor: _discountButton ? Styles.darkOrange : Styles.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8),
+                      child: FlatButton(
+                        child: Text("Discount",
+                            style: _discountButton
+                                ? Styles.customStyle("mediumwhite")
+                                : Styles.customStyle("mediumgray")),
+                        onPressed: () {
+                          setState(() {
+                            _discountButton = !_discountButton;
+                          });
+                        },
+                        color: _discountButton ? Styles.orange : Styles.white,
+                        highlightColor:
+                            _discountButton ? Styles.darkOrange : Styles.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
+                    ),
                   ],
                 ),
               ),
@@ -224,16 +241,19 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text("Big Deals",
-                  style: Styles.customStyle("largeboldblack"),),
-                  Text("Show All",
-                  style: Styles.customStyle("mediumorange"),),
+                  Text(
+                    "Big Deals",
+                    style: Styles.customStyle("largeboldblack"),
+                  ),
+                  Text(
+                    "Show All",
+                    style: Styles.customStyle("mediumorange"),
+                  ),
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(
-                  screenWidth * 0.05, 0, 0, 20),
+              padding: EdgeInsets.fromLTRB(screenWidth * 0.05, 0, 0, 20),
               child: SizedBox(
                 height: screenWidth * 0.50 + 50,
                 child: ListView(
@@ -245,41 +265,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     Stack(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(right: screenWidth * 0.05),
-                          width: screenWidth * 0.425 + 6,
-                          height: screenWidth * 2
-                        ),
+                            margin: EdgeInsets.only(right: screenWidth * 0.05),
+                            width: screenWidth * 0.425 + 6,
+                            height: screenWidth * 2),
                         Positioned(
-                          left: 6,
-                          child: Container(
-                            width: screenWidth * 0.425,
-                            height: screenWidth * 0.50,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/food/square/roasted-cherry-double-chocolate-buckwheat-ice-cream-sandwiches-gluten-free-10.jpg"),
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(8.0))
-                            ),
-                          )
-                        ),
+                            left: 6,
+                            child: Container(
+                              width: screenWidth * 0.425,
+                              height: screenWidth * 0.50,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/food/square/roasted-cherry-double-chocolate-buckwheat-ice-cream-sandwiches-gluten-free-10.jpg"),
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8.0))),
+                            )),
                         Positioned(
                           top: screenWidth * 0.05,
                           left: 0,
                           child: Container(
-                            width: 60,
-                            height: 28,
-                            child: Image.asset("assets/icon/rating_page.png")
-                          ),
+                              width: 60,
+                              height: 28,
+                              child:
+                                  Image.asset("assets/icon/rating_page.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.02,
                           left: screenWidth * 0.30,
                           child: Container(
-                            width: 50,
-                            height: 52,
-                            child: Image.asset("assets/icon/disc_circle.png")
-                          ),
+                              width: 50,
+                              height: 52,
+                              child:
+                                  Image.asset("assets/icon/disc_circle.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.05 + 3,
@@ -287,8 +306,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Container(
                             child: Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumwhite"),),
-                                Image.asset("assets/icon/w_star.png", width: 16, height: 16)
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle("mediumwhite"),
+                                ),
+                                Image.asset("assets/icon/w_star.png",
+                                    width: 16, height: 16)
                               ],
                             ),
                           ),
@@ -297,51 +320,65 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: screenWidth * 0.05,
                           left: screenWidth * 0.3 + 8,
                           child: Container(
-                            child: Column(
-                              children: <Widget>[
-                                Text("30%", style: Styles.customStyle("mediumboldorange")),
-                                Text("Off", style: Styles.customStyle("smallorange"))
-                              ],
-                            )
-                          ),
+                              child: Column(
+                            children: <Widget>[
+                              Text("30%",
+                                  style:
+                                      Styles.customStyle("mediumboldorange")),
+                              Text("Off",
+                                  style: Styles.customStyle("smallorange"))
+                            ],
+                          )),
                         ),
                         Positioned(
                           top: screenWidth * 0.5 + 10,
                           left: 6,
                           child: Container(
-                            width: screenWidth * 0.425,
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("Chunky Pie", style: Styles.customStyle("mediumblack")),
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("IDR 75.000", style: Styles.customStyle("smallblack")),
-                                          Text(" • Western", style: Styles.customStyle("smallGray"))
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  Container(
-                                    width: 2,
-                                    height: 30,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("40", style: Styles.customStyle("mediumboldblack")),
-                                      Text("MINS", style: Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ),
+                              width: screenWidth * 0.425,
+                              child: Container(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text("Chunky Pie",
+                                            style: Styles.customStyle(
+                                                "mediumblack")),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("IDR 75.000",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                            Text(" • Western",
+                                                style: Styles.customStyle(
+                                                    "smallGray"))
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 2,
+                                      height: 30,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("40",
+                                            style: Styles.customStyle(
+                                                "mediumboldblack")),
+                                        Text("MINS",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )),
                         )
                       ],
                     ),
@@ -349,41 +386,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     Stack(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(right: screenWidth * 0.05),
-                          width: screenWidth * 0.425 + 6,
-                          height: screenWidth * 2
-                        ),
+                            margin: EdgeInsets.only(right: screenWidth * 0.05),
+                            width: screenWidth * 0.425 + 6,
+                            height: screenWidth * 2),
                         Positioned(
-                          left: 6,
-                          child: Container(
-                            width: screenWidth * 0.425,
-                            height: screenWidth * 0.50,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/food/square/zucchini-chickpea-feta-veggie-burgers-GF-square1.jpg"),
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(8.0))
-                            ),
-                          )
-                        ),
+                            left: 6,
+                            child: Container(
+                              width: screenWidth * 0.425,
+                              height: screenWidth * 0.50,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/food/square/zucchini-chickpea-feta-veggie-burgers-GF-square1.jpg"),
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8.0))),
+                            )),
                         Positioned(
                           top: screenWidth * 0.05,
                           left: 0,
                           child: Container(
-                            width: 60,
-                            height: 28,
-                            child: Image.asset("assets/icon/rating_page.png")
-                          ),
+                              width: 60,
+                              height: 28,
+                              child:
+                                  Image.asset("assets/icon/rating_page.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.02,
                           left: screenWidth * 0.30,
                           child: Container(
-                            width: 50,
-                            height: 52,
-                            child: Image.asset("assets/icon/disc_circle.png")
-                          ),
+                              width: 50,
+                              height: 52,
+                              child:
+                                  Image.asset("assets/icon/disc_circle.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.05 + 3,
@@ -391,8 +427,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Container(
                             child: Row(
                               children: <Widget>[
-                                Text("4.5 ", style: Styles.customStyle("mediumwhite"),),
-                                Image.asset("assets/icon/w_star.png", width: 16, height: 16)
+                                Text(
+                                  "4.5 ",
+                                  style: Styles.customStyle("mediumwhite"),
+                                ),
+                                Image.asset("assets/icon/w_star.png",
+                                    width: 16, height: 16)
                               ],
                             ),
                           ),
@@ -401,51 +441,65 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: screenWidth * 0.05,
                           left: screenWidth * 0.3 + 8,
                           child: Container(
-                            child: Column(
-                              children: <Widget>[
-                                Text("60%", style: Styles.customStyle("mediumboldorange")),
-                                Text("Off", style: Styles.customStyle("smallorange"))
-                              ],
-                            )
-                          ),
+                              child: Column(
+                            children: <Widget>[
+                              Text("60%",
+                                  style:
+                                      Styles.customStyle("mediumboldorange")),
+                              Text("Off",
+                                  style: Styles.customStyle("smallorange"))
+                            ],
+                          )),
                         ),
                         Positioned(
                           top: screenWidth * 0.5 + 10,
                           left: 6,
                           child: Container(
-                            width: screenWidth * 0.425,
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("Mega Burger", style: Styles.customStyle("mediumblack")),
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("IDR 40.000", style: Styles.customStyle("smallblack")),
-                                          Text(" • Western", style: Styles.customStyle("smallGray"))
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  Container(
-                                    width: 2,
-                                    height: 30,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("25", style: Styles.customStyle("mediumboldblack")),
-                                      Text("MINS", style: Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ),
+                              width: screenWidth * 0.425,
+                              child: Container(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text("Mega Burger",
+                                            style: Styles.customStyle(
+                                                "mediumblack")),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("IDR 40.000",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                            Text(" • Western",
+                                                style: Styles.customStyle(
+                                                    "smallGray"))
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 2,
+                                      height: 30,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("25",
+                                            style: Styles.customStyle(
+                                                "mediumboldblack")),
+                                        Text("MINS",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )),
                         )
                       ],
                     ),
@@ -453,41 +507,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     Stack(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(right: screenWidth * 0.05),
-                          width: screenWidth * 0.425 + 6,
-                          height: screenWidth * 2
-                        ),
+                            margin: EdgeInsets.only(right: screenWidth * 0.05),
+                            width: screenWidth * 0.425 + 6,
+                            height: screenWidth * 2),
                         Positioned(
-                          left: 6,
-                          child: Container(
-                            width: screenWidth * 0.425,
-                            height: screenWidth * 0.50,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/food/square/miso-rice-noodle-ramen-vegetarian-lede-62.jpg"),
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(8.0))
-                            ),
-                          )
-                        ),
+                            left: 6,
+                            child: Container(
+                              width: screenWidth * 0.425,
+                              height: screenWidth * 0.50,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/food/square/miso-rice-noodle-ramen-vegetarian-lede-62.jpg"),
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8.0))),
+                            )),
                         Positioned(
                           top: screenWidth * 0.05,
                           left: 0,
                           child: Container(
-                            width: 60,
-                            height: 28,
-                            child: Image.asset("assets/icon/rating_page.png")
-                          ),
+                              width: 60,
+                              height: 28,
+                              child:
+                                  Image.asset("assets/icon/rating_page.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.02,
                           left: screenWidth * 0.30,
                           child: Container(
-                            width: 50,
-                            height: 52,
-                            child: Image.asset("assets/icon/disc_circle.png")
-                          ),
+                              width: 50,
+                              height: 52,
+                              child:
+                                  Image.asset("assets/icon/disc_circle.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.05 + 3,
@@ -495,8 +548,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Container(
                             child: Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumwhite"),),
-                                Image.asset("assets/icon/w_star.png", width: 16, height: 16)
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle("mediumwhite"),
+                                ),
+                                Image.asset("assets/icon/w_star.png",
+                                    width: 16, height: 16)
                               ],
                             ),
                           ),
@@ -509,11 +566,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    Text("Buy", style: Styles.customStyle("smallorange")),
-                                    Text("Get", style: Styles.customStyle("smallorange")),
+                                    Text("Buy",
+                                        style:
+                                            Styles.customStyle("smallorange")),
+                                    Text("Get",
+                                        style:
+                                            Styles.customStyle("smallorange")),
                                   ],
                                 ),
-                                Text("1", style: Styles.customStyle("largerboldorange")),
+                                Text("1",
+                                    style:
+                                        Styles.customStyle("largerboldorange")),
                               ],
                             ),
                           ),
@@ -522,39 +585,51 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: screenWidth * 0.5 + 10,
                           left: 6,
                           child: Container(
-                            width: screenWidth * 0.425,
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("Ramen Yu Na", style: Styles.customStyle("mediumblack")),
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("IDR 195.000", style: Styles.customStyle("smallblack")),
-                                          Text(" Japan", style: Styles.customStyle("smallGray"))
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  Container(
-                                    width: 2,
-                                    height: 30,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("40", style: Styles.customStyle("mediumboldblack")),
-                                      Text("MINS", style: Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ),
+                              width: screenWidth * 0.425,
+                              child: Container(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text("Ramen Yu Na",
+                                            style: Styles.customStyle(
+                                                "mediumblack")),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("IDR 195.000",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                            Text(" Japan",
+                                                style: Styles.customStyle(
+                                                    "smallGray"))
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 2,
+                                      height: 30,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("40",
+                                            style: Styles.customStyle(
+                                                "mediumboldblack")),
+                                        Text("MINS",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )),
                         )
                       ],
                     ),
@@ -562,41 +637,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     Stack(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(right: screenWidth * 0.05),
-                          width: screenWidth * 0.425 + 6,
-                          height: screenWidth * 2
-                        ),
+                            margin: EdgeInsets.only(right: screenWidth * 0.05),
+                            width: screenWidth * 0.425 + 6,
+                            height: screenWidth * 2),
                         Positioned(
-                          left: 6,
-                          child: Container(
-                            width: screenWidth * 0.425,
-                            height: screenWidth * 0.50,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/food/square/socca-pesto-pizza-81.jpg"),
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(8.0))
-                            ),
-                          )
-                        ),
+                            left: 6,
+                            child: Container(
+                              width: screenWidth * 0.425,
+                              height: screenWidth * 0.50,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/food/square/socca-pesto-pizza-81.jpg"),
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8.0))),
+                            )),
                         Positioned(
                           top: screenWidth * 0.05,
                           left: 0,
                           child: Container(
-                            width: 60,
-                            height: 28,
-                            child: Image.asset("assets/icon/rating_page.png")
-                          ),
+                              width: 60,
+                              height: 28,
+                              child:
+                                  Image.asset("assets/icon/rating_page.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.02,
                           left: screenWidth * 0.30,
                           child: Container(
-                            width: 50,
-                            height: 52,
-                            child: Image.asset("assets/icon/disc_circle.png")
-                          ),
+                              width: 50,
+                              height: 52,
+                              child:
+                                  Image.asset("assets/icon/disc_circle.png")),
                         ),
                         Positioned(
                           top: screenWidth * 0.05 + 3,
@@ -604,8 +678,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Container(
                             child: Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumwhite"),),
-                                Image.asset("assets/icon/w_star.png", width: 16, height: 16)
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle("mediumwhite"),
+                                ),
+                                Image.asset("assets/icon/w_star.png",
+                                    width: 16, height: 16)
                               ],
                             ),
                           ),
@@ -618,11 +696,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    Text("Buy", style: Styles.customStyle("smallorange")),
-                                    Text("Get", style: Styles.customStyle("smallorange")),
+                                    Text("Buy",
+                                        style:
+                                            Styles.customStyle("smallorange")),
+                                    Text("Get",
+                                        style:
+                                            Styles.customStyle("smallorange")),
                                   ],
                                 ),
-                                Text("1", style: Styles.customStyle("largerboldorange")),
+                                Text("1",
+                                    style:
+                                        Styles.customStyle("largerboldorange")),
                               ],
                             ),
                           ),
@@ -631,39 +715,51 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: screenWidth * 0.5 + 10,
                           left: 6,
                           child: Container(
-                            width: screenWidth * 0.425,
-                            child: Container(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("Vegetable Pizza", style: Styles.customStyle("mediumblack")),
-                                      Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("IDR 240.000", style: Styles.customStyle("smallblack")),
-                                          Text(" • Western", style: Styles.customStyle("smallGray"))
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  Container(
-                                    width: 2,
-                                    height: 30,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("60", style: Styles.customStyle("mediumboldblack")),
-                                      Text("MINS", style: Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ),
+                              width: screenWidth * 0.425,
+                              child: Container(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text("Vegetable Pizza",
+                                            style: Styles.customStyle(
+                                                "mediumblack")),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("IDR 240.000",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                            Text(" • Western",
+                                                style: Styles.customStyle(
+                                                    "smallGray"))
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    Container(
+                                      width: 2,
+                                      height: 30,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("60",
+                                            style: Styles.customStyle(
+                                                "mediumboldblack")),
+                                        Text("MINS",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              )),
                         )
                       ],
                     ),
@@ -680,10 +776,14 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text("Recommended",
-                  style: Styles.customStyle("largeboldblack"),),
-                  Text("Show All",
-                  style: Styles.customStyle("mediumorange"),),
+                  Text(
+                    "Recommended",
+                    style: Styles.customStyle("largeboldblack"),
+                  ),
+                  Text(
+                    "Show All",
+                    style: Styles.customStyle("mediumorange"),
+                  ),
                 ],
               ),
             ),
@@ -701,19 +801,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.15 + 40,
                       ),
-                      Positioned (
+                      Positioned(
                         top: 20,
                         left: screenWidth * 0.05,
                         child: Container(
                           width: screenWidth * 0.9,
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                             color: Styles.white,
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         left: screenWidth * 0.05 + 10,
                         child: Container(
@@ -721,26 +822,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/restaurant/unnamed.jpg")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/restaurant/unnamed.jpg")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
                       Positioned(
                         top: 30,
-                        left : screenWidth * 0.20 + 20,
+                        left: screenWidth * 0.20 + 20,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("Altar Ruins Resto", style: Styles.customStyle("mediumblack"),),
-                            Text("Open 7am - 9pm", style: Styles.customStyle("mediumblack"),),
-                            Text("Western Chinese Cake", style: Styles.customStyle("mediumlightGray"),),
+                            Text(
+                              "Altar Ruins Resto",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Open 7am - 9pm",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Western Chinese Cake",
+                              style: Styles.customStyle("mediumlightGray"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 60,
                         child: Column(
@@ -748,16 +859,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumbolddarkOrange"),),
-                                Image.asset("assets/icon/o_star.png", width: 16, height: 16),
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle(
+                                      "mediumbolddarkOrange"),
+                                ),
+                                Image.asset("assets/icon/o_star.png",
+                                    width: 16, height: 16),
                               ],
                             ),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 50,
                         child: Container(
@@ -766,13 +888,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Styles.gray,
                         ),
                       ),
-                      Positioned (
-                        top: 40, 
+                      Positioned(
+                        top: 40,
                         right: screenWidth * 0.05 + 10,
                         child: Column(
                           children: <Widget>[
-                            Text("40", style: Styles.customStyle("mediumboldblack")),
-                            Text("MINS", style: Styles.customStyle("smallblack")),
+                            Text("40",
+                                style: Styles.customStyle("mediumboldblack")),
+                            Text("MINS",
+                                style: Styles.customStyle("smallblack")),
                           ],
                         ),
                       ),
@@ -792,7 +916,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  
+
                   // Resto 2
                   Stack(
                     children: <Widget>[
@@ -800,19 +924,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.15 + 40,
                       ),
-                      Positioned (
+                      Positioned(
                         top: 20,
                         left: screenWidth * 0.05,
                         child: Container(
                           width: screenWidth * 0.9,
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                             color: Styles.white,
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         left: screenWidth * 0.05 + 10,
                         child: Container(
@@ -820,26 +945,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/restaurant/restaurant-png-hd--1920.png")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/restaurant/restaurant-png-hd--1920.png")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
                       Positioned(
                         top: 30,
-                        left : screenWidth * 0.20 + 20,
+                        left: screenWidth * 0.20 + 20,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("Chinese Resident", style: Styles.customStyle("mediumblack"),),
-                            Text("Open 8am - 9pm", style: Styles.customStyle("mediumblack"),),
-                            Text("Cake Chinese", style: Styles.customStyle("mediumlightGray"),),
+                            Text(
+                              "Chinese Resident",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Open 8am - 9pm",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Cake Chinese",
+                              style: Styles.customStyle("mediumlightGray"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 60,
                         child: Column(
@@ -847,16 +982,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumbolddarkOrange"),),
-                                Image.asset("assets/icon/o_star.png", width: 16, height: 16),
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle(
+                                      "mediumbolddarkOrange"),
+                                ),
+                                Image.asset("assets/icon/o_star.png",
+                                    width: 16, height: 16),
                               ],
                             ),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 50,
                         child: Container(
@@ -865,48 +1011,51 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Styles.gray,
                         ),
                       ),
-                      Positioned (
-                        top: 40, 
+                      Positioned(
+                        top: 40,
                         right: screenWidth * 0.05 + 10,
                         child: Column(
                           children: <Widget>[
-                            Text("40", style: Styles.customStyle("mediumboldblack")),
-                            Text("MINS", style: Styles.customStyle("smallblack")),
+                            Text("40",
+                                style: Styles.customStyle("mediumboldblack")),
+                            Text("MINS",
+                                style: Styles.customStyle("smallblack")),
                           ],
                         ),
                       ),
 
                       // Overlay
-                      Positioned (
+                      Positioned(
                         top: 20,
                         left: screenWidth * 0.05,
-                        child: 
-                        Opacity (
+                        child: Opacity(
                           opacity: 0.6,
                           child: Container(
                             width: screenWidth * 0.9,
                             height: screenWidth * 0.15 + 20,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                              color: Styles.black
-                            ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                                color: Styles.black),
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 40,
                         left: 0,
                         right: 0,
                         child: Center(
                           child: Column(
                             children: <Widget>[
-                              Text("Restaurant is Closed", style: Styles.customStyle("largeboldwhite")),
-                              Text("Open 8am - 9pm", style: Styles.customStyle("mediumwhite")),
+                              Text("Restaurant is Closed",
+                                  style: Styles.customStyle("largeboldwhite")),
+                              Text("Open 8am - 9pm",
+                                  style: Styles.customStyle("mediumwhite")),
                             ],
                           ),
                         ),
                       ),
-                      
+
                       // Dots
                       Positioned(
                         top: 15,
@@ -930,19 +1079,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.15 + 40,
                       ),
-                      Positioned (
+                      Positioned(
                         top: 20,
                         left: screenWidth * 0.05,
                         child: Container(
                           width: screenWidth * 0.9,
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                             color: Styles.white,
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         left: screenWidth * 0.05 + 10,
                         child: Container(
@@ -950,26 +1100,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/restaurant/restaurant-png-hd--1920.png")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/restaurant/restaurant-png-hd--1920.png")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
                       Positioned(
                         top: 30,
-                        left : screenWidth * 0.20 + 20,
+                        left: screenWidth * 0.20 + 20,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("Chinese Resident", style: Styles.customStyle("mediumblack"),),
-                            Text("Open 8am - 9pm", style: Styles.customStyle("mediumblack"),),
-                            Text("Cake Chinese", style: Styles.customStyle("mediumlightGray"),),
+                            Text(
+                              "Chinese Resident",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Open 8am - 9pm",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Cake Chinese",
+                              style: Styles.customStyle("mediumlightGray"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 60,
                         child: Column(
@@ -977,16 +1137,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumbolddarkOrange"),),
-                                Image.asset("assets/icon/o_star.png", width: 16, height: 16),
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle(
+                                      "mediumbolddarkOrange"),
+                                ),
+                                Image.asset("assets/icon/o_star.png",
+                                    width: 16, height: 16),
                               ],
                             ),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 50,
                         child: Container(
@@ -995,17 +1166,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Styles.gray,
                         ),
                       ),
-                      Positioned (
-                        top: 40, 
+                      Positioned(
+                        top: 40,
                         right: screenWidth * 0.05 + 10,
                         child: Column(
                           children: <Widget>[
-                            Text("40", style: Styles.customStyle("mediumboldblack")),
-                            Text("MINS", style: Styles.customStyle("smallblack")),
+                            Text("40",
+                                style: Styles.customStyle("mediumboldblack")),
+                            Text("MINS",
+                                style: Styles.customStyle("smallblack")),
                           ],
                         ),
                       ),
-                      
+
                       // Dots
                       Positioned(
                         top: 15,
@@ -1029,19 +1202,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.15 + 40,
                       ),
-                      Positioned (
+                      Positioned(
                         top: 20,
                         left: screenWidth * 0.05,
                         child: Container(
                           width: screenWidth * 0.9,
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                             color: Styles.white,
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         left: screenWidth * 0.05 + 10,
                         child: Container(
@@ -1049,26 +1223,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/restaurant/unnamed.jpg")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/restaurant/unnamed.jpg")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
                       Positioned(
                         top: 30,
-                        left : screenWidth * 0.20 + 20,
+                        left: screenWidth * 0.20 + 20,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("Altar Ruins Resto", style: Styles.customStyle("mediumblack"),),
-                            Text("Open 7am - 9pm", style: Styles.customStyle("mediumblack"),),
-                            Text("Western Chinese Cake", style: Styles.customStyle("mediumlightGray"),),
+                            Text(
+                              "Altar Ruins Resto",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Open 7am - 9pm",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Western Chinese Cake",
+                              style: Styles.customStyle("mediumlightGray"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 60,
                         child: Column(
@@ -1076,16 +1260,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumbolddarkOrange"),),
-                                Image.asset("assets/icon/o_star.png", width: 16, height: 16),
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle(
+                                      "mediumbolddarkOrange"),
+                                ),
+                                Image.asset("assets/icon/o_star.png",
+                                    width: 16, height: 16),
                               ],
                             ),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 50,
                         child: Container(
@@ -1094,13 +1289,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Styles.gray,
                         ),
                       ),
-                      Positioned (
-                        top: 40, 
+                      Positioned(
+                        top: 40,
                         right: screenWidth * 0.05 + 10,
                         child: Column(
                           children: <Widget>[
-                            Text("40", style: Styles.customStyle("mediumboldblack")),
-                            Text("MINS", style: Styles.customStyle("smallblack")),
+                            Text("40",
+                                style: Styles.customStyle("mediumboldblack")),
+                            Text("MINS",
+                                style: Styles.customStyle("smallblack")),
                           ],
                         ),
                       ),
@@ -1128,19 +1325,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.15 + 40,
                       ),
-                      Positioned (
+                      Positioned(
                         top: 20,
                         left: screenWidth * 0.05,
                         child: Container(
                           width: screenWidth * 0.9,
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                             color: Styles.white,
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         left: screenWidth * 0.05 + 10,
                         child: Container(
@@ -1148,26 +1346,36 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/restaurant/restaurant-png-hd--1920.png")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/restaurant/restaurant-png-hd--1920.png")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
                       Positioned(
                         top: 30,
-                        left : screenWidth * 0.20 + 20,
+                        left: screenWidth * 0.20 + 20,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("Chinese Resident", style: Styles.customStyle("mediumblack"),),
-                            Text("Open 8am - 9pm", style: Styles.customStyle("mediumblack"),),
-                            Text("Cake Chinese", style: Styles.customStyle("mediumlightGray"),),
+                            Text(
+                              "Chinese Resident",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Open 8am - 9pm",
+                              style: Styles.customStyle("mediumblack"),
+                            ),
+                            Text(
+                              "Cake Chinese",
+                              style: Styles.customStyle("mediumlightGray"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 60,
                         child: Column(
@@ -1175,16 +1383,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                Text("5.0 ", style: Styles.customStyle("mediumbolddarkOrange"),),
-                                Image.asset("assets/icon/o_star.png", width: 16, height: 16),
+                                Text(
+                                  "5.0 ",
+                                  style: Styles.customStyle(
+                                      "mediumbolddarkOrange"),
+                                ),
+                                Image.asset("assets/icon/o_star.png",
+                                    width: 16, height: 16),
                               ],
                             ),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
-                            Text("", style: Styles.customStyle("mediumbolddarkOrange"),),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
+                            Text(
+                              "",
+                              style: Styles.customStyle("mediumbolddarkOrange"),
+                            ),
                           ],
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 30,
                         right: screenWidth * 0.05 + 50,
                         child: Container(
@@ -1193,48 +1412,51 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Styles.gray,
                         ),
                       ),
-                      Positioned (
-                        top: 40, 
+                      Positioned(
+                        top: 40,
                         right: screenWidth * 0.05 + 10,
                         child: Column(
                           children: <Widget>[
-                            Text("40", style: Styles.customStyle("mediumboldblack")),
-                            Text("MINS", style: Styles.customStyle("smallblack")),
+                            Text("40",
+                                style: Styles.customStyle("mediumboldblack")),
+                            Text("MINS",
+                                style: Styles.customStyle("smallblack")),
                           ],
                         ),
                       ),
 
                       // Overlay
-                      Positioned (
+                      Positioned(
                         top: 20,
                         left: screenWidth * 0.05,
-                        child: 
-                        Opacity (
+                        child: Opacity(
                           opacity: 0.6,
                           child: Container(
                             width: screenWidth * 0.9,
                             height: screenWidth * 0.15 + 20,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                              color: Styles.black
-                            ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                                color: Styles.black),
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: 40,
                         left: 0,
                         right: 0,
                         child: Center(
                           child: Column(
                             children: <Widget>[
-                              Text("Restaurant is Closed", style: Styles.customStyle("largeboldwhite")),
-                              Text("Open 8am - 9pm", style: Styles.customStyle("mediumwhite")),
+                              Text("Restaurant is Closed",
+                                  style: Styles.customStyle("largeboldwhite")),
+                              Text("Open 8am - 9pm",
+                                  style: Styles.customStyle("mediumwhite")),
                             ],
                           ),
                         ),
                       ),
-                      
+
                       // Dots
                       Positioned(
                         top: 15,
@@ -1253,7 +1475,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   Container(
                     padding: EdgeInsets.only(top: 20, bottom: 20),
-                    child: Text("Show All", style: Styles.customStyle("mediumorange")),
+                    child: Text("Show All",
+                        style: Styles.customStyle("mediumorange")),
                   )
                 ],
               ),
@@ -1266,8 +1489,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text("Newest Food",
-                  style: Styles.customStyle("largeboldblack"),),
+                  Text(
+                    "Newest Food",
+                    style: Styles.customStyle("largeboldblack"),
+                  ),
                 ],
               ),
             ),
@@ -1284,7 +1509,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.60 + 80,
                       ),
-                      Positioned (
+                      Positioned(
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
                         child: Container(
@@ -1292,15 +1517,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/food/landscape/BACKYARD+FARMS+TOMATOES_JUNE+2015_BRIAN+SAMUELS+PHOTOGRAPHY-0295.jpg")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/food/landscape/BACKYARD+FARMS+TOMATOES_JUNE+2015_BRIAN+SAMUELS+PHOTOGRAPHY-0295.jpg")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
-                    
-                      Positioned (
+                      Positioned(
                         top: screenWidth * 0.60 + 10,
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
@@ -1310,8 +1535,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text("Lamb Da Grilled", style: Styles.customStyle("largeblack")),
-                                Text("IDR 75.000", style: Styles.customStyle("mediumblack")),
+                                Text("Lamb Da Grilled",
+                                    style: Styles.customStyle("largeblack")),
+                                Text("IDR 75.000",
+                                    style: Styles.customStyle("mediumblack")),
                               ],
                             ),
                             Row(
@@ -1320,11 +1547,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Text("4.0 ", style: Styles.customStyle("mediumboldblack"),),
-                                        Image.asset("assets/icon/b_star.png", width: 16, height: 16),
+                                        Text(
+                                          "4.0 ",
+                                          style: Styles.customStyle(
+                                              "mediumboldblack"),
+                                        ),
+                                        Image.asset("assets/icon/b_star.png",
+                                            width: 16, height: 16),
                                       ],
                                     ),
-                                    Text("Western", style: Styles.customStyle("mediumlightGray"),),
+                                    Text(
+                                      "Western",
+                                      style:
+                                          Styles.customStyle("mediumlightGray"),
+                                    ),
                                   ],
                                 ),
                                 Container(
@@ -1335,8 +1571,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Column(
                                   children: <Widget>[
-                                    Text("40", style: Styles.customStyle("largeboldblack")),
-                                    Text("MINS", style: Styles.customStyle("smallblack")),
+                                    Text("40",
+                                        style: Styles.customStyle(
+                                            "largeboldblack")),
+                                    Text("MINS",
+                                        style:
+                                            Styles.customStyle("smallblack")),
                                   ],
                                 )
                               ],
@@ -1354,7 +1594,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.60 + 80,
                       ),
-                      Positioned (
+                      Positioned(
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
                         child: Container(
@@ -1362,15 +1602,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/food/landscape/Citrus-Poppy-Seed-Almond-Flour-Pancakes-2.jpg")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/food/landscape/Citrus-Poppy-Seed-Almond-Flour-Pancakes-2.jpg")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
-                    
-                      Positioned (
+                      Positioned(
                         top: screenWidth * 0.60 + 10,
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
@@ -1380,18 +1620,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text("Fresh Paladise Lone", style: Styles.customStyle("largeblack")),
+                                Text("Fresh Paladise Lone",
+                                    style: Styles.customStyle("largeblack")),
                                 Row(
                                   children: <Widget>[
-                                    Text("IDR 175.000  ", style: Styles.customStyle("mediumblack")),
-                                    Text("200.000", 
-                                      style: TextStyle(
-                                        color: Styles.gray,
-                                        fontSize: 16,
-                                        decoration: TextDecoration.lineThrough
-                                      )
-                                    ),
-                                  ],  
+                                    Text("IDR 175.000  ",
+                                        style:
+                                            Styles.customStyle("mediumblack")),
+                                    Text("200.000",
+                                        style: TextStyle(
+                                            color: Styles.gray,
+                                            fontSize: 16,
+                                            decoration:
+                                                TextDecoration.lineThrough)),
+                                  ],
                                 )
                               ],
                             ),
@@ -1401,11 +1643,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Text("4.0 ", style: Styles.customStyle("mediumboldblack"),),
-                                        Image.asset("assets/icon/b_star.png", width: 16, height: 16),
+                                        Text(
+                                          "4.0 ",
+                                          style: Styles.customStyle(
+                                              "mediumboldblack"),
+                                        ),
+                                        Image.asset("assets/icon/b_star.png",
+                                            width: 16, height: 16),
                                       ],
                                     ),
-                                    Text("Western", style: Styles.customStyle("mediumlightGray"),),
+                                    Text(
+                                      "Western",
+                                      style:
+                                          Styles.customStyle("mediumlightGray"),
+                                    ),
                                   ],
                                 ),
                                 Container(
@@ -1416,8 +1667,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Column(
                                   children: <Widget>[
-                                    Text("40", style: Styles.customStyle("largeboldblack")),
-                                    Text("MINS", style: Styles.customStyle("smallblack")),
+                                    Text("40",
+                                        style: Styles.customStyle(
+                                            "largeboldblack")),
+                                    Text("MINS",
+                                        style:
+                                            Styles.customStyle("smallblack")),
                                   ],
                                 )
                               ],
@@ -1436,7 +1691,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: screenWidth * 0.60 + 80,
                       ),
 
-                      Positioned (
+                      Positioned(
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
                         child: Container(
@@ -1444,41 +1699,42 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/food/landscape/GreenLasadaPasta.jpg")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/food/landscape/GreenLasadaPasta.jpg")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
 
                       // Overlay
-                      Positioned (
+                      Positioned(
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
-                        child: 
-                        Opacity (
+                        child: Opacity(
                           opacity: 0.6,
                           child: Container(
                             width: screenWidth * 0.9,
                             height: screenWidth * 0.60,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                              color: Styles.black
-                            ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                                color: Styles.black),
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: screenWidth * 0.30 - 15,
                         left: 0,
                         right: 0,
                         child: Center(
-                          child: Text("Out of Stock", style: Styles.customStyle("largerboldwhite")),
+                          child: Text("Out of Stock",
+                              style: Styles.customStyle("largerboldwhite")),
                         ),
                       ),
-                    
-                      Positioned (
+
+                      Positioned(
                         top: screenWidth * 0.60 + 10,
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
@@ -1488,18 +1744,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text("Green Lasada Pasta", style: Styles.customStyle("largeblack")),
+                                Text("Green Lasada Pasta",
+                                    style: Styles.customStyle("largeblack")),
                                 Row(
                                   children: <Widget>[
-                                    Text("IDR 55.000  ", style: Styles.customStyle("mediumblack")),
-                                    Text("200.000", 
-                                      style: TextStyle(
-                                        color: Styles.gray,
-                                        fontSize: 16,
-                                        decoration: TextDecoration.lineThrough
-                                      )
-                                    ),
-                                  ],  
+                                    Text("IDR 55.000  ",
+                                        style:
+                                            Styles.customStyle("mediumblack")),
+                                    Text("200.000",
+                                        style: TextStyle(
+                                            color: Styles.gray,
+                                            fontSize: 16,
+                                            decoration:
+                                                TextDecoration.lineThrough)),
+                                  ],
                                 )
                               ],
                             ),
@@ -1509,11 +1767,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Text("4.0 ", style: Styles.customStyle("mediumboldblack"),),
-                                        Image.asset("assets/icon/b_star.png", width: 16, height: 16),
+                                        Text(
+                                          "4.0 ",
+                                          style: Styles.customStyle(
+                                              "mediumboldblack"),
+                                        ),
+                                        Image.asset("assets/icon/b_star.png",
+                                            width: 16, height: 16),
                                       ],
                                     ),
-                                    Text("Western", style: Styles.customStyle("mediumlightGray"),),
+                                    Text(
+                                      "Western",
+                                      style:
+                                          Styles.customStyle("mediumlightGray"),
+                                    ),
                                   ],
                                 ),
                                 Container(
@@ -1524,8 +1791,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Column(
                                   children: <Widget>[
-                                    Text("40", style: Styles.customStyle("largeboldblack")),
-                                    Text("MINS", style: Styles.customStyle("smallblack")),
+                                    Text("40",
+                                        style: Styles.customStyle(
+                                            "largeboldblack")),
+                                    Text("MINS",
+                                        style:
+                                            Styles.customStyle("smallblack")),
                                   ],
                                 )
                               ],
@@ -1546,8 +1817,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text("Trending Restaurant",
-                  style: Styles.customStyle("largeboldblack"),),
+                  Text(
+                    "Trending Restaurant",
+                    style: Styles.customStyle("largeboldblack"),
+                  ),
                 ],
               ),
             ),
@@ -1565,7 +1838,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.60 + 80,
                       ),
-                      Positioned (
+                      Positioned(
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
                         child: Container(
@@ -1573,15 +1846,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/restaurant/modernRestaurant.jpg")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/restaurant/modernRestaurant.jpg")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
-                    
-                      Positioned (
+                      Positioned(
                         top: screenWidth * 0.60 + 10,
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
@@ -1591,8 +1864,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text("De Luna Resto", style: Styles.customStyle("largeblack")),
-                                Text("Open 7am - 11pm", style: Styles.customStyle("mediumblack")),
+                                Text("De Luna Resto",
+                                    style: Styles.customStyle("largeblack")),
+                                Text("Open 7am - 11pm",
+                                    style: Styles.customStyle("mediumblack")),
                               ],
                             ),
                             Row(
@@ -1601,11 +1876,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Text("4.0 ", style: Styles.customStyle("mediumboldblack"),),
-                                        Image.asset("assets/icon/b_star.png", width: 16, height: 16),
+                                        Text(
+                                          "4.0 ",
+                                          style: Styles.customStyle(
+                                              "mediumboldblack"),
+                                        ),
+                                        Image.asset("assets/icon/b_star.png",
+                                            width: 16, height: 16),
                                       ],
                                     ),
-                                    Text("Chinese", style: Styles.customStyle("mediumlightGray"),),
+                                    Text(
+                                      "Chinese",
+                                      style:
+                                          Styles.customStyle("mediumlightGray"),
+                                    ),
                                   ],
                                 ),
                                 Container(
@@ -1616,8 +1900,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Column(
                                   children: <Widget>[
-                                    Text("40", style: Styles.customStyle("largeboldblack")),
-                                    Text("MINS", style: Styles.customStyle("smallblack")),
+                                    Text("40",
+                                        style: Styles.customStyle(
+                                            "largeboldblack")),
+                                    Text("MINS",
+                                        style:
+                                            Styles.customStyle("smallblack")),
                                   ],
                                 )
                               ],
@@ -1635,7 +1923,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: screenWidth,
                         height: screenWidth * 0.60 + 80,
                       ),
-                      Positioned (
+                      Positioned(
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
                         child: Container(
@@ -1643,41 +1931,42 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.60,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage("assets/restaurant/thumb-1920-444393.jpg")
-                            ),
-                            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                    "assets/restaurant/thumb-1920-444393.jpg")),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                           ),
                         ),
                       ),
 
                       // Overlay
-                      Positioned (
+                      Positioned(
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
-                        child: 
-                        Opacity (
+                        child: Opacity(
                           opacity: 0.6,
                           child: Container(
                             width: screenWidth * 0.9,
                             height: screenWidth * 0.60,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                              color: Styles.black
-                            ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                                color: Styles.black),
                           ),
                         ),
                       ),
-                      Positioned (
+                      Positioned(
                         top: screenWidth * 0.30 - 15,
                         left: 0,
                         right: 0,
                         child: Center(
-                          child: Text("Restaurant is Closed", style: Styles.customStyle("largerboldwhite")),
+                          child: Text("Restaurant is Closed",
+                              style: Styles.customStyle("largerboldwhite")),
                         ),
                       ),
-                    
-                      Positioned (
+
+                      Positioned(
                         top: screenWidth * 0.60 + 10,
                         left: screenWidth * 0.05,
                         right: screenWidth * 0.05,
@@ -1687,8 +1976,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text("High Tower Cuisine", style: Styles.customStyle("largeblack")),
-                                Text("Open 9am - 12pm", style: Styles.customStyle("mediumblack")),
+                                Text("High Tower Cuisine",
+                                    style: Styles.customStyle("largeblack")),
+                                Text("Open 9am - 12pm",
+                                    style: Styles.customStyle("mediumblack")),
                               ],
                             ),
                             Row(
@@ -1697,11 +1988,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Text("3.2 ", style: Styles.customStyle("mediumboldblack"),),
-                                        Image.asset("assets/icon/b_star.png", width: 16, height: 16),
+                                        Text(
+                                          "3.2 ",
+                                          style: Styles.customStyle(
+                                              "mediumboldblack"),
+                                        ),
+                                        Image.asset("assets/icon/b_star.png",
+                                            width: 16, height: 16),
                                       ],
                                     ),
-                                    Text("American", style: Styles.customStyle("mediumlightGray"),),
+                                    Text(
+                                      "American",
+                                      style:
+                                          Styles.customStyle("mediumlightGray"),
+                                    ),
                                   ],
                                 ),
                                 Container(
@@ -1712,8 +2012,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Column(
                                   children: <Widget>[
-                                    Text("20", style: Styles.customStyle("largeboldblack")),
-                                    Text("MINS", style: Styles.customStyle("smallblack")),
+                                    Text("20",
+                                        style: Styles.customStyle(
+                                            "largeboldblack")),
+                                    Text("MINS",
+                                        style:
+                                            Styles.customStyle("smallblack")),
                                   ],
                                 )
                               ],
@@ -1721,24 +2025,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-
-                      
                     ],
                   ),
                 ],
               ),
             ),
 
-
-
-
-
-
-          // End of code
+            // End of code
           ],
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -1747,31 +2043,40 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedFontSize: 0,
         items: [
           BottomNavigationBarItem(
-            icon: _currentIndex == 0 ? Image.asset("assets/icon/o_home.png", width: 20, height: 20) : Image.asset("assets/icon/b_home.png", width: 20, height: 20),
+            icon: _currentIndex == 0
+                ? Image.asset("assets/icon/o_home.png", width: 20, height: 20)
+                : Image.asset("assets/icon/b_home.png", width: 20, height: 20),
             title: Text('Home'),
           ),
-
           BottomNavigationBarItem(
-            icon: _currentIndex == 1 ? Image.asset("assets/icon/o_notif.png", width: 20, height: 20) : Image.asset("assets/icon/b_notif.png", width: 20, height: 20),
+            icon: _currentIndex == 1
+                ? Image.asset("assets/icon/o_notif.png", width: 20, height: 20)
+                : Image.asset("assets/icon/b_notif.png", width: 20, height: 20),
             title: Text('Notification'),
           ),
-
           BottomNavigationBarItem(
-            icon: _currentIndex == 2 ? Image.asset("assets/icon/o_wallet.png", width: 20, height: 20) : Image.asset("assets/icon/b_wallet.png", width: 20, height: 20),
+            icon: _currentIndex == 2
+                ? Image.asset("assets/icon/o_wallet.png", width: 20, height: 20)
+                : Image.asset("assets/icon/b_wallet.png",
+                    width: 20, height: 20),
             title: Text('Wallet'),
           ),
-
           BottomNavigationBarItem(
-            icon: _currentIndex == 3 ? Image.asset("assets/icon/o_note.png", width: 20, height: 20) : Image.asset("assets/icon/b_note.png", width: 20, height: 20),
+            icon: _currentIndex == 3
+                ? Image.asset("assets/icon/o_note.png", width: 20, height: 20)
+                : Image.asset("assets/icon/b_note.png", width: 20, height: 20),
             title: Text('Note'),
           ),
-
           BottomNavigationBarItem(
-            icon: _currentIndex == 4 ? Image.asset("assets/icon/o_profile.png", width: 20, height: 20) : Image.asset("assets/icon/b_profile.png", width: 20, height: 20),
+            icon: _currentIndex == 4
+                ? Image.asset("assets/icon/o_profile.png",
+                    width: 20, height: 20)
+                : Image.asset("assets/icon/b_profile.png",
+                    width: 20, height: 20),
             title: Text('Profile'),
           ),
         ],
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });

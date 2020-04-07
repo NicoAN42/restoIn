@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:restoin/screens/home_screen.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:restoin/screens/register_screen.dart';
 import 'package:restoin/styles.dart';
@@ -24,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   String _valPw = "guest123";
 
   void _submitCommand() {
-    _email = _emailController.text;
+    _email = _emailController.text.trim();
     _pw = _passwordController.text;
 
     if (_email != _valEmail && _pw != _valPw) {
@@ -38,8 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
       _loginCommand(3);
       _passwordController.clear();
     } else {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      _emailController.clear();
+      _passwordController.clear();
+      Navigator.pushReplacementNamed(context, "/home");
     }
   }
 

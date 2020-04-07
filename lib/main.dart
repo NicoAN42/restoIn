@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'screens/finger_login_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/location_screen.dart';
+import 'screens/search_result_screen.dart';
 import 'screens/search_screen.dart';
 import 'styles.dart';
 
@@ -19,12 +20,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Futura',
       ),
-      initialRoute: '/',
+      initialRoute: '/searchResult',
       routes: {
         '/': (context) => FingerLoginScreen(),
         '/home': (context) => HomeScreen(),
         '/search': (context) => SearchScreen(),
         '/location': (context) => LocationScreen(),
+        '/searchResult': (context) => SearchResultScreen(),
       },
     );
   }
