@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: <Widget>[
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
                   screenHeight * 0.1, screenWidth * 0.05, 5),
               child: Row(
@@ -74,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 0, screenWidth * 0.05, 20),
               child: Row(
@@ -104,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(screenWidth * 0.05, 0, 0, 20),
               child: SizedBox(
                 height: 40,
@@ -233,9 +236,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               height: 10,
-              color: Styles.lightGray,
+              color: Styles.white,
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 20, screenWidth * 0.05, 10),
               child: Row(
@@ -253,6 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(screenWidth * 0.05, 0, 0, 20),
               child: SizedBox(
                 height: screenWidth * 0.50 + 50,
@@ -354,7 +359,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Text("IDR 75.000",
                                                 style: Styles.customStyle(
                                                     "smallblack")),
-                                            Text(" • Western",
+                                            Text(" Western",
                                                 style: Styles.customStyle(
                                                     "smallGray"))
                                           ],
@@ -475,7 +480,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Text("IDR 40.000",
                                                 style: Styles.customStyle(
                                                     "smallblack")),
-                                            Text(" • Western",
+                                            Text(" Western",
                                                 style: Styles.customStyle(
                                                     "smallGray"))
                                           ],
@@ -735,7 +740,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Text("IDR 240.000",
                                                 style: Styles.customStyle(
                                                     "smallblack")),
-                                            Text(" • Western",
+                                            Text(" Western",
                                                 style: Styles.customStyle(
                                                     "smallGray"))
                                           ],
@@ -770,7 +775,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Recommended
             Container(
-              color: Styles.lightGray,
+              color: Styles.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 20, screenWidth * 0.05, 0),
               child: Row(
@@ -791,7 +796,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Recommended Content
             Container(
               width: screenWidth,
-              color: Styles.lightGray,
+              color: Styles.white,
               child: Column(
                 children: <Widget>[
                   // Resto 1
@@ -810,7 +815,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -933,7 +938,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -1088,7 +1093,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -1211,7 +1216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -1334,7 +1339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -1484,6 +1489,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Newest Food
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 20, screenWidth * 0.05, 20),
               child: Row(
@@ -1499,6 +1505,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Newest Food Content
             Container(
+              color: Colors.white,
               width: screenWidth,
               child: Column(
                 children: <Widget>[
