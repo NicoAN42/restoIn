@@ -5,6 +5,8 @@ import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
 
+import 'login_screen.dart';
+
 TextEditingController _newNameController = TextEditingController();
 TextEditingController _newEmailController = TextEditingController();
 TextEditingController _newPasswordController = TextEditingController();
