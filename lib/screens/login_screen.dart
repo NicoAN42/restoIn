@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:restoin/screens/home_screen.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:restoin/screens/register_screen.dart';
 import 'package:restoin/styles.dart';
@@ -37,7 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
       _loginCommand(3);
       _passwordController.clear();
     } else {
-      //LOGIN
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeScreen()));
     }
   }
 
