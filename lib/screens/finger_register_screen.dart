@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:restoin/screens/register_screen.dart';
 import 'package:restoin/styles.dart';
 
 import 'register_confirm_screen.dart';
@@ -14,10 +13,8 @@ class _FingerRegisterScreenState extends State<FingerRegisterScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _submitCommand() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RegisterConfirmScreen()),
-    );
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => RegisterConfirmScreen()));
   }
 
   @override
@@ -91,7 +88,7 @@ class _FingerRegisterScreenState extends State<FingerRegisterScreen> {
                               child: Text("Skip",
                                   style: Styles.customStyle(
                                       "mediumBoldUnderlineOrange")),
-                              onPressed: () {},
+                              onPressed: () => _submitCommand(),
                             ),
                             RaisedButton(
                               child: Text("Sign Up",
@@ -121,12 +118,8 @@ class _FingerRegisterScreenState extends State<FingerRegisterScreen> {
                                   style: Styles.customStyle("mediumBoldOrange"),
                                   recognizer: new TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                RegisterScreen()),
-                                      );
+                                      Navigator.popUntil(
+                                          context, ModalRoute.withName("/"));
                                     })
                             ],
                           ),

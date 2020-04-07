@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/styles.dart';
 import 'package:restoin/widgets/custom_icon_icons.dart';
 
@@ -46,12 +47,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
     super.dispose();
   }
 
-  Future<Null> _onFocusChange() async {
-    if (_focus.hasFocus) {
-      setState(() {});
-    } else {
-      setState(() {});
-    }
+  void _onFocusChange() {
+    setState(() {});
   }
 
   _toggleObscure() {
@@ -130,5 +127,115 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
       ],
     );
+  }
+}
+
+class CustomSearchField extends StatefulWidget {
+  final TextEditingController controller;
+
+  CustomSearchField({this.controller});
+
+  @override
+  _CustomSearchFieldState createState() => new _CustomSearchFieldState();
+}
+
+class _CustomSearchFieldState extends State<CustomSearchField> {
+  FocusNode _focus = new FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focus.addListener(_onFocusChange);
+  }
+
+  void dispose() {
+    _focus.removeListener(_onFocusChange);
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (TextField(
+      style: Styles.customStyle("mediumBlack"),
+      focusNode: _focus,
+      controller: widget.controller,
+      decoration: InputDecoration(
+        hintText: "Search food or restaurant",
+        hintStyle: Styles.customStyle("mediumGray"),
+        contentPadding: EdgeInsets.symmetric(vertical: 0),
+        filled: true,
+        fillColor: Styles.white,
+        border: InputBorder.none,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderSide: BorderSide(color: Styles.white),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderSide: BorderSide(color: Styles.white),
+        ),
+        prefixIcon: new Icon(FontAwesomeIcons.search,
+            color: _focus.hasFocus ? Styles.black : Styles.gray),
+      ),
+    ));
+  }
+}
+
+class CustomLocationField extends StatefulWidget {
+  final TextEditingController controller;
+
+  CustomLocationField({this.controller});
+
+  @override
+  _CustomLocationFieldState createState() => new _CustomLocationFieldState();
+}
+
+class _CustomLocationFieldState extends State<CustomLocationField> {
+  FocusNode _focus = new FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focus.addListener(_onFocusChange);
+  }
+
+  void dispose() {
+    _focus.removeListener(_onFocusChange);
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (TextField(
+      style: Styles.customStyle("mediumBlack"),
+      focusNode: _focus,
+      controller: widget.controller,
+      decoration: InputDecoration(
+        hintText: "Your location, ex: Street, Building",
+        hintStyle: Styles.customStyle("mediumGray"),
+        contentPadding: EdgeInsets.symmetric(vertical: 0),
+        filled: true,
+        fillColor: Styles.white,
+        border: InputBorder.none,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderSide: BorderSide(color: Styles.white),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderSide: BorderSide(color: Styles.white),
+        ),
+        prefixIcon: new Icon(FontAwesomeIcons.mapMarkerAlt,
+            color: _focus.hasFocus ? Styles.black : Styles.orange),
+      ),
+    ));
   }
 }

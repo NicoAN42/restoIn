@@ -45,10 +45,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _loginCommand() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => FingerRegisterScreen()),
-    );
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => FingerRegisterScreen()));
   }
 
   @override
@@ -164,7 +162,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   style: Styles.customStyle("mediumBoldOrange"),
                                   recognizer: new TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.pop(context);
+                                      Navigator.popUntil(
+                                          context, ModalRoute.withName("/"));
                                     })
                             ],
                           ),

@@ -13,9 +13,7 @@ class _FingerLoginScreenState extends State<FingerLoginScreen> {
 
   void _submitCommand() {
     Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
   }
 
   @override

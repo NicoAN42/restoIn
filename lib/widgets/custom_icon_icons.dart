@@ -12,6 +12,10 @@
 ///       - asset: fonts/CustomIcon.ttf
 ///
 /// 
+/// * Material Design Icons, Copyright (C) Google, Inc
+///         Author:    Google
+///         License:   Apache 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+///         Homepage:  https://design.google.com/icons/
 /// * Elusive, Copyright (C) 2013 by Aristeides Stathopoulos
 ///         Author:    Aristeides Stathopoulos
 ///         License:   SIL (http://scripts.sil.org/OFL)
@@ -23,7 +27,10 @@ class CustomIcon {
   CustomIcon._();
 
   static const _kFontFam = 'CustomIcon';
+  static const _kFontPkg = null;
 
-  static const IconData eye = IconData(0xe801, fontFamily: _kFontFam);
-  static const IconData eye_off = IconData(0xe802, fontFamily: _kFontFam);
+  static const IconData fingerprint = const IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData eye = const IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData eye_off = const IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData keyboard_arrow_left = const IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

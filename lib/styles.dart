@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class Styles {
-  static const Color white = Color(0xFFFBFBFB);
+  static const Color white = Color(0xFFF3F3F3);
   static const Color black = Color(0xFF222F3E);
   static const Color lightGray = Color(0xFFE8E8E8);
   static const Color lightPink = Color(0xFFFFF2DE);
