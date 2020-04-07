@@ -38,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _loginCommand(3);
       _passwordController.clear();
     } else {
+      //LOGIN
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomeScreen()));
     }

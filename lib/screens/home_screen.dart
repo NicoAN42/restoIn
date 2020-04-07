@@ -23,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    
 
     DropdownButton _myLocation() => DropdownButton<String>(
           style: Styles.customStyle("mediumboldblack"),
@@ -51,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: <Widget>[
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
                   screenHeight * 0.1, screenWidth * 0.05, 5),
               child: Row(
@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 0, screenWidth * 0.05, 20),
               child: Row(
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           hintText: "Search food or restaurant",
                           filled: true,
                           contentPadding: EdgeInsets.all(4),
-                          fillColor: Styles.lightGray,
+                          fillColor: Styles.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -105,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 0, 0, 20),
               child: SizedBox(
@@ -216,9 +218,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Container(
               height: 10,
-              color: Styles.lightGray,
+              color: Styles.white,
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 20, screenWidth * 0.05, 10),
               child: Row(
@@ -232,6 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 0, 0, 20),
               child: SizedBox(
@@ -322,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Text("IDR 75.000", style: Styles.customStyle("smallblack")),
-                                          Text(" • Western", style: Styles.customStyle("smallGray"))
+                                          Text(" Western", style: Styles.customStyle("smallGray"))
                                         ],
                                       )
                                     ],
@@ -426,7 +430,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Text("IDR 40.000", style: Styles.customStyle("smallblack")),
-                                          Text(" • Western", style: Styles.customStyle("smallGray"))
+                                          Text(" Western", style: Styles.customStyle("smallGray"))
                                         ],
                                       )
                                     ],
@@ -644,7 +648,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Text("IDR 240.000", style: Styles.customStyle("smallblack")),
-                                          Text(" • Western", style: Styles.customStyle("smallGray"))
+                                          Text(" Western", style: Styles.customStyle("smallGray"))
                                         ],
                                       )
                                     ],
@@ -674,7 +678,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Recommended
             Container(
-              color: Styles.lightGray,
+              color: Styles.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 20, screenWidth * 0.05, 0),
               child: Row(
@@ -691,7 +695,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // Recommended Content
             Container(
               width: screenWidth,
-              color: Styles.lightGray,
+              color: Styles.white,
               child: Column(
                 children: <Widget>[
                   // Resto 1
@@ -709,7 +713,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -808,7 +812,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -938,7 +942,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -1037,7 +1041,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -1136,7 +1140,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: screenWidth * 0.15 + 20,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                            color: Styles.white,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -1261,6 +1265,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Newest Food
             Container(
+              color: Colors.white,
               padding: EdgeInsets.fromLTRB(
                   screenWidth * 0.05, 20, screenWidth * 0.05, 20),
               child: Row(
@@ -1274,6 +1279,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // Newest Food Content
             Container(
+              color: Colors.white,
               width: screenWidth,
               child: Column(
                 children: <Widget>[
