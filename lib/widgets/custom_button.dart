@@ -135,3 +135,51 @@ class _CustomSearchSortButtonState extends State<CustomSearchSortButton> {
     );
   }
 }
+
+class CustomSmallButton extends StatefulWidget {
+  final String text;
+  final bool isClear;
+
+  const CustomSmallButton({Key key, this.text, this.isClear = false})
+      : super(key: key);
+
+  @override
+  _CustomSmallButtonState createState() => new _CustomSmallButtonState();
+}
+
+class _CustomSmallButtonState extends State<CustomSmallButton> {
+  bool isPressed = false;
+
+  @override
+  void didUpdateWidget(CustomSmallButton oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    if (widget.isClear) {
+      setState(() {
+        isPressed = false;
+      });
+      print("Passed");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ButtonTheme(
+      minWidth: 30,
+      child: (FlatButton(
+        child: Text(widget.text,
+            maxLines: 1,
+            style: isPressed
+                ? Styles.customStyle("mediumWhite")
+                : Styles.customStyle("mediumGray")),
+        color: isPressed ? Styles.orange : Styles.white,
+        onPressed: () {
+          setState(() {
+            isPressed = !isPressed;
+          });
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      )),
+    );
+  }
+}

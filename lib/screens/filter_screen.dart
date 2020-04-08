@@ -9,10 +9,14 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  // Order Type
-  CustomSmallButton eatInButton = CustomSmallButton(text: "Eat In");
-  CustomSmallButton bookingButton = CustomSmallButton(text: "Booking");
-  CustomSmallButton pickUpButton = CustomSmallButton(text: "Pick Up");
+  static bool _clearOrderType = false;
+  static bool _clearCategories = false;
+  static bool _clearCuisine = false;
+  static bool _clearPrice = false;
+  static bool _clearDistance = false;
+
+  List<CustomSmallButton> orderType;
+  //tambahin list lainnya
 
   // Categories
   CustomSmallButton allButton = CustomSmallButton(text: "All");
@@ -77,16 +81,53 @@ class _FilterScreenState extends State<FilterScreen> {
   CustomSmallButton sixtotenButton = CustomSmallButton(text: "6-10km");
   CustomSmallButton greatertenButton = CustomSmallButton(text: ">10km");
 
-  void reset () {
-    clearOrderType();
-    clearCategories();
-    clearCuisine();
-    clearPrice();
-    clearDistance();
+  List<Widget> createOrderType() {
+    List<Widget> list = new List();
+    list.add(new CustomSmallButton(
+      text: "Eat In",
+      isClear: _clearOrderType,
+    ));
+    list.add(new CustomSmallButton(
+      text: "Booking",
+      isClear: _clearOrderType,
+    ));
+    list.add(new CustomSmallButton(
+      text: "Pick Up",
+      isClear: _clearOrderType,
+    ));
+    return list;
+  }
+
+  List<Widget> createDistance() {
+    List<Widget> list = new List();
+    list.add(new CustomSmallButton(
+      text: "1-3km",
+      isClear: _clearDistance,
+    ));
+    list.add(new CustomSmallButton(
+      text: "3-6km",
+      isClear: _clearDistance,
+    ));
+    list.add(new CustomSmallButton(
+      text: "6-10km",
+      isClear: _clearDistance,
+    ));
+    list.add(new CustomSmallButton(
+      text: ">10km",
+      isClear: _clearDistance,
+    ));
+
+    return list;
   }
 
   void clearOrderType() {
-    // TODO: Clear order type
+    setState(() {
+      //Sisanya false
+      _clearDistance = false;
+
+      //cuman dia yang true
+      _clearOrderType = true;
+    });
   }
 
   void clearCategories() {
@@ -102,7 +143,18 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void clearDistance() {
-    // TODO: Clear distance
+    setState(() {
+      _clearOrderType = false;
+      _clearDistance = true;
+    });
+  }
+
+  void reset() {
+    clearOrderType();
+    clearCategories();
+    clearCuisine();
+    clearPrice();
+    clearDistance();
   }
 
   @override
@@ -117,23 +169,25 @@ class _FilterScreenState extends State<FilterScreen> {
             // Header
             Container(
               color: Colors.white,
-              padding: EdgeInsets.fromLTRB(screenWidth * 0.05, screenHeight * 0.1, screenWidth * 0.05, 20),
+              padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
+                  screenHeight * 0.1, screenWidth * 0.05, 20),
               child: Stack(
                 children: <Widget>[
-                  Container(
-                    width: screenWidth,
-                    height: 21
-                  ),
+                  Container(width: screenWidth, height: 21),
                   Positioned(
                     child: GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: Container(
-                        child: Image.asset("assets/icon/close.png", width: 21, height: 21),
+                        child: Image.asset("assets/icon/close.png",
+                            width: 21, height: 21),
                       ),
                     ),
                   ),
                   Align(
-                    child: Text("Filter", style: Styles.customStyle("largeboldblack"),),
+                    child: Text(
+                      "Filter",
+                      style: Styles.customStyle("largeboldblack"),
+                    ),
                   ),
                   Positioned(
                     right: 0,
@@ -141,7 +195,10 @@ class _FilterScreenState extends State<FilterScreen> {
                     child: GestureDetector(
                       onTap: () => clearOrderType(),
                       child: Container(
-                        child: Text("Reset", style: Styles.customStyle("mediumorange"),),
+                        child: Text(
+                          "Reset",
+                          style: Styles.customStyle("mediumorange"),
+                        ),
                       ),
                     ),
                   ),
@@ -168,10 +225,15 @@ class _FilterScreenState extends State<FilterScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Order Type", style: Styles.customStyle("mediumboldblack"),),
+                        Text(
+                          "Order Type",
+                          style: Styles.customStyle("mediumboldblack"),
+                        ),
                         GestureDetector(
                           onTap: () => clearOrderType(),
-                          child: Text("Clear All", style: Styles.customStyle("mediumorange"),
+                          child: Text(
+                            "Clear All",
+                            style: Styles.customStyle("mediumorange"),
                           ),
                         ),
                       ],
@@ -179,25 +241,33 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
 
                   Row(
-                    children: <Widget>[
-                      eatInButton, 
-                      SizedBox(width: 5),
-                      bookingButton, 
-                      SizedBox(width: 5),
-                      pickUpButton
-                    ],
+                    children: createOrderType(),
+                    // <Widget>[
+
+                    //   eatInButton,
+                    //   SizedBox(width: 5),
+                    //   bookingButton,
+                    //   SizedBox(width: 5),
+                    //   pickUpButton
+                    // ],
                   ),
-                  
+
                   // Categories
                   Container(
-                    padding: EdgeInsets.only(top: screenWidth * 0.05, bottom: screenWidth * 0.05),
+                    padding: EdgeInsets.only(
+                        top: screenWidth * 0.05, bottom: screenWidth * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Categories", style: Styles.customStyle("mediumboldblack"),),
+                        Text(
+                          "Categories",
+                          style: Styles.customStyle("mediumboldblack"),
+                        ),
                         GestureDetector(
                           onTap: () => clearCategories(),
-                          child: Text("Clear All", style: Styles.customStyle("mediumorange"),
+                          child: Text(
+                            "Clear All",
+                            style: Styles.customStyle("mediumorange"),
                           ),
                         ),
                       ],
@@ -206,9 +276,9 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   Row(
                     children: <Widget>[
-                      allButton, 
+                      allButton,
                       SizedBox(width: 5),
-                      fastfoodButton, 
+                      fastfoodButton,
                       SizedBox(width: 5),
                       sushiButton,
                       SizedBox(width: 5),
@@ -218,9 +288,9 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   Row(
                     children: <Widget>[
-                      soupButton, 
+                      soupButton,
                       SizedBox(width: 5),
-                      coffeeButton, 
+                      coffeeButton,
                       SizedBox(width: 5),
                       pastaButton,
                       SizedBox(width: 5),
@@ -230,9 +300,9 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   Row(
                     children: <Widget>[
-                      noodleButton, 
+                      noodleButton,
                       SizedBox(width: 5),
-                      healthyButton, 
+                      healthyButton,
                       SizedBox(width: 5),
                       veganButton,
                       SizedBox(width: 5),
@@ -244,7 +314,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     children: <Widget>[
                       breakfastButton,
                       SizedBox(width: 5),
-                      lunchButton, 
+                      lunchButton,
                       SizedBox(width: 5),
                       teaButton,
                       SizedBox(width: 5),
@@ -254,13 +324,16 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   // Categories Show More
                   Container(
-                    padding: EdgeInsets.only(top: screenWidth * 0.05, bottom: screenWidth * 0.05),
+                    padding: EdgeInsets.only(
+                        top: screenWidth * 0.05, bottom: screenWidth * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         GestureDetector(
                           // TODO: Ontap Here (Hide / Show More)
-                          child: Text("Show More", style: Styles.customStyle("mediumgray"),
+                          child: Text(
+                            "Show More",
+                            style: Styles.customStyle("mediumgray"),
                           ),
                         ),
                       ],
@@ -269,14 +342,20 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   // Cuisine
                   Container(
-                    padding: EdgeInsets.only(top: screenWidth * 0.05, bottom: screenWidth * 0.05),
+                    padding: EdgeInsets.only(
+                        top: screenWidth * 0.05, bottom: screenWidth * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Cuisine", style: Styles.customStyle("mediumboldblack"),),
+                        Text(
+                          "Cuisine",
+                          style: Styles.customStyle("mediumboldblack"),
+                        ),
                         GestureDetector(
                           onTap: () => clearCuisine(),
-                          child: Text("Clear All", style: Styles.customStyle("mediumorange"),
+                          child: Text(
+                            "Clear All",
+                            style: Styles.customStyle("mediumorange"),
                           ),
                         ),
                       ],
@@ -285,13 +364,13 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   Row(
                     children: <Widget>[
-                      arabicButton, 
+                      arabicButton,
                       SizedBox(width: 5),
-                      americanButton, 
+                      americanButton,
                       SizedBox(width: 5),
                       westernButton,
                       SizedBox(width: 5),
-                      chineseButton, 
+                      chineseButton,
                     ],
                   ),
 
@@ -299,7 +378,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     children: <Widget>[
                       indonesianButton,
                       SizedBox(width: 5),
-                      japaneseButton, 
+                      japaneseButton,
                       SizedBox(width: 5),
                       koreanButton,
                     ],
@@ -311,7 +390,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       SizedBox(width: 5),
                       taiwaneseButton,
                       SizedBox(width: 5),
-                      peruvianButton, 
+                      peruvianButton,
                       SizedBox(width: 5),
                       indiaButton
                     ],
@@ -321,27 +400,28 @@ class _FilterScreenState extends State<FilterScreen> {
                     children: <Widget>[
                       franceButton,
                       SizedBox(width: 5),
-                      balineseButton, 
+                      balineseButton,
                       SizedBox(width: 5),
                       javaneseButton,
                     ],
                   ),
 
                   Row(
-                    children: <Widget>[
-                     
-                    ],
+                    children: <Widget>[],
                   ),
 
                   // Cuisine Show More
                   Container(
-                    padding: EdgeInsets.only(top: screenWidth * 0.05, bottom: screenWidth * 0.05),
+                    padding: EdgeInsets.only(
+                        top: screenWidth * 0.05, bottom: screenWidth * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         GestureDetector(
                           // TODO: Ontap Here (Hide / Show More)
-                          child: Text("Show More", style: Styles.customStyle("mediumgray"),
+                          child: Text(
+                            "Show More",
+                            style: Styles.customStyle("mediumgray"),
                           ),
                         ),
                       ],
@@ -350,14 +430,20 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   // Price
                   Container(
-                    padding: EdgeInsets.only(top: screenWidth * 0.05, bottom: screenWidth * 0.05),
+                    padding: EdgeInsets.only(
+                        top: screenWidth * 0.05, bottom: screenWidth * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Price", style: Styles.customStyle("mediumboldblack"),),
+                        Text(
+                          "Price",
+                          style: Styles.customStyle("mediumboldblack"),
+                        ),
                         GestureDetector(
                           onTap: () => clearPrice(),
-                          child: Text("Clear All", style: Styles.customStyle("mediumorange"),
+                          child: Text(
+                            "Clear All",
+                            style: Styles.customStyle("mediumorange"),
                           ),
                         ),
                       ],
@@ -386,15 +472,22 @@ class _FilterScreenState extends State<FilterScreen> {
                           setState(() {
                             if (value.end - value.start >= 50000) {
                               values = value;
-                              labels = RangeLabels(value.start.toInt().toString(), value.end.toInt().toString());
-                            }
-                            else {
+                              labels = RangeLabels(
+                                  value.start.toInt().toString(),
+                                  value.end.toInt().toString());
+                            } else {
                               if (value.start == values.start) {
-                                values = RangeValues(values.start, values.start + 50000);
-                                labels = RangeLabels(values.start.toInt().toString(), (values.start + 50000).toInt().toString());
+                                values = RangeValues(
+                                    values.start, values.start + 50000);
+                                labels = RangeLabels(
+                                    values.start.toInt().toString(),
+                                    (values.start + 50000).toInt().toString());
                               } else {
-                                values = RangeValues(values.end - 50000, values.end);
-                                labels = RangeLabels((values.end - 50000).toInt().toString(), values.end.toInt().toString());
+                                values =
+                                    RangeValues(values.end - 50000, values.end);
+                                labels = RangeLabels(
+                                    (values.end - 50000).toInt().toString(),
+                                    values.end.toInt().toString());
                               }
                             }
                           });
@@ -403,27 +496,37 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
 
-                  // Distance
+                  // Price
                   Container(
-                    padding: EdgeInsets.only(left: screenWidth * 0.05, bottom: screenWidth * 0.05),
+                    padding: EdgeInsets.only(
+                        left: screenWidth * 0.05, bottom: screenWidth * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("IDR", style: Styles.customStyle("midgray"),),
+                        Text(
+                          "IDR",
+                          style: Styles.customStyle("midgray"),
+                        ),
                       ],
                     ),
                   ),
 
                   // Distance
                   Container(
-                    padding: EdgeInsets.only(top: screenWidth * 0.05, bottom: screenWidth * 0.05),
+                    padding: EdgeInsets.only(
+                        top: screenWidth * 0.05, bottom: screenWidth * 0.05),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Distance from your location", style: Styles.customStyle("mediumboldblack"),),
+                        Text(
+                          "Distance from your location",
+                          style: Styles.customStyle("mediumboldblack"),
+                        ),
                         GestureDetector(
                           onTap: () => clearDistance(),
-                          child: Text("Clear All", style: Styles.customStyle("mediumorange"),
+                          child: Text(
+                            "Clear All",
+                            style: Styles.customStyle("mediumorange"),
                           ),
                         ),
                       ],
@@ -431,15 +534,16 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
 
                   Row(
-                    children: <Widget>[
-                      onetothreeButton,
-                      SizedBox(width: 5), 
-                      threetosixButton,
-                      SizedBox(width: 5),
-                      sixtotenButton,
-                      SizedBox(width: 5),
-                      greatertenButton
-                    ],
+                    children: createDistance(),
+                    // <Widget>[
+                    //   onetothreeButton,
+                    //   SizedBox(width: 5),
+                    //   threetosixButton,
+                    //   SizedBox(width: 5),
+                    //   sixtotenButton,
+                    //   SizedBox(width: 5),
+                    //   greatertenButton
+                    // ],
                   ),
                 ],
               ),
@@ -452,15 +556,16 @@ class _FilterScreenState extends State<FilterScreen> {
                   setState(() {
                     //TODO : Transition
                   });
-                }, 
-                child: Text("Apply", style: Styles.customStyle("mediumwhite"),),
+                },
+                child: Text(
+                  "Apply",
+                  style: Styles.customStyle("mediumwhite"),
+                ),
                 color: Styles.orange,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
               ),
             )
-
-            
-
           ],
         ),
       ),

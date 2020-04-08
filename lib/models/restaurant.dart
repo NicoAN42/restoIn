@@ -11,7 +11,7 @@ class Restaurant {
   String close;
   String location;
   List<String> type;
-  int distance;
+  double distance;
   List<Food> featuredFoods;
 
   Restaurant(
@@ -63,7 +63,7 @@ class Restaurant {
   Column getDistanceText() {
     return Column(children: <Widget>[
       Text("$distance", style: Styles.customStyle("largerBoldBlack")),
-      Text("MINS", style: Styles.customStyle("mediumBlack")),
+      Text("KM", style: Styles.customStyle("mediumBlack")),
     ]);
   }
 }

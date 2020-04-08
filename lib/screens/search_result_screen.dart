@@ -44,7 +44,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         close: "11pm",
         location: "No. 17 Large River, Tangerang",
         type: ["Western", "Indonesian"],
-        distance: 40,
+        distance: 4,
         featuredFoods: [
           new Food(
               image: "assets/food/square/chunkyPie.jpg",
@@ -67,7 +67,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         close: "10pm",
         location: "Plaza Terra, Fl. 5, Bandung",
         type: ["Western", "Soup"],
-        distance: 145,
+        distance: 9.3,
         featuredFoods: [
           new Food(
               image: "assets/food/square/fruteLaMina.jpg",
@@ -84,7 +84,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         close: "11pm",
         location: "No. 11 Long River, Banten",
         type: ["Western", "Indonesian"],
-        distance: 10,
+        distance: 15,
         featuredFoods: [
           new Food(
               image: "assets/food/square/mackCorne.jpg",
