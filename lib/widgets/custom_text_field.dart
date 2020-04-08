@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/screens/search_result_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:restoin/widgets/custom_icon_icons.dart';
 
@@ -164,7 +165,16 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
       style: Styles.customStyle("mediumBlack"),
       focusNode: _focus,
       controller: widget.controller,
-      onSubmitted: widget.addHistory(widget.controller.text),
+      onSubmitted: (String str) {
+        widget.addHistory(str);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SearchResultScreen(
+                searchText: str,
+              ),
+            ));
+      },
       decoration: InputDecoration(
         hintText: "Search food or restaurant",
         hintStyle: Styles.customStyle("mediumGray"),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/screens/search_result_screen.dart';
 
 import '../styles.dart';
 
@@ -13,23 +14,22 @@ class CustomButton extends StatefulWidget {
 }
 
 class _CustomButtonState extends State<CustomButton> {
-  bool isPressed = false;
-
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
       minWidth: 30,
       child: (FlatButton(
         child: Text(widget.text,
-            maxLines: 1,
-            style: isPressed
-                ? Styles.customStyle("mediumWhite")
-                : Styles.customStyle("mediumGray")),
-        color: isPressed ? Styles.orange : Styles.white,
+            maxLines: 1, style: Styles.customStyle("mediumGray")),
+        color: Styles.white,
         onPressed: () {
-          setState(() {
-            isPressed = !isPressed;
-          });
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchResultScreen(
+                  searchText: widget.text,
+                ),
+              ));
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       )),
@@ -63,7 +63,13 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
         });
       },
       onTap: () {
-        //TODO: link history to search page
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SearchResultScreen(
+                searchText: widget.text,
+              ),
+            ));
       },
       child: Container(
         padding: EdgeInsets.only(top: 15, bottom: 5),

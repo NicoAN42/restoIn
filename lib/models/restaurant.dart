@@ -5,6 +5,7 @@ import 'food.dart';
 
 class Restaurant {
   String image;
+  double rating;
   String name;
   String open;
   String close;
@@ -15,6 +16,7 @@ class Restaurant {
 
   Restaurant(
       {this.image,
+      this.rating,
       this.name,
       this.open,
       this.close,
@@ -23,11 +25,12 @@ class Restaurant {
       this.distance,
       this.featuredFoods});
 
-  Image getImage() {
-    return Image.asset(
-      image,
-      fit: BoxFit.cover,
-    );
+  DecorationImage getImage() {
+    return DecorationImage(image: AssetImage(image), fit: BoxFit.cover);
+  }
+
+  Text getRating() {
+    return Text("$rating", style: Styles.customStyle("smallwhite"));
   }
 
   Text getNameText() {
@@ -52,7 +55,7 @@ class Restaurant {
         style: Styles.customStyle("smallGray"),
       );
     return Text(
-      "${type[0]}\t${type[1]}",
+      "${type[0]}    ${type[1]}",
       style: Styles.customStyle("smallGray"),
     );
   }

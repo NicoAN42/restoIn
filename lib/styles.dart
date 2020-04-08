@@ -36,7 +36,7 @@ abstract class Styles {
     else if (s.contains("large")) size = 21;
 
     if (s.contains("white"))
-      color = white;
+      color = Colors.white;
     else if (s.contains("gray"))
       color = gray;
     else if (s.contains("black"))

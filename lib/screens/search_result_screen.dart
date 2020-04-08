@@ -4,6 +4,7 @@ import 'package:restoin/models/food.dart';
 import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/styles.dart';
 import 'package:restoin/widgets/custom_button.dart';
+import 'package:restoin/widgets/custom_list_tile.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
 
 TextEditingController _searchController = new TextEditingController();
@@ -13,6 +14,10 @@ List<String> searchHistory = [];
 List<Restaurant> restoList = [];
 
 class SearchResultScreen extends StatefulWidget {
+  final String searchText;
+
+  const SearchResultScreen({Key key, this.searchText}) : super(key: key);
+
   @override
   _SearchResultScreenState createState() => new _SearchResultScreenState();
 }
@@ -33,6 +38,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     restoList.clear();
     restoList.add(new Restaurant(
         image: "assets/restaurant/louiseBranz.jpg",
+        rating: 4.9,
         name: "Louise Branz",
         open: "7am",
         close: "11pm",
@@ -55,6 +61,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         ]));
     restoList.add(new Restaurant(
         image: "assets/restaurant/geraldVenue.jpg",
+        rating: 4.9,
         name: "Gerald Venue",
         open: "10am",
         close: "10pm",
@@ -71,6 +78,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         ]));
     restoList.add(new Restaurant(
         image: "assets/restaurant/queenRe.png",
+        rating: 4.9,
         name: "Queen Re",
         open: "7am",
         close: "11pm",
@@ -85,6 +93,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               type: ["Western", "Indonesian"],
               rating: 5.0),
         ]));
+
+    _searchController.text = widget.searchText;
     super.initState();
   }
 
@@ -111,8 +121,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         width: screenWidth,
         height: screenHeight,
         child: Column(children: <Widget>[
-          Expanded(
-            flex: 1,
+          SizedBox(
+            height: screenHeight / 6,
             child: Column(
               children: <Widget>[
                 Padding(
@@ -167,7 +177,24 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               ],
             ),
           ),
-          Expanded(flex: 5, child: ListView.builder(itemBuilder: null)),
+          Container(
+            height: screenHeight * 5 / 6,
+            color: Styles.orange,
+            child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              child: ListView.builder(
+                  itemCount: restoList.length,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return CustomRestoTile(
+                      r: restoList[index],
+                      screenWidth: screenWidth,
+                      screenHeight: screenHeight,
+                    );
+                  }),
+            ),
+          ),
         ]),
       ),
     );
