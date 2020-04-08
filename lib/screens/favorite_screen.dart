@@ -194,7 +194,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                   decoration: BoxDecoration(
                                                     image: DecorationImage(
                                                       fit: BoxFit.cover,
-                                                      image: AssetImage("assets/restaurant/6fccfc4a785a9cfc55bcc2abcf752151.jpg"),
+                                                      image: AssetImage("assets/restaurant/louiseBranz.jpg"),
                                                     ),
                                                     borderRadius: BorderRadius.all(Radius.circular(8.0))
                                                   ),
@@ -327,7 +327,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
-                                                  image: AssetImage("assets/food/square/flaky-chive-goat-cheese-biscuits-square-11.jpg"),
+                                                  image: AssetImage("assets/food/square/fBreadTofu.jpg"),
                                                 ),
                                                 borderRadius: BorderRadius.all(Radius.circular(8.0))
                                               ),

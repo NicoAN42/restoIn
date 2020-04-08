@@ -70,7 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       _myLocation(),
                     ],
                   ),
-                  Image.asset('assets/icon/fav.png', width: 20, height: 20)
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, "/favorite"),
+                    child: Container(
+                      child: Image.asset('assets/icon/fav.png', width: 20, height: 20),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -101,7 +106,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ])),
                   ),
-                  Image.asset('assets/icon/g_filter.png', width: 24, height: 24)
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, "/filter"),
+                    child: Container(
+                      child: Image.asset('assets/icon/g_filter.png', width: 24, height: 24),
+                    ),
+                  ),
                 ],
               ),
             ),

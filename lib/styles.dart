@@ -27,6 +27,8 @@ abstract class Styles {
 
     if (s.contains("small"))
       size = 12;
+    else if (s.contains("mid"))
+      size = 14;
     else if (s.contains("medium"))
       size = 16;
     else if (s.contains("xlarge"))
