@@ -1,10 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:restoin/styles.dart';
 
 import 'register_confirm_screen.dart';
 
+// final FirebaseAuth _auth = FirebaseAuth.instance;
+
 class FingerRegisterScreen extends StatefulWidget {
+  final FirebaseUser user;
+  final String name;
+
+  const FingerRegisterScreen({
+    Key key,
+    this.user,
+    this.name,
+  }) : super(key: key);
+
   @override
   _FingerRegisterScreenState createState() => new _FingerRegisterScreenState();
 }
@@ -12,9 +24,15 @@ class FingerRegisterScreen extends StatefulWidget {
 class _FingerRegisterScreenState extends State<FingerRegisterScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void _submitCommand() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => RegisterConfirmScreen()));
+  void _submitCommand() async {
+    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => RegisterConfirmScreen(
+                  user: widget.user,
+                  name: widget.name,
+                )));
   }
 
   @override

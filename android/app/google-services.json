@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "390921004552",
+    "firebase_url": "https://restoin-fb.firebaseio.com",
+    "project_id": "restoin-fb",
+    "storage_bucket": "restoin-fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390921004552:android:0f51b4458abaff27ed93bd",
+        "android_client_info": {
+          "package_name": "com.example.restoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390921004552-rl2lh1tnqssepplaig952j9pb6qtt5qr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXHM5bq6LtkBsWHt_LU6bcfFBjK0znGdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390921004552-rl2lh1tnqssepplaig952j9pb6qtt5qr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

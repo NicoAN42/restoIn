@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 
 class HomeScreen extends StatefulWidget {
+  final FirebaseUser user;
+
+  const HomeScreen({Key key, this.user}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -73,7 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, "/favorite"),
                     child: Container(
-                      child: Image.asset('assets/icon/fav.png', width: 20, height: 20),
+                      child: Image.asset('assets/icon/fav.png',
+                          width: 20, height: 20),
                     ),
                   ),
                 ],
@@ -109,7 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, "/filter"),
                     child: Container(
-                      child: Image.asset('assets/icon/g_filter.png', width: 24, height: 24),
+                      child: Image.asset('assets/icon/g_filter.png',
+                          width: 24, height: 24),
                     ),
                   ),
                 ],
@@ -292,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                        "assets/food/square/roasted-cherry-double-chocolate-buckwheat-ice-cream-sandwiches-gluten-free-10.jpg"),
+                                        "assets/food/square/chunkyPie.jpg"),
                                   ),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8.0))),

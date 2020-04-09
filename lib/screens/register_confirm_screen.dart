@@ -1,8 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/styles.dart';
 
 class RegisterConfirmScreen extends StatefulWidget {
+  final FirebaseUser user;
+  final String name;
+
+  const RegisterConfirmScreen({Key key, this.user, this.name})
+      : super(key: key);
+
   @override
   _RegisterConfirmScreenState createState() =>
       new _RegisterConfirmScreenState();
@@ -11,7 +18,9 @@ class RegisterConfirmScreen extends StatefulWidget {
 class _RegisterConfirmScreenState extends State<RegisterConfirmScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void _submitCommand() {
+  void _submitCommand() async {
+    await widget.user.sendEmailVerification();
+
     final snackbar = SnackBar(
       content: Text("Email has been resent. Please check your inbox."),
       duration: new Duration(seconds: 3),

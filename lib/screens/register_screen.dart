@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:restoin/screens/finger_register_screen.dart';
@@ -5,10 +6,12 @@ import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
 
-TextEditingController _newNameController = TextEditingController();
-TextEditingController _newEmailController = TextEditingController();
-TextEditingController _newPasswordController = TextEditingController();
-TextEditingController _newConfirmPasswordController = TextEditingController();
+TextEditingController _newNameController;
+TextEditingController _newEmailController;
+TextEditingController _newPasswordController;
+TextEditingController _newConfirmPasswordController;
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -22,7 +25,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _name;
   String _email;
   String _pw;
-  String _confirmPw;
 
   void savePw(val) {
     setState(() {
@@ -31,16 +33,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _submitCommand() {
+    FocusScope.of(context).unfocus();
     final form = formKey.currentState;
-
+    _newEmailController.text = _newEmailController.text.trim();
     if (form.validate()) {
-      _name = _newNameController.text;
-      _email = _newEmailController.text;
-      _pw = _newPasswordController.text;
-      _newNameController.clear();
-      _newEmailController.clear();
-      _newPasswordController.clear();
-      _newConfirmPasswordController.clear();
+      _name = _newNameController.text.trim();
+      _email = _newEmailController.text.trim();
+      _pw = _newPasswordController.text.trim();
       _loginCommand();
     } else {
       _newPasswordController.clear();
@@ -48,9 +47,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
-  void _loginCommand() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => FingerRegisterScreen()));
+  Future<void> _loginCommand() async {
+    try {
+      final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+        email: _email,
+        password: _pw,
+      ))
+          .user;
+
+      await user.sendEmailVerification();
+
+      Navigator.pop(context);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FingerRegisterScreen(
+                    user: user,
+                    name: _name,
+                  )));
+    } catch (e) {
+      String error = e.toString();
+      if (error.contains("EMAIL_ALREADY_IN_USE")) {
+        final snackbar = SnackBar(
+          content: Text("Invalid e-mail, e-mail already in use."),
+          duration: new Duration(seconds: 3),
+        );
+        scaffoldKey.currentState.showSnackBar(snackbar);
+      }
+      _newEmailController.clear();
+    }
+  }
+
+  @override
+  void initState() {
+    _newNameController = TextEditingController();
+    _newEmailController = TextEditingController();
+    _newPasswordController = TextEditingController();
+    _newConfirmPasswordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _newConfirmPasswordController.dispose();
+    _newNameController.dispose();
+    _newEmailController.dispose();
+    _newPasswordController.dispose();
+    super.dispose();
   }
 
   @override

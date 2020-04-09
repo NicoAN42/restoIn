@@ -1,13 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:restoin/screens/forgot_password_screen.dart';
+import 'package:restoin/screens/home_screen.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:restoin/screens/register_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
 
-TextEditingController _emailController = TextEditingController();
-TextEditingController _passwordController = TextEditingController();
+TextEditingController _emailController;
+TextEditingController _passwordController;
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -19,36 +24,38 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String _email;
   String _pw;
-  String _valEmail = "guest@gmail.com";
-  String _valPw = "guest123";
+
+  TextStyle forgotPasswordStyle = Styles.customStyle("smallGray");
 
   void _submitCommand() {
-    _email = _emailController.text.trim();
-    _pw = _passwordController.text;
+    FocusScope.of(context).unfocus();
+    setState(() {
+      _email = _emailController.text.trim();
+      _pw = _passwordController.text;
+    });
 
-    if (_email != _valEmail && _pw != _valPw) {
-      _loginCommand(1);
+    if (_email.isEmpty || _pw.isEmpty) {
+      _loginSnackBar(4);
       _emailController.clear();
       _passwordController.clear();
-    } else if (_email != _valEmail) {
-      _loginCommand(2);
-      _emailController.clear();
-    } else if (_pw != _valPw) {
-      _loginCommand(3);
-      _passwordController.clear();
-    } else {
-      _emailController.clear();
-      _passwordController.clear();
-      Navigator.pushReplacementNamed(context, "/home");
-    }
+    } else
+      _login(_email, _pw);
   }
 
-  void _loginCommand(int type) {
+  void _resetPassword() async {
+    Navigator.pop(context);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ForgotPasswordScreen()));
+  }
+
+  void _loginSnackBar(int type) {
     Text message;
 
     switch (type) {
       case 1:
-        message = Text("Invalid e-mail and password");
+        message = Text(
+          "User not found",
+        );
         break;
       case 2:
         message = Text("Invalid e-mail");
@@ -56,13 +63,67 @@ class _LoginScreenState extends State<LoginScreen> {
       case 3:
         message = Text("Invalid password");
         break;
+      case 4:
+        message = Text("Invalid submission, textfield cannot be empty");
+        break;
+      case 5:
+        message = Text("Email hasn't been verified, please check your inbox.");
+        break;
     }
 
     final snackbar = SnackBar(
       content: message,
-      duration: new Duration(seconds: 2),
+      duration: new Duration(seconds: 3),
     );
     scaffoldKey.currentState.showSnackBar(snackbar);
+  }
+
+  Future<void> _login(String email, String pw) async {
+    try {
+      FirebaseUser user = (await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: pw,
+      ))
+          .user;
+
+      if (!user.isEmailVerified) throw Exception("EMAIL_NOT_VERIFIED");
+
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(
+                    user: user,
+                  )));
+    } catch (e) {
+      String error = e.toString();
+      if (error.contains("USER_NOT_FOUND")) {
+        _loginSnackBar(1);
+        _emailController.clear();
+        _passwordController.clear();
+      } else if (error.contains("INVALID_EMAIL")) {
+        _loginSnackBar(2);
+        _emailController.clear();
+      } else if (error.contains("WRONG_PASSWORD")) {
+        _loginSnackBar(3);
+        _passwordController.clear();
+      } else if (error.contains("EMAIL_NOT_VERIFIED")) {
+        _loginSnackBar(5);
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -124,9 +185,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Padding(
                             padding: EdgeInsets.only(top: screenHeight * 0.01),
-                            //Add GestureDetector
-                            child: Text("Forgot your password?",
-                                style: Styles.customStyle("smallGray")))
+                            child: GestureDetector(
+                              onTap: () => _resetPassword(),
+                              onTapDown: (TapDownDetails details) =>
+                                  setState(() {
+                                forgotPasswordStyle =
+                                    Styles.customStyle("smallUnderlineGray");
+                              }),
+                              onTapUp: (TapUpDetails details) => setState(() {
+                                forgotPasswordStyle =
+                                    Styles.customStyle("smallGray");
+                              }),
+                              child: Text("Forgot your password?",
+                                  style: forgotPasswordStyle),
+                            ))
                       ],
                     ),
                   ),
@@ -178,6 +250,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: Styles.customStyle("mediumBoldOrange"),
                                   recognizer: new TapGestureRecognizer()
                                     ..onTap = () {
+                                      Navigator.pop(context);
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
