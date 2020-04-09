@@ -12,51 +12,70 @@ class _FilterScreenState extends State<FilterScreen> {
   static bool _clearOrderType = false;
   static bool _clearCategories = false;
   static bool _clearCuisine = false;
-  static bool _clearPrice = false;
   static bool _clearDistance = false;
 
-  List<CustomSmallButton> orderType;
-  //tambahin list lainnya
+  static bool _showMoreCategories = true;
+  static bool _showMoreCuisine = true;
 
-  // Categories
-  CustomSmallButton allButton = CustomSmallButton(text: "All");
-  CustomSmallButton fastfoodButton = CustomSmallButton(text: "Fast Food");
-  CustomSmallButton sushiButton = CustomSmallButton(text: "Sushi");
-  CustomSmallButton dinnerButton = CustomSmallButton(text: "Dinner");
+  Container categoriesContainer = Container(
+    child: Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            CustomSmallButton(text: "Noodle", isClear: _clearCategories),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Healthy", isClear: _clearCategories),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Vegan", isClear: _clearCategories),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Ice Cream", isClear: _clearCategories),
+            SizedBox(width: 5),
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            CustomSmallButton(text: "Breakfast", isClear: _clearCategories),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Lunch", isClear: _clearCategories),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Tea", isClear: _clearCategories),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Dessert", isClear: _clearCategories),
+            SizedBox(width: 5),
+          ],
+        )
+      ],
+    ),
+  );
 
-  CustomSmallButton soupButton = CustomSmallButton(text: "Soup");
-  CustomSmallButton coffeeButton = CustomSmallButton(text: "Coffee");
-  CustomSmallButton pastaButton = CustomSmallButton(text: "Pasta");
-  CustomSmallButton pizzaButton = CustomSmallButton(text: "Pizza");
-
-  CustomSmallButton noodleButton = CustomSmallButton(text: "Noodle");
-  CustomSmallButton healthyButton = CustomSmallButton(text: "Healthy");
-  CustomSmallButton veganButton = CustomSmallButton(text: "Vegan");
-  CustomSmallButton icecreamButton = CustomSmallButton(text: "Ice Cream");
-
-  CustomSmallButton breakfastButton = CustomSmallButton(text: "Breakfast");
-  CustomSmallButton lunchButton = CustomSmallButton(text: "Lunch");
-  CustomSmallButton teaButton = CustomSmallButton(text: "Tea");
-  CustomSmallButton dessertButton = CustomSmallButton(text: "Dessert");
-
-  // Cuisine
-  CustomSmallButton arabicButton = CustomSmallButton(text: "Arabic");
-  CustomSmallButton americanButton = CustomSmallButton(text: "American");
-  CustomSmallButton westernButton = CustomSmallButton(text: "Western");
-  CustomSmallButton chineseButton = CustomSmallButton(text: "Chinese");
-
-  CustomSmallButton indonesianButton = CustomSmallButton(text: "Indonesian");
-  CustomSmallButton japaneseButton = CustomSmallButton(text: "Japanese");
-  CustomSmallButton koreanButton = CustomSmallButton(text: "Korean");
-
-  CustomSmallButton turkiButton = CustomSmallButton(text: "Turki");
-  CustomSmallButton taiwaneseButton = CustomSmallButton(text: "Taiwanese");
-  CustomSmallButton peruvianButton = CustomSmallButton(text: "Peruvian");
-  CustomSmallButton indiaButton = CustomSmallButton(text: "India");
-
-  CustomSmallButton franceButton = CustomSmallButton(text: "France");
-  CustomSmallButton balineseButton = CustomSmallButton(text: "Balinese");
-  CustomSmallButton javaneseButton = CustomSmallButton(text: "Javanese");
+  Container cuisineContainer = Container(
+    child: Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            CustomSmallButton(text: "Turki", isClear: _clearCuisine),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Taiwanese", isClear: _clearCuisine),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Peruvian", isClear: _clearCuisine),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "India", isClear: _clearCuisine),
+            SizedBox(width: 5),
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            CustomSmallButton(text: "France", isClear: _clearCuisine),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Balinese", isClear: _clearCuisine),
+            SizedBox(width: 5),
+            CustomSmallButton(text: "Javanese", isClear: _clearCuisine),
+            SizedBox(width: 5),
+          ],
+        )
+      ],
+    ),
+  );
 
   // Price
   static final RangeThumbSelector customRangeThumbSelector = (
@@ -87,13 +106,71 @@ class _FilterScreenState extends State<FilterScreen> {
       text: "Eat In",
       isClear: _clearOrderType,
     ));
+    list.add(SizedBox(width: 5));
     list.add(new CustomSmallButton(
       text: "Booking",
       isClear: _clearOrderType,
     ));
+    list.add(SizedBox(width: 5));
     list.add(new CustomSmallButton(
       text: "Pick Up",
       isClear: _clearOrderType,
+    ));
+    return list;
+  }
+
+  List<Widget> createCategories() {
+    List<Widget> list = new List();
+    list.add(Row(
+      children: <Widget>[
+        CustomSmallButton(text: "All", isClear: _clearCategories),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Fast Food", isClear: _clearCategories),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Sushi", isClear: _clearCategories),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Dinner", isClear: _clearCategories),
+        SizedBox(width: 5),
+      ],
+    ));
+    list.add(Row(
+      children: <Widget>[
+        CustomSmallButton(text: "Soup", isClear: _clearCategories),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Coffee", isClear: _clearCategories),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Pasta", isClear: _clearCategories),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Pizza", isClear: _clearCategories),
+        SizedBox(width: 5),
+      ],
+    ));
+    return list;
+  }
+
+  List<Widget> createCuisine() {
+    List<Widget> list = new List();
+    list.add(Row(
+      children: <Widget>[
+        CustomSmallButton(text: "Arabic", isClear: _clearCuisine),
+        SizedBox(width: 4),
+        CustomSmallButton(text: "American", isClear: _clearCuisine),
+        SizedBox(width: 4),
+        CustomSmallButton(text: "Western", isClear: _clearCuisine),
+        SizedBox(width: 4),
+        CustomSmallButton(text: "Chinese", isClear: _clearCuisine),
+        SizedBox(width: 4),
+      ],
+    ));
+    list.add(Row(
+      children: <Widget>[
+        CustomSmallButton(text: "Indonesian", isClear: _clearCuisine),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Japanese", isClear: _clearCuisine),
+        SizedBox(width: 5),
+        CustomSmallButton(text: "Korean", isClear: _clearCuisine),
+        SizedBox(width: 5),
+      ],
     ));
     return list;
   }
@@ -104,14 +181,17 @@ class _FilterScreenState extends State<FilterScreen> {
       text: "1-3km",
       isClear: _clearDistance,
     ));
+    list.add(SizedBox(width: 5));
     list.add(new CustomSmallButton(
       text: "3-6km",
       isClear: _clearDistance,
     ));
+    list.add(SizedBox(width: 5));
     list.add(new CustomSmallButton(
       text: "6-10km",
       isClear: _clearDistance,
     ));
+    list.add(SizedBox(width: 5));
     list.add(new CustomSmallButton(
       text: ">10km",
       isClear: _clearDistance,
@@ -122,39 +202,60 @@ class _FilterScreenState extends State<FilterScreen> {
 
   void clearOrderType() {
     setState(() {
-      //Sisanya false
-      _clearDistance = false;
-
-      //cuman dia yang true
       _clearOrderType = true;
+      _clearCategories = false;
+      _clearCuisine = false;
+      _clearDistance = false;
     });
   }
 
   void clearCategories() {
-    // TODO: Clear categories
+      setState(() {
+      _clearOrderType = false;
+      _clearCategories = true;
+      _clearCuisine = false;
+      _clearDistance = false;
+    });
   }
 
   void clearCuisine() {
-    // TODO: Clear cuisine
+      setState(() {
+      _clearOrderType = false;
+      _clearCategories = false;
+      _clearCuisine = true;
+      _clearDistance = false;
+    });
   }
 
   void clearPrice() {
-    // TODO: Clear price
+    setState(() {
+      _clearOrderType = false;
+      _clearCategories = false;
+      _clearCuisine = false;
+      values = RangeValues(0, 500000);
+      labels = RangeLabels('0', '500000');
+      _clearDistance = false;
+    });
   }
 
   void clearDistance() {
     setState(() {
       _clearOrderType = false;
+      _clearCategories = false;
+      _clearCuisine = false;
       _clearDistance = true;
     });
   }
 
   void reset() {
-    clearOrderType();
-    clearCategories();
-    clearCuisine();
-    clearPrice();
-    clearDistance();
+    setState(() {
+      _clearOrderType = true;
+      _clearCategories = true;
+      _clearCuisine = true;
+      values = RangeValues(0, 500000);
+      labels = RangeLabels('0', '500000');
+      _clearDistance = true;
+    });
   }
 
   @override
@@ -193,7 +294,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     right: 0,
                     bottom: 0,
                     child: GestureDetector(
-                      onTap: () => clearOrderType(),
+                      onTap: () => reset(),
                       child: Container(
                         child: Text(
                           "Reset",
@@ -242,14 +343,6 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   Row(
                     children: createOrderType(),
-                    // <Widget>[
-
-                    //   eatInButton,
-                    //   SizedBox(width: 5),
-                    //   bookingButton,
-                    //   SizedBox(width: 5),
-                    //   pickUpButton
-                    // ],
                   ),
 
                   // Categories
@@ -274,51 +367,12 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
 
-                  Row(
+                  Column(
                     children: <Widget>[
-                      allButton,
-                      SizedBox(width: 5),
-                      fastfoodButton,
-                      SizedBox(width: 5),
-                      sushiButton,
-                      SizedBox(width: 5),
-                      dinnerButton,
-                    ],
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      soupButton,
-                      SizedBox(width: 5),
-                      coffeeButton,
-                      SizedBox(width: 5),
-                      pastaButton,
-                      SizedBox(width: 5),
-                      pizzaButton,
-                    ],
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      noodleButton,
-                      SizedBox(width: 5),
-                      healthyButton,
-                      SizedBox(width: 5),
-                      veganButton,
-                      SizedBox(width: 5),
-                      icecreamButton
-                    ],
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      breakfastButton,
-                      SizedBox(width: 5),
-                      lunchButton,
-                      SizedBox(width: 5),
-                      teaButton,
-                      SizedBox(width: 5),
-                      dessertButton,
+                      Column(
+                        children: createCategories(),
+                      ),
+                      _showMoreCategories ? categoriesContainer : Container(),
                     ],
                   ),
 
@@ -330,11 +384,14 @@ class _FilterScreenState extends State<FilterScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         GestureDetector(
-                          // TODO: Ontap Here (Hide / Show More)
-                          child: Text(
-                            "Show More",
-                            style: Styles.customStyle("mediumgray"),
-                          ),
+                          onTap: () {
+                            setState(() {
+                              _showMoreCategories = !_showMoreCategories;
+                            });
+                          },
+                          child: _showMoreCategories ? 
+                            Text("Hide", style: Styles.customStyle("mediumgray")) :
+                            Text( "Show More", style: Styles.customStyle("mediumgray")),
                         ),
                       ],
                     ),
@@ -362,52 +419,13 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
 
-                  Row(
+                  Column(
                     children: <Widget>[
-                      arabicButton,
-                      SizedBox(width: 5),
-                      americanButton,
-                      SizedBox(width: 5),
-                      westernButton,
-                      SizedBox(width: 5),
-                      chineseButton,
+                      Column(
+                        children: createCuisine(),
+                      ),
+                      _showMoreCuisine ? cuisineContainer : Container(),
                     ],
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      indonesianButton,
-                      SizedBox(width: 5),
-                      japaneseButton,
-                      SizedBox(width: 5),
-                      koreanButton,
-                    ],
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      turkiButton,
-                      SizedBox(width: 5),
-                      taiwaneseButton,
-                      SizedBox(width: 5),
-                      peruvianButton,
-                      SizedBox(width: 5),
-                      indiaButton
-                    ],
-                  ),
-
-                  Row(
-                    children: <Widget>[
-                      franceButton,
-                      SizedBox(width: 5),
-                      balineseButton,
-                      SizedBox(width: 5),
-                      javaneseButton,
-                    ],
-                  ),
-
-                  Row(
-                    children: <Widget>[],
                   ),
 
                   // Cuisine Show More
@@ -418,11 +436,14 @@ class _FilterScreenState extends State<FilterScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         GestureDetector(
-                          // TODO: Ontap Here (Hide / Show More)
-                          child: Text(
-                            "Show More",
-                            style: Styles.customStyle("mediumgray"),
-                          ),
+                          onTap: () {
+                            setState(() {
+                              _showMoreCuisine = !_showMoreCuisine;
+                            });
+                          },
+                          child: _showMoreCuisine ? 
+                            Text("Hide", style: Styles.customStyle("mediumgray")) :
+                            Text( "Show More", style: Styles.customStyle("mediumgray")),
                         ),
                       ],
                     ),
@@ -535,37 +556,37 @@ class _FilterScreenState extends State<FilterScreen> {
 
                   Row(
                     children: createDistance(),
-                    // <Widget>[
-                    //   onetothreeButton,
-                    //   SizedBox(width: 5),
-                    //   threetosixButton,
-                    //   SizedBox(width: 5),
-                    //   sixtotenButton,
-                    //   SizedBox(width: 5),
-                    //   greatertenButton
-                    // ],
                   ),
+
                 ],
               ),
             ),
 
-            ButtonTheme(
-              minWidth: screenWidth * 0.6,
-              child: FlatButton(
-                onPressed: () {
-                  setState(() {
-                    //TODO : Transition
-                  });
-                },
-                child: Text(
-                  "Apply",
-                  style: Styles.customStyle("mediumwhite"),
-                ),
-                color: Styles.orange,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
+            Container(
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  FlatButton(
+                    padding: EdgeInsets.only(left: 80, right: 80),
+                    onPressed: () {
+                      setState(() {
+                        //TODO : Transition
+                      });
+                    },
+                    child: Text(
+                      "Apply",
+                      style: Styles.customStyle("mediumwhite"),
+                    ),
+                    color: Styles.orange,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ],
               ),
             )
+
+          
           ],
         ),
       ),
