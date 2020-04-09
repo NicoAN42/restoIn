@@ -86,9 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
       ))
           .user;
 
-      if (user.email == "guest@gmail.com" || user.email == "test@gmail.com")
-        ;
-      else if (!user.isEmailVerified) throw Exception("EMAIL_NOT_VERIFIED");
+      if (!user.isEmailVerified && !(user.email == "guest@gmail.com"))
+        throw Exception("EMAIL_NOT_VERIFIED");
 
       Navigator.pushReplacement(
           context,

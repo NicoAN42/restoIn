@@ -165,7 +165,7 @@ class _CustomSmallButtonState extends State<CustomSmallButton> {
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
-      minWidth: 30,
+      minWidth: 10,
       child: (FlatButton(
         child: Text(widget.text,
             maxLines: 1,

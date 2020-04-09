@@ -14,68 +14,8 @@ class _FilterScreenState extends State<FilterScreen> {
   static bool _clearCuisine = false;
   static bool _clearDistance = false;
 
-  static bool _showMoreCategories = true;
-  static bool _showMoreCuisine = true;
-
-  Container categoriesContainer = Container(
-    child: Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            CustomSmallButton(text: "Noodle", isClear: _clearCategories),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Healthy", isClear: _clearCategories),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Vegan", isClear: _clearCategories),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Ice Cream", isClear: _clearCategories),
-            SizedBox(width: 5),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            CustomSmallButton(text: "Breakfast", isClear: _clearCategories),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Lunch", isClear: _clearCategories),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Tea", isClear: _clearCategories),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Dessert", isClear: _clearCategories),
-            SizedBox(width: 5),
-          ],
-        )
-      ],
-    ),
-  );
-
-  Container cuisineContainer = Container(
-    child: Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            CustomSmallButton(text: "Turki", isClear: _clearCuisine),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Taiwanese", isClear: _clearCuisine),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Peruvian", isClear: _clearCuisine),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "India", isClear: _clearCuisine),
-            SizedBox(width: 5),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            CustomSmallButton(text: "France", isClear: _clearCuisine),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Balinese", isClear: _clearCuisine),
-            SizedBox(width: 5),
-            CustomSmallButton(text: "Javanese", isClear: _clearCuisine),
-            SizedBox(width: 5),
-          ],
-        )
-      ],
-    ),
-  );
+  static bool _showMoreCategories = false;
+  static bool _showMoreCuisine = false;
 
   // Price
   static final RangeThumbSelector customRangeThumbSelector = (
@@ -102,100 +42,63 @@ class _FilterScreenState extends State<FilterScreen> {
 
   List<Widget> createOrderType() {
     List<Widget> list = new List();
-    list.add(new CustomSmallButton(
-      text: "Eat In",
-      isClear: _clearOrderType,
-    ));
-    list.add(SizedBox(width: 5));
-    list.add(new CustomSmallButton(
-      text: "Booking",
-      isClear: _clearOrderType,
-    ));
-    list.add(SizedBox(width: 5));
-    list.add(new CustomSmallButton(
-      text: "Pick Up",
-      isClear: _clearOrderType,
-    ));
+    list.add(new CustomSmallButton(text: "Eat In", isClear: _clearOrderType));
+    list.add(new CustomSmallButton(text: "Booking", isClear: _clearOrderType));
+    list.add(new CustomSmallButton(text: "Pick Up", isClear: _clearOrderType));
     return list;
   }
 
   List<Widget> createCategories() {
     List<Widget> list = new List();
-    list.add(Row(
-      children: <Widget>[
-        CustomSmallButton(text: "All", isClear: _clearCategories),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Fast Food", isClear: _clearCategories),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Sushi", isClear: _clearCategories),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Dinner", isClear: _clearCategories),
-        SizedBox(width: 5),
-      ],
-    ));
-    list.add(Row(
-      children: <Widget>[
-        CustomSmallButton(text: "Soup", isClear: _clearCategories),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Coffee", isClear: _clearCategories),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Pasta", isClear: _clearCategories),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Pizza", isClear: _clearCategories),
-        SizedBox(width: 5),
-      ],
-    ));
+
+    list.add(CustomSmallButton(text: "All", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Fast Food", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Sushi", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Dinner", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Soup", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Coffee", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Pasta", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Pizza", isClear: _clearCategories));
+    if (!_showMoreCategories) return list;
+    list.add(CustomSmallButton(text: "Noodle", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Healthy", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Vegan", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Ice Cream", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Breakfast", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Lunch", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Tea", isClear: _clearCategories));
+    list.add(CustomSmallButton(text: "Dessert", isClear: _clearCategories));
+
     return list;
   }
 
   List<Widget> createCuisine() {
     List<Widget> list = new List();
-    list.add(Row(
-      children: <Widget>[
-        CustomSmallButton(text: "Arabic", isClear: _clearCuisine),
-        SizedBox(width: 4),
-        CustomSmallButton(text: "American", isClear: _clearCuisine),
-        SizedBox(width: 4),
-        CustomSmallButton(text: "Western", isClear: _clearCuisine),
-        SizedBox(width: 4),
-        CustomSmallButton(text: "Chinese", isClear: _clearCuisine),
-        SizedBox(width: 4),
-      ],
-    ));
-    list.add(Row(
-      children: <Widget>[
-        CustomSmallButton(text: "Indonesian", isClear: _clearCuisine),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Japanese", isClear: _clearCuisine),
-        SizedBox(width: 5),
-        CustomSmallButton(text: "Korean", isClear: _clearCuisine),
-        SizedBox(width: 5),
-      ],
-    ));
+    list.add(CustomSmallButton(text: "Arabic", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "American", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Western", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Chinese", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Indonesian", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Japanese", isClear: _clearCuisine));
+    if (!_showMoreCuisine) return list;
+    list.add(CustomSmallButton(text: "Korean", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Turki", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Taiwanese", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Peruvian", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "India", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "France", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Balinese", isClear: _clearCuisine));
+    list.add(CustomSmallButton(text: "Javanese", isClear: _clearCuisine));
+
     return list;
   }
 
   List<Widget> createDistance() {
     List<Widget> list = new List();
-    list.add(new CustomSmallButton(
-      text: "1-3km",
-      isClear: _clearDistance,
-    ));
-    list.add(SizedBox(width: 5));
-    list.add(new CustomSmallButton(
-      text: "3-6km",
-      isClear: _clearDistance,
-    ));
-    list.add(SizedBox(width: 5));
-    list.add(new CustomSmallButton(
-      text: "6-10km",
-      isClear: _clearDistance,
-    ));
-    list.add(SizedBox(width: 5));
-    list.add(new CustomSmallButton(
-      text: ">10km",
-      isClear: _clearDistance,
-    ));
+    list.add(new CustomSmallButton(text: "1-3km", isClear: _clearDistance));
+    list.add(new CustomSmallButton(text: "3-6km", isClear: _clearDistance));
+    list.add(new CustomSmallButton(text: "6-10km", isClear: _clearDistance));
+    list.add(new CustomSmallButton(text: ">10km", isClear: _clearDistance));
 
     return list;
   }
@@ -210,7 +113,7 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void clearCategories() {
-      setState(() {
+    setState(() {
       _clearOrderType = false;
       _clearCategories = true;
       _clearCuisine = false;
@@ -219,7 +122,7 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void clearCuisine() {
-      setState(() {
+    setState(() {
       _clearOrderType = false;
       _clearCategories = false;
       _clearCuisine = true;
@@ -229,12 +132,9 @@ class _FilterScreenState extends State<FilterScreen> {
 
   void clearPrice() {
     setState(() {
-      _clearOrderType = false;
-      _clearCategories = false;
-      _clearCuisine = false;
+      turnAllOff();
       values = RangeValues(0, 500000);
       labels = RangeLabels('0', '500000');
-      _clearDistance = false;
     });
   }
 
@@ -258,6 +158,30 @@ class _FilterScreenState extends State<FilterScreen> {
     });
   }
 
+  void turnAllOff() {
+    setState(() {
+      _clearOrderType = false;
+      _clearCategories = false;
+      _clearCuisine = false;
+      _clearDistance = false;
+    });
+  }
+
+  String getPrice(int price) {
+    String p = price.toString();
+    List<String> res = [];
+    for (int i = p.length; i > 0; i -= 3) {
+      if (i - 3 >= 0) {
+        res.insert(0, "${p.substring(i - 3, i)}");
+      } else {
+        res.insert(0, "${p.substring(0, i)}");
+      }
+    }
+    String r = res.join(".");
+
+    return r;
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -271,7 +195,7 @@ class _FilterScreenState extends State<FilterScreen> {
             Container(
               color: Colors.white,
               padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
-                  screenHeight * 0.1, screenWidth * 0.05, 20),
+                  screenHeight * 0.05, screenWidth * 0.05, 20),
               child: Stack(
                 children: <Widget>[
                   Container(width: screenWidth, height: 21),
@@ -308,11 +232,7 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
 
             // Line
-            Container(
-              width: screenWidth,
-              height: 10,
-              color: Color(0xFFF7F7F7),
-            ),
+            Container(width: screenWidth, height: 10, color: Styles.white),
 
             // Content
             Container(
@@ -341,8 +261,13 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
 
-                  Row(
-                    children: createOrderType(),
+                  SizedBox(
+                    width: screenWidth * 0.9,
+                    child: Wrap(
+                      spacing: 5,
+                      direction: Axis.horizontal,
+                      children: createOrderType(),
+                    ),
                   ),
 
                   // Categories
@@ -367,14 +292,22 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
 
-                  Column(
-                    children: <Widget>[
-                      Column(
-                        children: createCategories(),
-                      ),
-                      _showMoreCategories ? categoriesContainer : Container(),
-                    ],
+                  SizedBox(
+                    width: screenWidth * 0.9,
+                    child: Wrap(
+                      spacing: 5,
+                      direction: Axis.horizontal,
+                      children: createCategories(),
+                    ),
                   ),
+                  // Column(
+                  //   children: <Widget>[
+                  //     Column(
+                  //       children: createCategories(),
+                  //     ),
+                  //     _showMoreCategories ? categoriesContainer : Container(),
+                  //   ],
+                  // ),
 
                   // Categories Show More
                   Container(
@@ -385,13 +318,16 @@ class _FilterScreenState extends State<FilterScreen> {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
+                            turnAllOff();
                             setState(() {
                               _showMoreCategories = !_showMoreCategories;
                             });
                           },
-                          child: _showMoreCategories ? 
-                            Text("Hide", style: Styles.customStyle("mediumgray")) :
-                            Text( "Show More", style: Styles.customStyle("mediumgray")),
+                          child: _showMoreCategories
+                              ? Text("Hide",
+                                  style: Styles.customStyle("mediumgray"))
+                              : Text("Show More",
+                                  style: Styles.customStyle("mediumgray")),
                         ),
                       ],
                     ),
@@ -419,14 +355,22 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
 
-                  Column(
-                    children: <Widget>[
-                      Column(
-                        children: createCuisine(),
-                      ),
-                      _showMoreCuisine ? cuisineContainer : Container(),
-                    ],
+                  SizedBox(
+                    width: screenWidth * 0.9,
+                    child: Wrap(
+                      spacing: 5,
+                      direction: Axis.horizontal,
+                      children: createCuisine(),
+                    ),
                   ),
+                  // Column(
+                  //   children: <Widget>[
+                  //     Column(
+                  //       children: createCuisine(),
+                  //     ),
+                  //     _showMoreCuisine ? cuisineContainer : Container(),
+                  //   ],
+                  // ),
 
                   // Cuisine Show More
                   Container(
@@ -437,13 +381,16 @@ class _FilterScreenState extends State<FilterScreen> {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
+                            turnAllOff();
                             setState(() {
                               _showMoreCuisine = !_showMoreCuisine;
                             });
                           },
-                          child: _showMoreCuisine ? 
-                            Text("Hide", style: Styles.customStyle("mediumgray")) :
-                            Text( "Show More", style: Styles.customStyle("mediumgray")),
+                          child: _showMoreCuisine
+                              ? Text("Hide",
+                                  style: Styles.customStyle("mediumgray"))
+                              : Text("Show More",
+                                  style: Styles.customStyle("mediumgray")),
                         ),
                       ],
                     ),
@@ -494,21 +441,30 @@ class _FilterScreenState extends State<FilterScreen> {
                             if (value.end - value.start >= 50000) {
                               values = value;
                               labels = RangeLabels(
-                                  value.start.toInt().toString(),
-                                  value.end.toInt().toString());
+                                  getPrice(value.start.toInt()),
+                                  getPrice(value.end.toInt()));
+                              // value.start.toInt().toString(),
+                              // value.end.toInt().toString());
                             } else {
                               if (value.start == values.start) {
                                 values = RangeValues(
                                     values.start, values.start + 50000);
                                 labels = RangeLabels(
-                                    values.start.toInt().toString(),
-                                    (values.start + 50000).toInt().toString());
+                                    getPrice(values.start.toInt()),
+                                    getPrice((values.start + 50000).toInt())
+                                    // values.start.toInt().toString(),
+                                    // (values.start + 50000).toInt().toString()
+                                    );
                               } else {
                                 values =
                                     RangeValues(values.end - 50000, values.end);
                                 labels = RangeLabels(
-                                    (values.end - 50000).toInt().toString(),
-                                    values.end.toInt().toString());
+                                    getPrice((values.end - 50000).toInt()),
+                                    getPrice(values.end.toInt())
+
+                                    // (values.end - 50000).toInt().toString(),
+                                    // values.end.toInt().toString()
+                                    );
                               }
                             }
                           });
@@ -554,10 +510,14 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
 
-                  Row(
-                    children: createDistance(),
+                  SizedBox(
+                    width: screenWidth * 0.9,
+                    child: Wrap(
+                      spacing: 5,
+                      direction: Axis.horizontal,
+                      children: createDistance(),
+                    ),
                   ),
-
                 ],
               ),
             ),
@@ -585,8 +545,6 @@ class _FilterScreenState extends State<FilterScreen> {
                 ],
               ),
             )
-
-          
           ],
         ),
       ),
