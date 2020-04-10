@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:restoin/screens/finger_register_screen.dart';
+import 'package:restoin/screens/login_and_register/finger_register_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
+import 'package:restoin/widgets/loading_animation.dart';
 
 TextEditingController _newNameController;
 TextEditingController _newEmailController;
@@ -12,6 +14,7 @@ TextEditingController _newPasswordController;
 TextEditingController _newConfirmPasswordController;
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
+final dbRef = Firestore.instance;
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -21,6 +24,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _loadingKey = GlobalKey<State>();
 
   String _name;
   String _email;
@@ -49,13 +53,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _loginCommand() async {
     try {
+      LoadingAnimation.showLoadingDialog(context, _loadingKey);
+
       final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
         email: _email,
         password: _pw,
       ))
           .user;
-
       await user.sendEmailVerification();
+      await dbRef
+          .collection("users")
+          .document(user.uid)
+          .setData({'isAdmin': false, 'name': '$_name'});
+      Navigator.of(_loadingKey.currentContext, rootNavigator: true).pop();
 
       Navigator.pop(context);
       Navigator.push(
@@ -66,6 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     name: _name,
                   )));
     } catch (e) {
+      Navigator.of(_loadingKey.currentContext, rootNavigator: true).pop();
       String error = e.toString();
       if (error.contains("EMAIL_ALREADY_IN_USE")) {
         final snackbar = SnackBar(

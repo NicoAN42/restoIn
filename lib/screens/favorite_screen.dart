@@ -93,7 +93,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                       image: DecorationImage(
                                                         fit: BoxFit.cover,
                                                         image: AssetImage(
-                                                            "assets/restaurant/restaurant-png-hd--1920.png"),
+                                                            "assets/restaurant/chineseResident.png"),
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.all(
@@ -512,7 +512,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                       image: DecorationImage(
                                                         fit: BoxFit.cover,
                                                         image: AssetImage(
-                                                            "assets/restaurant/modernRestaurant.jpg"),
+                                                            "assets/restaurant/hakagureRamen.jpg"),
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.all(

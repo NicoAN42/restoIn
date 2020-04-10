@@ -39,8 +39,8 @@ class _CustomRestoTileState extends State<CustomRestoTile> {
                         Positioned(
                           left: 4,
                           child: Container(
-                            width: 96,
-                            height: 96,
+                            width: widget.screenWidth * 0.24,
+                            height: widget.screenWidth * 0.24,
                             decoration: BoxDecoration(
                                 image: widget.r.getImage(),
                                 borderRadius:

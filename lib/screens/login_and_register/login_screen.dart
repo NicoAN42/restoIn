@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:restoin/screens/forgot_password_screen.dart';
+import 'package:restoin/screens/login_and_register/forgot_password_screen.dart';
 import 'package:restoin/screens/home_screen.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:restoin/screens/register_screen.dart';
+import 'package:restoin/screens/login_and_register/register_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
+import 'package:restoin/widgets/loading_animation.dart';
 
 TextEditingController _emailController;
 TextEditingController _passwordController;
@@ -21,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _loadingKey = GlobalKey<State>();
 
   String _email;
   String _pw;
@@ -80,6 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _login(String email, String pw) async {
     try {
+      LoadingAnimation.showLoadingDialog(context, _loadingKey);
+
       FirebaseUser user = (await _auth.signInWithEmailAndPassword(
         email: email,
         password: pw,
@@ -88,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (!user.isEmailVerified && !(user.email == "guest@gmail.com"))
         throw Exception("EMAIL_NOT_VERIFIED");
+      Navigator.of(_loadingKey.currentContext, rootNavigator: true).pop();
 
       Navigator.pushReplacement(
           context,
@@ -96,6 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     user: user,
                   )));
     } catch (e) {
+      Navigator.of(_loadingKey.currentContext, rootNavigator: true).pop();
       String error = e.toString();
       if (error.contains("USER_NOT_FOUND")) {
         _loginSnackBar(1);

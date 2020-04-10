@@ -845,7 +845,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
-                                    "assets/restaurant/unnamed.jpg")),
+                                    "assets/restaurant/altarRuinsResto.jpg")),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
@@ -968,7 +968,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
-                                    "assets/restaurant/restaurant-png-hd--1920.png")),
+                                    "assets/restaurant/chineseResident.png")),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
@@ -1123,7 +1123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
-                                    "assets/restaurant/restaurant-png-hd--1920.png")),
+                                    "assets/restaurant/chineseResident.png")),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
@@ -1246,7 +1246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
-                                    "assets/restaurant/unnamed.jpg")),
+                                    "assets/restaurant/altarRuinsResto.jpg")),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
@@ -1369,7 +1369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
-                                    "assets/restaurant/restaurant-png-hd--1920.png")),
+                                    "assets/restaurant/chineseResident.png")),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),
@@ -1871,7 +1871,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
-                                    "assets/restaurant/modernRestaurant.jpg")),
+                                    "assets/restaurant/hakagureRamen.jpg")),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.0)),
                           ),

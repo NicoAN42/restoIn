@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+// import 'package:restoin/init_data.dart';
 
-import 'screens/finger_login_screen.dart';
+import 'screens/login_and_register/finger_login_screen.dart';
 import 'screens/location_screen.dart';
 import 'screens/search_result_screen.dart';
 import 'screens/search_screen.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/favorite': (context) => FavoriteScreen(),
         '/home': (context) => HomeScreen(),
         '/filter': (context) => FilterScreen(),
+        // '/initData': (context) => InitData(),
       },
     );
   }

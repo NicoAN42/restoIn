@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/styles.dart';
+import 'package:restoin/widgets/loading_animation.dart';
 
 class RegisterConfirmScreen extends StatefulWidget {
   final FirebaseUser user;
@@ -17,9 +18,12 @@ class RegisterConfirmScreen extends StatefulWidget {
 
 class _RegisterConfirmScreenState extends State<RegisterConfirmScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _loadingKey = GlobalKey<State>();
 
   void _submitCommand() async {
+    LoadingAnimation.showLoadingDialog(context, _loadingKey);
     await widget.user.sendEmailVerification();
+    Navigator.of(_loadingKey.currentContext, rootNavigator: true).pop();
 
     final snackbar = SnackBar(
       content: Text("Email has been resent. Please check your inbox."),

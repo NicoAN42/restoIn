@@ -2,10 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 // import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:restoin/screens/register_screen.dart';
+import 'package:restoin/screens/login_and_register/register_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
+import 'package:restoin/widgets/loading_animation.dart';
 
 TextEditingController _emailController;
 
@@ -18,7 +19,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final _loadingKey = GlobalKey<State>();
   String _email;
 
   void _resetPassword() async {
@@ -31,10 +32,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       _loginSnackBar(1);
     else {
       try {
+        LoadingAnimation.showLoadingDialog(context, _loadingKey);
+
         await _auth.sendPasswordResetEmail(email: _email);
+        Navigator.of(_loadingKey.currentContext, rootNavigator: true).pop();
 
         _loginSnackBar(4);
       } catch (e) {
+        Navigator.of(_loadingKey.currentContext, rootNavigator: true).pop();
         String error = e.toString();
         if (error.contains("INVALID_EMAIL"))
           _loginSnackBar(2);
