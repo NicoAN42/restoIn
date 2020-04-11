@@ -9,6 +9,7 @@ import 'screens/favorite_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/filter_screen.dart';
 import 'screens/resto_info_review_screen.dart';
+import 'screens/resto_menu_screen.dart';
 import 'styles.dart';
 
 void main() => runApp(MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Futura',
       ),
-      initialRoute: '/restoInfoGallery',
+      initialRoute: '/restoMenu',
       routes: {
         '/': (context) => FingerLoginScreen(),
         '/search': (context) => SearchScreen(),
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/filter': (context) => FilterScreen(),
         // '/initData': (context) => InitData(),
-        '/restoInfoGallery': (context) => RestoInfoReviewScreen(),
+        '/restoInfoReview': (context) => RestoInfoReviewScreen(),
+        '/restoMenu' : (context) => RestoMenuScreen(),
       },
     );
   }
