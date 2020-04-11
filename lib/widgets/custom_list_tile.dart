@@ -108,7 +108,6 @@ class _CustomRestoTileState extends State<CustomRestoTile> {
                 ),
               ),
               Container(
-                // color: Styles.peach,
                 padding: EdgeInsets.symmetric(horizontal: 60),
                 child: ListView.builder(
                     itemCount: widget.r.featuredFoods.length,

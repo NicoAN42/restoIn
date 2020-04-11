@@ -27,7 +27,7 @@ class _CustomButtonState extends State<CustomButton> {
               context,
               MaterialPageRoute(
                 builder: (context) => SearchResultScreen(
-                  searchText: widget.text,
+                  query: widget.text,
                 ),
               ));
         },
@@ -67,7 +67,7 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
             context,
             MaterialPageRoute(
               builder: (context) => SearchResultScreen(
-                searchText: widget.text,
+                query: widget.text,
               ),
             ));
       },
@@ -197,12 +197,14 @@ class _CustomReviewButtonState extends State<CustomReviewButton> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
-      onPressed: () {
-        //TODO: Navigate to Popup Review Screen
-      },
-      backgroundColor: Styles.orange,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      label: Text("Write a review", style: Styles.customStyle("mediumboldwhite"),)
-    );
+        onPressed: () {
+          //TODO: Navigate to Popup Review Screen
+        },
+        backgroundColor: Styles.orange,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        label: Text(
+          "Write a review",
+          style: Styles.customStyle("mediumboldwhite"),
+        ));
   }
 }
