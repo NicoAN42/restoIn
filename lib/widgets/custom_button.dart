@@ -6,8 +6,9 @@ import '../styles.dart';
 
 class CustomButton extends StatefulWidget {
   final String text;
+  final Function addHistory;
 
-  const CustomButton({Key key, this.text}) : super(key: key);
+  const CustomButton({Key key, this.text, this.addHistory}) : super(key: key);
 
   @override
   _CustomButtonState createState() => new _CustomButtonState();
@@ -28,6 +29,7 @@ class _CustomButtonState extends State<CustomButton> {
               MaterialPageRoute(
                 builder: (context) => SearchResultScreen(
                   query: widget.text,
+                  addHistory: widget.addHistory,
                 ),
               ));
         },
@@ -39,8 +41,10 @@ class _CustomButtonState extends State<CustomButton> {
 
 class CustomHistoryButton extends StatefulWidget {
   final String text;
+  final Function addHistory;
 
-  const CustomHistoryButton({Key key, this.text}) : super(key: key);
+  const CustomHistoryButton({Key key, this.text, this.addHistory})
+      : super(key: key);
 
   @override
   _CustomHistoryButtonState createState() => new _CustomHistoryButtonState();
@@ -68,6 +72,7 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
             MaterialPageRoute(
               builder: (context) => SearchResultScreen(
                 query: widget.text,
+                addHistory: widget.addHistory,
               ),
             ));
       },
@@ -85,8 +90,11 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
 class CustomSearchSortButton extends StatefulWidget {
   final String text;
   final bool isSortBy;
+  final bool isPressed;
+  final Function change;
 
-  const CustomSearchSortButton({Key key, this.text, this.isSortBy = false})
+  const CustomSearchSortButton(
+      {Key key, this.text, this.isSortBy = false, this.change, this.isPressed})
       : super(key: key);
 
   @override
@@ -95,8 +103,6 @@ class CustomSearchSortButton extends StatefulWidget {
 }
 
 class _CustomSearchSortButtonState extends State<CustomSearchSortButton> {
-  bool isPressed = false;
-
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
@@ -107,14 +113,14 @@ class _CustomSearchSortButtonState extends State<CustomSearchSortButton> {
           Text(widget.text,
               style: widget.isSortBy
                   ? Styles.customStyle("mediumGray")
-                  : isPressed
+                  : widget.isPressed
                       ? Styles.customStyle("mediumWhite")
                       : Styles.customStyle("mediumGray")),
           widget.isSortBy
               ? Icon(
-                  isPressed
-                      ? FontAwesomeIcons.sortUp
-                      : FontAwesomeIcons.sortDown,
+                  widget.isPressed
+                      ? FontAwesomeIcons.sortDown
+                      : FontAwesomeIcons.sortUp,
                   color: Styles.gray,
                 )
               : Container(
@@ -124,11 +130,9 @@ class _CustomSearchSortButtonState extends State<CustomSearchSortButton> {
         ]),
         color: widget.isSortBy
             ? Styles.white
-            : isPressed ? Styles.orange : Styles.white,
+            : widget.isPressed ? Styles.orange : Styles.white,
         onPressed: () {
-          setState(() {
-            isPressed = !isPressed;
-          });
+          widget.change();
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       )),

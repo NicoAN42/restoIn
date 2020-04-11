@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-    sdk: ">=2.1.0 <3.0.0"
+    sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
     flutter:
@@ -56,6 +56,12 @@ flutter:
         - assets/food/landscape/
         - assets/food/potrait/
         - assets/food/square/
+        - assets/food/altar_ruins_resto/
+        - assets/food/chinese_resident/
+        - assets/food/gerald_venue/
+        - assets/food/hakagure_ramen/
+        - assets/food/louise_branz/
+        - assets/food/queen_re/
         - assets/icon/
         - assets/restaurant/
     # An image asset can refer to one or more resolution-specific "variants", see

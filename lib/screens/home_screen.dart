@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 
+import 'search_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   final FirebaseUser user;
 
@@ -97,8 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Styles.white,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        onPressed: () =>
-                            Navigator.pushNamed(context, "/search"),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchScreen())),
                         child: Row(children: <Widget>[
                           Padding(
                             padding: EdgeInsets.only(right: 8.0),

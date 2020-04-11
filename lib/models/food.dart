@@ -5,9 +5,9 @@ import '../styles.dart';
 class Food {
   String image;
   String name;
-  double price;
+  int price;
   List<String> type;
-  double rating;
+  List<double> rating;
 
   Food({this.image, this.name, this.price, this.type, this.rating});
 
@@ -23,7 +23,7 @@ class Food {
   }
 
   Text getPriceText() {
-    String p = price.toInt().toString();
+    String p = price.toString();
     List<String> res = [];
     for (int i = p.length; i > 0; i -= 3) {
       if (i - 3 >= 0) {
@@ -50,6 +50,10 @@ class Food {
   }
 
   Text getRatingText() {
-    return Text("$rating", style: Styles.customStyle("smallWhite"));
+    double avg = 0;
+    rating.forEach((r) => avg += r);
+    avg /= rating.length;
+
+    return Text("$avg", style: Styles.customStyle("smallWhite"));
   }
 }

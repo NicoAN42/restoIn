@@ -18,39 +18,39 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    searchHistory.clear();
-    searchHistory.insert(0, "Ice Cream Sandwich");
-    searchHistory.insert(0, "Dalgona Coffee");
-    searchHistory.insert(0, "Beef BBQ");
-    searchHistory.insert(0, "Vanilla Cake");
+    // searchHistory.clear();
+    // searchHistory.insert(0, "Ice Cream Sandwich");
+    // searchHistory.insert(0, "Dalgona Coffee");
+    // searchHistory.insert(0, "Beef BBQ");
+    // searchHistory.insert(0, "Vanilla Cake");
     super.initState();
+  }
+
+  void _deleteHistory(String s) {
+    setState(() {
+      searchHistory.remove(s);
+    });
+  }
+
+  void _clearAllHistory() {
+    setState(() {
+      searchHistory.clear();
+    });
+  }
+
+  void _addHistory(String s) {
+    _searchController.clear();
+    s.trim();
+    if (s.isNotEmpty)
+      // setState(() {
+      searchHistory.insert(0, s);
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
-    void _deleteHistory(String s) {
-      setState(() {
-        searchHistory.remove(s);
-      });
-    }
-
-    void _clearAllHistory() {
-      setState(() {
-        searchHistory.clear();
-      });
-    }
-
-    void _addHistory(String s) {
-      _searchController.clear();
-      s.trim();
-      if (s.isNotEmpty)
-        // setState(() {
-        searchHistory.insert(0, s);
-      // });
-    }
 
     return new Scaffold(
       key: scaffoldKey,
@@ -100,17 +100,19 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Wrap(
                       spacing: 10,
                       children: <Widget>[
-                        CustomButton(text: "Bowl"),
-                        CustomButton(text: "Sea Food"),
-                        CustomButton(text: "Pancake"),
-                        CustomButton(text: "Cafe"),
-                        CustomButton(text: "Vegetarian"),
-                        CustomButton(text: "Soup"),
-                        CustomButton(text: "Open Now"),
-                        CustomButton(text: "Tea"),
-                        CustomButton(text: "Sushi"),
-                        CustomButton(text: "Bubble Drink"),
-                        CustomButton(text: "Pizza"),
+                        CustomButton(text: "Bowl", addHistory: _addHistory),
+                        CustomButton(text: "Sea Food", addHistory: _addHistory),
+                        CustomButton(text: "Pancake", addHistory: _addHistory),
+                        CustomButton(text: "Cafe", addHistory: _addHistory),
+                        CustomButton(
+                            text: "Vegetarian", addHistory: _addHistory),
+                        CustomButton(text: "Soup", addHistory: _addHistory),
+                        CustomButton(text: "Open Now", addHistory: _addHistory),
+                        CustomButton(text: "Tea", addHistory: _addHistory),
+                        CustomButton(text: "Sushi", addHistory: _addHistory),
+                        CustomButton(
+                            text: "Bubble Drink", addHistory: _addHistory),
+                        CustomButton(text: "Pizza", addHistory: _addHistory),
                       ],
                     ),
                   ),
@@ -151,6 +153,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             children: <Widget>[
                               CustomHistoryButton(
                                 text: "${searchHistory[index]}",
+                                addHistory: _addHistory,
                               ),
                               GestureDetector(
                                 child: new Icon(

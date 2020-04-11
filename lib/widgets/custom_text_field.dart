@@ -166,14 +166,17 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
       focusNode: _focus,
       controller: widget.controller,
       onSubmitted: (String str) {
-        widget.addHistory(str);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SearchResultScreen(
-                searchText: str,
-              ),
-            ));
+        if (str.isNotEmpty) {
+          widget.addHistory(str);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchResultScreen(
+                  query: str,
+                  addHistory: widget.addHistory,
+                ),
+              ));
+        }
       },
       decoration: InputDecoration(
         hintText: "Search food or restaurant",

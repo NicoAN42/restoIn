@@ -5,7 +5,7 @@ import 'food.dart';
 
 class Restaurant {
   String image;
-  double rating;
+  List<double> rating;
   String name;
   String open;
   String close;
@@ -30,13 +30,18 @@ class Restaurant {
   }
 
   Text getRating() {
-    return Text("$rating", style: Styles.customStyle("smallwhite"));
+    double avg = 0;
+    rating.forEach((r) => avg += r);
+    avg /= rating.length;
+
+    return Text("$avg", style: Styles.customStyle("smallWhite"));
   }
 
   Text getNameText() {
     return Text(
       name,
-      style: Styles.customStyle("largeBoldBlack"),
+      style: TextStyle(
+          color: Styles.black, fontWeight: FontWeight.w700, fontSize: 19),
     );
   }
 
@@ -61,9 +66,11 @@ class Restaurant {
   }
 
   Column getDistanceText() {
-    return Column(children: <Widget>[
-      Text("$distance", style: Styles.customStyle("largerBoldBlack")),
-      Text("KM", style: Styles.customStyle("mediumBlack")),
-    ]);
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Text("$distance", style: Styles.customStyle("largeBoldBlack")),
+          Text("KM", style: Styles.customStyle("mediumBlack")),
+        ]);
   }
 }
