@@ -173,7 +173,6 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
               MaterialPageRoute(
                 builder: (context) => SearchResultScreen(
                   query: str,
-                  addHistory: widget.addHistory,
                 ),
               ));
         }

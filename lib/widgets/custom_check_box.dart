@@ -3,24 +3,29 @@ import '../styles.dart';
 
 class CustomCheckBox extends StatefulWidget {
   final int price;
+  final bool isChecked;
+  final Function addPrice;
 
-  const CustomCheckBox({Key key, this.price, }) : super(key: key);
+  const CustomCheckBox({
+    Key key,
+    this.price,
+    this.isChecked,
+    this.addPrice,
+  }) : super(key: key);
 
   @override
   _CustomCheckBoxState createState() => _CustomCheckBoxState();
 }
 
 class _CustomCheckBoxState extends State<CustomCheckBox> {
-  bool isChecked = false;
-
   @override
   Widget build(BuildContext context) {
-   return Checkbox(
+    return Checkbox(
       activeColor: Styles.orange,
-      value: isChecked,
+      value: widget.isChecked,
       onChanged: (bool val) {
         setState(() {
-          isChecked = val;
+          widget.addPrice(widget.price);
         });
       },
     );

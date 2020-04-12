@@ -16,10 +16,8 @@ List<Restaurant> restoList = [];
 
 class SearchResultScreen extends StatefulWidget {
   final String query;
-  final Function addHistory;
 
-  const SearchResultScreen({Key key, this.query, this.addHistory})
-      : super(key: key);
+  const SearchResultScreen({Key key, this.query}) : super(key: key);
 
   @override
   _SearchResultScreenState createState() => new _SearchResultScreenState();

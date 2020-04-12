@@ -3,15 +3,24 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../styles.dart';
 
 class CustomComment extends StatefulWidget {
-  String profilePic;
-  String name;
-  String comment;
-  List<String> image;
-  int star;
-  double screenWidth;
-  double screenHeight;
+  final String profilePic;
+  final String name;
+  final String comment;
+  final List<String> image;
+  final int star;
+  final double screenWidth;
+  final double screenHeight;
 
-  CustomComment({Key key, this.profilePic, this.name, this.comment, this.image, this.star, this.screenWidth, this.screenHeight}) : super(key: key);
+  CustomComment(
+      {Key key,
+      this.profilePic,
+      this.name,
+      this.comment,
+      this.image,
+      this.star,
+      this.screenWidth,
+      this.screenHeight})
+      : super(key: key);
   @override
   _CustomCommentState createState() => _CustomCommentState();
 }
@@ -26,12 +35,11 @@ class _CustomCommentState extends State<CustomComment> {
           width: widget.screenWidth * 0.15,
           height: widget.screenWidth * 0.15,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(widget.image[i]),
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(8.0))
-          ),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(widget.image[i]),
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
         ),
       );
     }
@@ -42,7 +50,8 @@ class _CustomCommentState extends State<CustomComment> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.screenWidth * 0.9,
-      padding: EdgeInsets.only(top: widget.screenWidth * 0.05, bottom: widget.screenWidth * 0.05),
+      padding: EdgeInsets.only(
+          top: widget.screenWidth * 0.05, bottom: widget.screenWidth * 0.05),
       color: Colors.white,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,21 +60,26 @@ class _CustomCommentState extends State<CustomComment> {
             width: widget.screenWidth * 0.15,
             height: widget.screenWidth * 0.15,
             decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(widget.profilePic),
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(8.0))
-            ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(widget.profilePic),
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
           ),
           SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.name, style: Styles.customStyle("mediumblack"),),
+              Text(
+                widget.name,
+                style: Styles.customStyle("mediumblack"),
+              ),
               Container(
                 width: widget.screenWidth * 0.7,
-                child: Text(widget.comment, style: Styles.customStyle("smallblack"),),
+                child: Text(
+                  widget.comment,
+                  style: Styles.customStyle("smallblack"),
+                ),
               ),
               SizedBox(height: 5),
               Container(
@@ -75,7 +89,9 @@ class _CustomCommentState extends State<CustomComment> {
               ),
               SizedBox(height: 5),
               Container(
-                padding: createImageList().length == 0 ? EdgeInsets.only(bottom: 0) : EdgeInsets.only(bottom: 5),
+                padding: createImageList().length == 0
+                    ? EdgeInsets.only(bottom: 0)
+                    : EdgeInsets.only(bottom: 5),
                 child: Wrap(
                   spacing: widget.screenWidth * 0.025,
                   runSpacing: widget.screenWidth * 0.025,
@@ -92,7 +108,7 @@ class _CustomCommentState extends State<CustomComment> {
 }
 
 class ReviewRating extends StatefulWidget {
-  int star;
+  final int star;
 
   ReviewRating({Key key, this.star}) : super(key: key);
   @override

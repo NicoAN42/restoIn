@@ -29,7 +29,6 @@ class _CustomButtonState extends State<CustomButton> {
               MaterialPageRoute(
                 builder: (context) => SearchResultScreen(
                   query: widget.text,
-                  addHistory: widget.addHistory,
                 ),
               ));
         },
@@ -72,7 +71,6 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
             MaterialPageRoute(
               builder: (context) => SearchResultScreen(
                 query: widget.text,
-                addHistory: widget.addHistory,
               ),
             ));
       },

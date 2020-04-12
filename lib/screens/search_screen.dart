@@ -18,11 +18,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    // searchHistory.clear();
-    // searchHistory.insert(0, "Ice Cream Sandwich");
-    // searchHistory.insert(0, "Dalgona Coffee");
-    // searchHistory.insert(0, "Beef BBQ");
-    // searchHistory.insert(0, "Vanilla Cake");
+    searchHistory.clear();
+    searchHistory.insert(0, "Ice Cream Sandwich");
+    searchHistory.insert(0, "Dalgona Coffee");
+    searchHistory.insert(0, "Beef BBQ");
+    searchHistory.insert(0, "Vanilla Cake");
     super.initState();
   }
 
