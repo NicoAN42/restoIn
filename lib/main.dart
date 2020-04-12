@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/screens/food_detail_screen.dart';
 // import 'package:restoin/init_data.dart';
 
 import 'screens/login_and_register/finger_login_screen.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/favorite': (context) => FavoriteScreen(),
         '/home': (context) => HomeScreen(),
         '/filter': (context) => FilterScreen(),
+        '/foodDetail': (context) => FoodDetailScreen(),
         // '/initData': (context) => InitData(),
       },
     );
