@@ -9,6 +9,9 @@ import 'screens/search_screen.dart';
 import 'screens/favorite_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/filter_screen.dart';
+import 'screens/activity_screen.dart';
+import 'screens/order_receipt_screen.dart';
+import 'screens/order_status_screen.dart';
 import 'styles.dart';
 
 void main() => runApp(MyApp());
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Futura',
       ),
-      initialRoute: '/',
+      initialRoute: '/orderStatus',
       routes: {
         '/': (context) => FingerLoginScreen(),
         '/search': (context) => SearchScreen(),
@@ -35,6 +38,9 @@ class MyApp extends StatelessWidget {
         '/filter': (context) => FilterScreen(),
         '/foodDetail': (context) => FoodDetailScreen(),
         // '/initData': (context) => InitData(),
+        '/activity': (context) => ActivityScreen(),
+        '/orderReceipt': (context) => OrderReceiptScreen(),
+        '/orderStatus' : (context) => OrderStatusScreen()
       },
     );
   }
