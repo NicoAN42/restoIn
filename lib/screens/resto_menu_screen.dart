@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:restoin/screens/order_main_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -180,6 +181,16 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
           ],
         ),
       ),
+
+      floatingActionButton: Container(
+        width: screenWidth * 0.9,
+        child: CustomSeeCartButton(text: "View cart"),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.yellow,
+        child: Container(height: 0),
+      ),
     );
   }
 }
@@ -249,5 +260,33 @@ class _RestoMenuSectionState extends State<RestoMenuSection> {
         SizedBox(height: widget.screenWidth * 0.05),
       ]
     );
+  }
+}
+
+class CustomSeeCartButton extends StatefulWidget {
+  final String text;
+
+  const CustomSeeCartButton({Key key, this.text}) : super(key: key);
+
+  @override
+  _CustomSeeCartButtonState createState() => _CustomSeeCartButtonState();
+}
+
+class _CustomSeeCartButtonState extends State<CustomSeeCartButton> {
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Navigator.push(
+          context, MaterialPageRoute(builder: (context) => OrderMainScreen()
+          )
+        );
+      },
+      backgroundColor: Styles.orange,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      label: Text(
+        widget.text,
+        style: Styles.customStyle("mediumboldwhite"),
+      ));
   }
 }

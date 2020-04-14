@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/screens/change_payment_screen.dart';
 import 'package:restoin/screens/food_detail_screen.dart';
+import 'package:restoin/screens/order_main_screen.dart';
+import 'package:restoin/screens/resto_menu_screen.dart';
+import 'package:restoin/screens/voucher_detail_screen.dart';
+import 'package:restoin/screens/voucher_search_screen.dart';
 // import 'package:restoin/init_data.dart';
 
 import 'screens/login_and_register/finger_login_screen.dart';
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Futura',
       ),
-      initialRoute: '/orderStatus',
+      initialRoute: '/restoMenu',
       routes: {
         '/': (context) => FingerLoginScreen(),
         '/search': (context) => SearchScreen(),
@@ -40,7 +45,12 @@ class MyApp extends StatelessWidget {
         // '/initData': (context) => InitData(),
         '/activity': (context) => ActivityScreen(),
         '/orderReceipt': (context) => OrderReceiptScreen(),
-        '/orderStatus' : (context) => OrderStatusScreen()
+        '/orderStatus' : (context) => OrderStatusScreen(),
+        '/order' : (context) => OrderMainScreen(),
+        '/restoMenu' : (context) => RestoMenuScreen(),
+        '/voucherSearch' : (context) => VoucherSearchScreen(),
+        '/voucherDetail' : (context) => VoucherDetailScreen(voucherCode: "CODE145"),
+        '/changePayment' : (context) => ChangePaymentScreen()
       },
     );
   }
