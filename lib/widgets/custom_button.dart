@@ -154,13 +154,11 @@ class _CustomSmallButtonState extends State<CustomSmallButton> {
 
   @override
   void didUpdateWidget(CustomSmallButton oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     if (widget.isClear) {
       setState(() {
         isPressed = false;
       });
-      print("Passed");
     }
   }
 
@@ -183,30 +181,5 @@ class _CustomSmallButtonState extends State<CustomSmallButton> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       )),
     );
-  }
-}
-
-class CustomReviewButton extends StatefulWidget {
-  final String text;
-
-  const CustomReviewButton({Key key, this.text}) : super(key: key);
-
-  @override
-  _CustomReviewButtonState createState() => _CustomReviewButtonState();
-}
-
-class _CustomReviewButtonState extends State<CustomReviewButton> {
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-        onPressed: () {
-          //TODO: Navigate to Popup Review Screen
-        },
-        backgroundColor: Styles.orange,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        label: Text(
-          "Write a review",
-          style: Styles.customStyle("mediumboldwhite"),
-        ));
   }
 }

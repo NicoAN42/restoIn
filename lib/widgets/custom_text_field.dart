@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/models/cart.dart';
 import 'package:restoin/screens/search_result_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:restoin/widgets/custom_icon_icons.dart';
@@ -134,8 +135,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
 class CustomSearchField extends StatefulWidget {
   final TextEditingController controller;
   final Function addHistory;
+  final Function addToCart;
+  final Cart lastCart;
 
-  CustomSearchField({this.controller, this.addHistory});
+  CustomSearchField(
+      {this.controller, this.addHistory, this.addToCart, this.lastCart});
 
   @override
   _CustomSearchFieldState createState() => new _CustomSearchFieldState();
@@ -168,12 +172,14 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
       onSubmitted: (String str) {
         if (str.isNotEmpty) {
           widget.addHistory(str);
+          Navigator.pop(context);
           Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => SearchResultScreen(
-                  query: str,
-                ),
+                    query: str,
+                    addToCart: widget.addToCart,
+                    lastCart: widget.lastCart),
               ));
         }
       },

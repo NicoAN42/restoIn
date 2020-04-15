@@ -13,6 +13,8 @@ class Restaurant {
   List<String> type;
   double distance;
   List<Food> featuredFoods;
+  bool isClosed;
+  List<String> menu;
 
   Restaurant(
       {this.image,
@@ -23,18 +25,28 @@ class Restaurant {
       this.location,
       this.type,
       this.distance,
-      this.featuredFoods});
+      this.featuredFoods,
+      this.isClosed,
+      this.menu});
 
   DecorationImage getImage() {
     return DecorationImage(image: AssetImage(image), fit: BoxFit.cover);
   }
 
-  Text getRating() {
+  Text getRatingText() {
     double avg = 0;
     rating.forEach((r) => avg += r);
     avg /= rating.length;
 
     return Text("$avg", style: Styles.customStyle("smallWhite"));
+  }
+
+  String getRating() {
+    double avg = 0;
+    rating.forEach((r) => avg += r);
+    avg /= rating.length;
+
+    return avg.toString();
   }
 
   Text getNameText() {
@@ -47,6 +59,10 @@ class Restaurant {
 
   Text getTimeText() {
     return Text("Open $open - $close", style: Styles.customStyle("smallBlack"));
+  }
+
+  String getTime() {
+    return "$open - $close";
   }
 
   Text getLocationText() {

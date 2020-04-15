@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'resto_info_review_screen.dart';
+
 class RestoInfoScreen extends StatefulWidget {
+  final Restaurant r;
+
+  const RestoInfoScreen({Key key, this.r}) : super(key: key);
+
   @override
   _RestoInfoScreenState createState() => _RestoInfoScreenState();
 }
@@ -24,54 +31,33 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
               width: screenWidth,
               height: screenHeight,
               decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/restaurant/louiseBranz.jpg")),
+                image: widget.r.getImage(),
               ),
             ),
-
-            Positioned(
-              top: screenWidth * 0.1,
-              left: screenWidth * 0.05,
-              child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  child: new Icon(
-                    FontAwesomeIcons.angleLeft,
-                    color: Styles.white,
-                    size: 28,
-                  ),
-                ),
-              ),
-            ),
-
             Container(
               height: screenHeight,
               decoration: BoxDecoration(
                   color: Colors.white,
                   gradient: LinearGradient(
-                    begin: FractionalOffset.center,
-                    end: FractionalOffset.bottomCenter,
-                    colors: [
-                      Styles.black.withOpacity(0.0),
-                      Styles.black,
-                    ],
-                    stops: [
-                      0.0,
-                      0.5
-                    ]
-                  )
-              ),
+                      begin: FractionalOffset.center,
+                      end: FractionalOffset.bottomCenter,
+                      colors: [
+                        Styles.black.withOpacity(0.0),
+                        Styles.black,
+                      ],
+                      stops: [
+                        0.0,
+                        0.5
+                      ])),
             ),
-
-
             Positioned(
-              width: screenWidth * 0.5,
-              left: screenWidth * 0.05,
-              top: screenHeight * 0.5,
-              child: Text("Louise Branz", style: Styles.customStyle("xlargeboldwhite"),)
-            ),
-            
+                width: screenWidth * 0.5,
+                left: screenWidth * 0.05,
+                top: screenHeight * 0.5,
+                child: Text(
+                  "${widget.r.name}",
+                  style: Styles.customStyle("xlargeboldwhite"),
+                )),
             Positioned(
               right: screenWidth * 0.05,
               top: screenHeight * 0.5,
@@ -82,16 +68,17 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
                   });
                 },
                 child: Container(
-                  child: isFav ? Image.asset("assets/icon/fav.png", width: 40, height: 40) : 
-                    new Icon(
-                    FontAwesomeIcons.heart,
-                    color: Styles.white,
-                    size: 40,
-                  ),
+                  child: isFav
+                      ? Image.asset("assets/icon/fav.png",
+                          width: 40, height: 40)
+                      : new Icon(
+                          FontAwesomeIcons.heart,
+                          color: Styles.white,
+                          size: 40,
+                        ),
                 ),
               ),
             ),
-
             Positioned(
               top: screenHeight * 0.625,
               left: screenWidth * 0.05,
@@ -99,16 +86,15 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text("Western", style: Styles.customStyle("largewhite")),
+                  Text("${widget.r.type[0]}",
+                      style: Styles.customStyle("largewhite")),
                   Row(
                     children: <Widget>[
                       ButtonTheme(
                         minWidth: 0,
                         child: FlatButton(
                           padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                          onPressed: () {
-                            //TODO : Calling
-                          },
+                          onPressed: () {},
                           child: new Icon(
                             FontAwesomeIcons.phone,
                             color: Styles.white,
@@ -123,10 +109,12 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
                         minWidth: 0,
                         child: FlatButton(
                           padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                          onPressed: () {
-                            //TODO : Location
-                          },
-                          child: Image.asset("assets/icon/pin_location.png", width: 20, height: 20,),
+                          onPressed: () {},
+                          child: Image.asset(
+                            "assets/icon/pin_location.png",
+                            width: 20,
+                            height: 20,
+                          ),
                           shape: CircleBorder(
                             side: BorderSide(color: Colors.white),
                           ),
@@ -137,17 +125,14 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
                 ],
               ),
             ),
-
             Positioned(
-              top: screenHeight * 0.7,
-              left: screenWidth * 0.05,
-              child: Container(
-                width: screenWidth * 0.9,
-                height: 1,
-                color: Colors.white,
-              )
-            ),
-
+                top: screenHeight * 0.7,
+                left: screenWidth * 0.05,
+                child: Container(
+                  width: screenWidth * 0.9,
+                  height: 1,
+                  color: Colors.white,
+                )),
             Positioned(
               top: screenHeight * 0.7 + 10,
               left: screenWidth * 0.05,
@@ -155,22 +140,32 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Opening Hours", style: Styles.customStyle("mediumboldwhite"),),
-                  SizedBox(height: 5,),
+                  Text(
+                    "Opening Hours",
+                    style: Styles.customStyle("mediumboldwhite"),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Container(
                     padding: EdgeInsets.only(left: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Mon - Sat", style: Styles.customStyle("mediumwhite"),),
-                        Text("7 AM - 11 PM", style: Styles.customStyle("mediumwhite"),),
+                        Text(
+                          "Mon - Sat",
+                          style: Styles.customStyle("mediumwhite"),
+                        ),
+                        Text(
+                          "${widget.r.getTime()}",
+                          style: Styles.customStyle("mediumwhite"),
+                        ),
                       ],
                     ),
                   )
                 ],
               ),
             ),
-
             Positioned(
               top: screenHeight * 0.8,
               left: screenWidth * 0.05,
@@ -180,8 +175,14 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Text("4.9", style: Styles.customStyle("largeboldwhite"),),
-                      Text("Rating", style: Styles.customStyle("mediumwhite"),),
+                      Text(
+                        "${widget.r.getRating()}",
+                        style: Styles.customStyle("largeboldwhite"),
+                      ),
+                      Text(
+                        "Rating",
+                        style: Styles.customStyle("mediumwhite"),
+                      ),
                     ],
                   ),
                   Container(
@@ -191,8 +192,14 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
                   ),
                   Column(
                     children: <Widget>[
-                      Text("417", style: Styles.customStyle("largeboldwhite"),),
-                      Text("Review", style: Styles.customStyle("mediumwhite"),),
+                      Text(
+                        "417",
+                        style: Styles.customStyle("largeboldwhite"),
+                      ),
+                      Text(
+                        "Review",
+                        style: Styles.customStyle("mediumwhite"),
+                      ),
                     ],
                   ),
                   Container(
@@ -202,14 +209,19 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
                   ),
                   Column(
                     children: <Widget>[
-                      Text("174", style: Styles.customStyle("largeboldwhite"),),
-                      Text("Favorites", style: Styles.customStyle("mediumwhite"),),
+                      Text(
+                        "174",
+                        style: Styles.customStyle("largeboldwhite"),
+                      ),
+                      Text(
+                        "Favorites",
+                        style: Styles.customStyle("mediumwhite"),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-
             Positioned(
               bottom: screenHeight * 0.05,
               left: screenWidth * 0.3,
@@ -217,10 +229,14 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
               child: OutlineButton(
                 borderSide: BorderSide(color: Colors.white),
                 color: Colors.white,
-                child: Text("Show reviews", style: Styles.customStyle("mediumWhite")),
-                onPressed: () {
-                  //TODO : Show reviews
-                },
+                child: Text("Show reviews",
+                    style: Styles.customStyle("mediumWhite")),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RestoInfoReviewScreen(
+                              r: widget.r,
+                            ))),
                 highlightColor: Styles.orange,
                 highlightedBorderColor: Styles.orange,
                 shape: RoundedRectangleBorder(
@@ -228,7 +244,22 @@ class _RestoInfoScreenState extends State<RestoInfoScreen> {
                 ),
               ),
             ),
-            
+
+            //Back button
+            Positioned(
+              top: screenWidth * 0.1,
+              left: screenWidth * 0.05,
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  child: new Icon(
+                    FontAwesomeIcons.angleLeft,
+                    color: Styles.white,
+                    size: 28,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/models/cart.dart';
 import 'package:restoin/models/food.dart';
 import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/styles.dart';
@@ -16,8 +17,11 @@ List<Restaurant> restoList = [];
 
 class SearchResultScreen extends StatefulWidget {
   final String query;
+  final Function addToCart;
+  final Cart lastCart;
 
-  const SearchResultScreen({Key key, this.query}) : super(key: key);
+  const SearchResultScreen({Key key, this.query, this.addToCart, this.lastCart})
+      : super(key: key);
 
   @override
   _SearchResultScreenState createState() => new _SearchResultScreenState();
@@ -188,9 +192,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               width: screenWidth * 0.9 - 28,
                               height: 37,
                               child: CustomSearchField(
-                                controller: _searchController,
-                                addHistory: _addHistory,
-                              )),
+                                  controller: _searchController,
+                                  addHistory: _addHistory,
+                                  addToCart: widget.addToCart)),
                         ],
                       ),
                     )),
@@ -230,10 +234,13 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (restoList.isEmpty)
-                    return Text(
-                      "We can't find what you're searching for. Please try to search another dish or restaurant.",
-                      style: Styles.customStyle("mediumGray"),
-                      textAlign: TextAlign.center,
+                    return Padding(
+                      padding: EdgeInsets.only(top: screenHeight * 0.3),
+                      child: Text(
+                        "We can't find what you're searching for. Please try to search another dish or restaurant.",
+                        style: Styles.customStyle("mediumGray"),
+                        textAlign: TextAlign.center,
+                      ),
                     );
 
                   return Container(
@@ -246,16 +253,18 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               physics: ClampingScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) {
                                 return CustomRestoTile(
-                                  r: restoList[index],
-                                  screenWidth: screenWidth,
-                                  screenHeight: screenHeight,
-                                );
+                                    r: restoList[index],
+                                    screenWidth: screenWidth,
+                                    screenHeight: screenHeight,
+                                    addToCart: widget.addToCart,
+                                    lastCart: widget.lastCart);
                               })));
                 }
-                return Text(
-                  "Please Wait...",
-                  style: Styles.customStyle("mediumGray"),
-                  textAlign: TextAlign.center,
+                return Padding(
+                  padding: EdgeInsets.only(top: screenHeight * 0.35),
+                  child: CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Styles.orange)),
                 );
               }),
         ]),
@@ -306,6 +315,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               location: resto["location"],
               type: resto["type"].cast<String>(),
               distance: resto["distance"],
+              menu: resto["menu"].cast<String>(),
               featuredFoods: [
                 new Food(
                   image: food["image"],
@@ -348,14 +358,15 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
         }
         if (!isDuplicate) {
           restoList.add(new Restaurant(
-            image: resto["image"].cast<double>(),
-            rating: resto["rating"],
+            image: resto["image"],
+            rating: resto["rating"].cast<double>(),
             name: resto["name"],
             open: resto["open"],
             close: resto["close"],
             location: resto["location"],
             type: resto["type"].cast<String>(),
             distance: resto["distance"],
+            menu: resto["menu"].cast<String>(),
             featuredFoods: [],
           ));
         }

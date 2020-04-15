@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:restoin/widgets/custom_button.dart';
 import 'package:restoin/widgets/custom_comment.dart';
 
 class RestoInfoReviewScreen extends StatefulWidget {
+  final Restaurant r;
+
+  const RestoInfoReviewScreen({Key key, this.r}) : super(key: key);
+
   @override
   _RestoInfoReviewScreenState createState() => _RestoInfoReviewScreenState();
 }
 
 class _RestoInfoReviewScreenState extends State<RestoInfoReviewScreen> {
   int menu = 0;
+  FocusNode _focus = new FocusNode();
+  TextEditingController _controller = new TextEditingController();
 
   List<Widget> createGalleryList(double screenWidth) {
     List<Widget> list = new List();
@@ -23,11 +29,9 @@ class _RestoInfoReviewScreenState extends State<RestoInfoReviewScreen> {
           decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
-                    "assets/food/square/fruteLaMina.jpg"),
+                image: AssetImage("assets/food/square/fruteLaMina.jpg"),
               ),
-              borderRadius:
-                  BorderRadius.all(Radius.circular(8.0))),
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
         ),
       );
     }
@@ -49,43 +53,41 @@ class _RestoInfoReviewScreenState extends State<RestoInfoReviewScreen> {
                 Container(
                   width: screenWidth,
                   height: screenHeight * 0.23,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assets/restaurant/louiseBranz.jpg")),
-                  ),
+                  decoration: BoxDecoration(image: widget.r.getImage()),
                 ),
-
                 Positioned(
-                  top: screenWidth * 0.1,
-                  left: screenWidth * 0.05,
-                  child: 
-                  Row(
-                    children: <Widget>[
-                      GestureDetector(
-                        onTap: () => Navigator.pop(context),
-                        child: Container(
-                          child: new Icon(
-                            FontAwesomeIcons.angleLeft,
-                            color: Styles.white,
-                            size: 28,
+                    top: screenWidth * 0.1,
+                    left: screenWidth * 0.05,
+                    child: Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            child: new Icon(
+                              FontAwesomeIcons.angleLeft,
+                              color: Styles.white,
+                              size: 28,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: 20,),
-                      Text("Louise Branz", style: Styles.customStyle("largeboldwhite")),
-                    ],
-                  )
-                ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text("${widget.r.name}",
+                            style: Styles.customStyle("largeboldwhite")),
+                      ],
+                    )),
               ],
             ),
-
             Container(
               color: Colors.white,
               padding: EdgeInsets.all(screenWidth * 0.05),
               child: Column(
                 children: <Widget>[
-                  Text("Reviews", style: Styles.customStyle("largeboldblack"),),
+                  Text(
+                    "Reviews",
+                    style: Styles.customStyle("largeboldblack"),
+                  ),
                   SizedBox(height: screenHeight * 0.02),
                   Container(
                     width: screenWidth * 0.9,
@@ -102,7 +104,10 @@ class _RestoInfoReviewScreenState extends State<RestoInfoReviewScreen> {
                             menu = 0;
                           });
                         },
-                        child: Text("Comment", style: menu == 0 ? Styles.customStyle("mediumboldblack") : Styles.customStyle("mediumblack")),
+                        child: Text("Comment",
+                            style: menu == 0
+                                ? Styles.customStyle("mediumboldblack")
+                                : Styles.customStyle("mediumblack")),
                       ),
                       FlatButton(
                         onPressed: () {
@@ -110,89 +115,229 @@ class _RestoInfoReviewScreenState extends State<RestoInfoReviewScreen> {
                             menu = 1;
                           });
                         },
-                        child: Text("Gallery", style: menu == 1 ? Styles.customStyle("mediumboldblack") : Styles.customStyle("mediumblack")),
+                        child: Text("Gallery",
+                            style: menu == 1
+                                ? Styles.customStyle("mediumboldblack")
+                                : Styles.customStyle("mediumblack")),
                       ),
                     ],
                   )
                 ],
               ),
             ),
-      
             Container(
               width: screenWidth,
-              padding: EdgeInsets.only(left: screenWidth * 0.05, right: screenWidth * 0.05),
+              padding: EdgeInsets.only(
+                  left: screenWidth * 0.05, right: screenWidth * 0.05),
               color: Colors.white,
-              child: menu == 0 ? 
-                Container(
-                color: Colors.white,
-                width: screenWidth,
-                child: Column(
-                  children: <Widget>[
-                    CustomComment(
-                      profilePic: "assets/food/square/fruteLaMina.jpg",
-                      name: "Frute La Mina",
-                      comment: "So delicious,,, maknyusssss, and also with place i'm so excited",
-                      image: ["assets/food/square/fruteLaMina.jpg", "assets/food/square/fruteLaMina.jpg", "assets/food/square/fruteLaMina.jpg", "assets/food/square/fruteLaMina.jpg"],
-                      star: 5,
-                      screenWidth: screenWidth, 
-                      screenHeight: screenHeight,
-                    ),
-                    CustomComment(
-                      profilePic: "assets/food/square/fruteLaMina.jpg",
-                      name: "Frute La Mina",
-                      comment: "Enak cuy",
-                      star: 4,
-                      screenWidth: screenWidth, 
-                      screenHeight: screenHeight,
-                    ),
-                    CustomComment(
-                      profilePic: "assets/food/square/fruteLaMina.jpg",
-                      name: "Frute La Mina",
-                      comment: "Mantap slur",
-                      star: 5,
-                      screenWidth: screenWidth, 
-                      screenHeight: screenHeight,
-                    ),
-                    CustomComment(
-                      profilePic: "assets/food/square/fruteLaMina.jpg",
-                      name: "Frute La Mina",
-                      comment: "Screennya banyak sekali :((",
-                      star: 3,
-                      screenWidth: screenWidth, 
-                      screenHeight: screenHeight,
-                    ),
-                    CustomComment(
-                      profilePic: "assets/food/square/fruteLaMina.jpg",
-                      name: "Frute La Mina",
-                      comment: "Acel tolong carry ya",
-                      star: 5,
-                      screenWidth: screenWidth, 
-                      screenHeight: screenHeight,
-                    ),
-                    SizedBox(height: 50),
-                  ]
-                ),
-              )
-              : Wrap(
-                spacing: screenWidth * 0.05,
-                runSpacing: screenWidth * 0.05,
-                children: createGalleryList(screenWidth)
-              ),
+              child: menu == 0
+                  ? Container(
+                      color: Colors.white,
+                      width: screenWidth,
+                      child: Column(children: <Widget>[
+                        CustomComment(
+                          profilePic: "assets/food/square/fruteLaMina.jpg",
+                          name: "Frute La Mina",
+                          comment: "Great food, great place, i'm satisfied!",
+                          image: [
+                            "assets/food/square/fruteLaMina.jpg",
+                            "assets/food/square/fruteLaMina.jpg",
+                            "assets/food/square/fruteLaMina.jpg",
+                            "assets/food/square/fruteLaMina.jpg"
+                          ],
+                          star: 5,
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                        ),
+                        CustomComment(
+                          profilePic: "assets/food/square/fruteLaMina.jpg",
+                          name: "Frute La Mina",
+                          comment: "It's too sweet for me.",
+                          star: 4,
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                        ),
+                        CustomComment(
+                          profilePic: "assets/food/square/fruteLaMina.jpg",
+                          name: "Frute La Mina",
+                          comment: "Lovin' it!",
+                          star: 5,
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                        ),
+                        CustomComment(
+                          profilePic: "assets/food/square/fruteLaMina.jpg",
+                          name: "Frute La Mina",
+                          comment: "So sweet :D",
+                          star: 3,
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                        ),
+                        CustomComment(
+                          profilePic: "assets/food/square/fruteLaMina.jpg",
+                          name: "Frute La Mina",
+                          comment: "I love it!",
+                          star: 5,
+                          screenWidth: screenWidth,
+                          screenHeight: screenHeight,
+                        ),
+                        SizedBox(height: 50),
+                      ]),
+                    )
+                  : Wrap(
+                      spacing: screenWidth * 0.05,
+                      runSpacing: screenWidth * 0.05,
+                      children: createGalleryList(screenWidth)),
             ),
-
           ],
         ),
       ),
-
       floatingActionButton: Container(
         width: screenWidth * 0.8,
-        child: CustomReviewButton(text: "Write a review"),
+        child: FloatingActionButton.extended(
+            onPressed: () {
+              _showReviewDialog();
+            },
+            backgroundColor: Styles.orange,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            label: Text(
+              "Write a review",
+              style: Styles.customStyle("mediumboldwhite"),
+            )),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.yellow,
-        child: Container(height: 0),
-      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  Future<void> _showReviewDialog() {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          // title: Text("Note", style: Styles.customStyle("mediumBoldBlack")),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 20),
+                    child: Row(
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/icon/close.png",
+                          width: 12,
+                          height: 12,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 16),
+                          child: Text("Write a review",
+                              style: Styles.customStyle("mediumBoldBlack")),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    // height: 40,
+                    child: TextField(
+                      style: Styles.customStyle("smallBlack"),
+                      focusNode: _focus,
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        hintText: "ex: Love this place",
+                        hintStyle: Styles.customStyle("smallGray"),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Styles.gray),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                          borderSide: BorderSide(color: Styles.black),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 24),
+                          child: Text("Upload Picture/Video",
+                              style: Styles.customStyle("mediumBoldBlack")),
+                        ),
+                        Image.asset(
+                          "assets/icon/upload.png",
+                          width: 24,
+                          height: 24,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      child: _getStar()),
+                  Container(
+                    width: 400,
+                    child: RaisedButton(
+                      child: Text("Confirm",
+                          style: Styles.customStyle("mediumBoldWhite")),
+                      color: Styles.orange,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true).pop();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  _getStar() {
+    return Row(
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(right: 24),
+          child: Text("Rate", style: Styles.customStyle("mediumBoldBlack")),
+        ),
+        Icon(
+          FontAwesomeIcons.star,
+          color: Styles.orange,
+          size: 24,
+        ),
+        Icon(
+          FontAwesomeIcons.star,
+          color: Styles.orange,
+          size: 24,
+        ),
+        Icon(
+          FontAwesomeIcons.star,
+          color: Styles.orange,
+          size: 24,
+        ),
+        Icon(
+          FontAwesomeIcons.star,
+          color: Styles.orange,
+          size: 24,
+        ),
+        Icon(
+          FontAwesomeIcons.star,
+          color: Styles.orange,
+          size: 24,
+        ),
+      ],
     );
   }
 }

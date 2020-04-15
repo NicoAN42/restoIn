@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/models/cart.dart';
+import 'package:restoin/screens/search_result_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:restoin/widgets/custom_button.dart';
 
 class FilterScreen extends StatefulWidget {
+  final Function addToCart;
+  final Cart lastCart;
+
+  const FilterScreen({Key key, this.addToCart, this.lastCart})
+      : super(key: key);
+
   @override
   _FilterScreenState createState() => _FilterScreenState();
 }
@@ -531,7 +539,13 @@ class _FilterScreenState extends State<FilterScreen> {
                     padding: EdgeInsets.only(left: 80, right: 80),
                     onPressed: () {
                       setState(() {
-                        //TODO : Transition
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchResultScreen(
+                                    query: "",
+                                    addToCart: widget.addToCart,
+                                    lastCart: widget.lastCart)));
                       });
                     },
                     child: Text(

@@ -45,9 +45,9 @@ abstract class Styles {
       color = black;
     else if (s.contains("lightorange"))
       color = lightOrange;
-    else if (s.contains("orange"))
-      color = orange;
-    else if (s.contains("darkOrange")) color = darkOrange;
+    else if (s.contains("darkorange"))
+      color = darkOrange;
+    else if (s.contains("orange")) color = orange;
 
     if (s.contains("bold")) weight = FontWeight.w700;
 

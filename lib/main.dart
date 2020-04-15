@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restoin/screens/food_detail_screen.dart';
+import 'package:restoin/screens/resto_menu_screen.dart';
 // import 'package:restoin/init_data.dart';
 
 import 'screens/login_and_register/finger_login_screen.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Futura',
       ),
-      initialRoute: '/orderStatus',
+      initialRoute: '/home',
       routes: {
         '/': (context) => FingerLoginScreen(),
         '/search': (context) => SearchScreen(),
@@ -37,10 +38,11 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/filter': (context) => FilterScreen(),
         '/foodDetail': (context) => FoodDetailScreen(),
+        '/restoMenu': (context) => RestoMenuScreen(),
         // '/initData': (context) => InitData(),
         '/activity': (context) => ActivityScreen(),
         '/orderReceipt': (context) => OrderReceiptScreen(),
-        '/orderStatus' : (context) => OrderStatusScreen()
+        '/orderStatus': (context) => OrderStatusScreen()
       },
     );
   }

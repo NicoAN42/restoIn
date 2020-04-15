@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/models/cart.dart';
 import 'package:restoin/styles.dart';
 import 'package:restoin/widgets/custom_button.dart';
 import 'package:restoin/widgets/custom_text_field.dart';
@@ -9,6 +10,12 @@ TextEditingController _searchController = new TextEditingController();
 List<String> searchHistory = [];
 
 class SearchScreen extends StatefulWidget {
+  final Function addToCart;
+  final Cart lastCart;
+
+  const SearchScreen({Key key, this.addToCart, this.lastCart})
+      : super(key: key);
+
   @override
   _SearchScreenState createState() => new _SearchScreenState();
 }
@@ -82,9 +89,10 @@ class _SearchScreenState extends State<SearchScreen> {
                               width: screenWidth * 0.9 - 28,
                               height: 37,
                               child: CustomSearchField(
-                                controller: _searchController,
-                                addHistory: _addHistory,
-                              )),
+                                  controller: _searchController,
+                                  addHistory: _addHistory,
+                                  addToCart: widget.addToCart,
+                                  lastCart: widget.lastCart)),
                         ],
                       )),
                   Padding(

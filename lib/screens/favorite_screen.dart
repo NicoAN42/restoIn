@@ -174,7 +174,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 Text("40",
                                                     style: Styles.customStyle(
                                                         "mediumboldblack")),
-                                                Text("MINS",
+                                                Text("KM",
                                                     style: Styles.customStyle(
                                                         "smallblack")),
                                               ],
@@ -311,7 +311,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 Text("40",
                                                     style: Styles.customStyle(
                                                         "mediumboldblack")),
-                                                Text("MINS",
+                                                Text("KM",
                                                     style: Styles.customStyle(
                                                         "smallblack")),
                                               ],
@@ -342,7 +342,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
                                                   image: AssetImage(
-                                                      "assets/food/square/roasted-cherry-double-chocolate-buckwheat-ice-cream-sandwiches-gluten-free-10.jpg"),
+                                                      "assets/food/louise_branz/chunkypie.jpg"),
                                                 ),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(8.0))),
@@ -413,7 +413,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
                                                   image: AssetImage(
-                                                      "assets/food/square/fBreadTofu.jpg"),
+                                                      "assets/food/louise_branz/fbread.jpg"),
                                                 ),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(8.0))),
@@ -592,7 +592,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 Text("30",
                                                     style: Styles.customStyle(
                                                         "mediumboldblack")),
-                                                Text("MINS",
+                                                Text("KM",
                                                     style: Styles.customStyle(
                                                         "smallblack")),
                                               ],
@@ -623,7 +623,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 image: DecorationImage(
                                                   fit: BoxFit.cover,
                                                   image: AssetImage(
-                                                      "assets/food/square/miso-rice-noodle-ramen-vegetarian-lede-62.jpg"),
+                                                      "assets/food/hakagure_ramen/yakiudon.jpg"),
                                                 ),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(8.0))),
@@ -802,7 +802,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 Text("16",
                                                     style: Styles.customStyle(
                                                         "mediumboldblack")),
-                                                Text("MINS",
+                                                Text("KM",
                                                     style: Styles.customStyle(
                                                         "smallblack")),
                                               ],
