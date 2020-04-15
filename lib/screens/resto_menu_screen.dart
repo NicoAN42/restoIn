@@ -10,6 +10,8 @@ import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'order_main_screen.dart';
+
 class RestoMenuScreen extends StatefulWidget {
   final Restaurant r;
   final Function addToCart;
@@ -304,7 +306,8 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
                 maxLines: 1,
               ),
               onPressed: () {
-                //TODO go to order
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OrderMainScreen()));
               },
               backgroundColor: Styles.orange,
             )
