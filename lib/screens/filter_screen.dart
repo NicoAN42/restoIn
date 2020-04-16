@@ -8,8 +8,10 @@ import 'package:restoin/widgets/custom_button.dart';
 class FilterScreen extends StatefulWidget {
   final Function addToCart;
   final Cart lastCart;
+  final Function addSearchHistory;
 
-  const FilterScreen({Key key, this.addToCart, this.lastCart})
+  const FilterScreen(
+      {Key key, this.addToCart, this.lastCart, this.addSearchHistory})
       : super(key: key);
 
   @override
@@ -543,9 +545,11 @@ class _FilterScreenState extends State<FilterScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SearchResultScreen(
-                                    query: "",
-                                    addToCart: widget.addToCart,
-                                    lastCart: widget.lastCart)));
+                                      query: "",
+                                      addToCart: widget.addToCart,
+                                      lastCart: widget.lastCart,
+                                      addSearchHistory: widget.addSearchHistory,
+                                    )));
                       });
                     },
                     child: Text(

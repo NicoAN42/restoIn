@@ -215,129 +215,165 @@ class _RestoInfoReviewScreenState extends State<RestoInfoReviewScreen> {
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
-        return SimpleDialog(
-          // title: Text("Note", style: Styles.customStyle("mediumBoldBlack")),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 20),
-                    child: Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "assets/icon/close.png",
-                          width: 12,
-                          height: 12,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 16),
-                          child: Text("Write a review",
-                              style: Styles.customStyle("mediumBoldBlack")),
-                        )
-                      ],
+        int stars = 0;
+        return StatefulBuilder(builder: (context, setState) {
+          return SimpleDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 20),
+                      child: Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/icon/close.png",
+                            width: 12,
+                            height: 12,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 16),
+                            child: Text("Write a review",
+                                style: Styles.customStyle("mediumBoldBlack")),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    // height: 40,
-                    child: TextField(
-                      style: Styles.customStyle("smallBlack"),
-                      focusNode: _focus,
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                        hintText: "ex: Love this place",
-                        hintStyle: Styles.customStyle("smallGray"),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Styles.gray),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(color: Styles.black),
+                    Container(
+                      // height: 40,
+                      child: TextField(
+                        style: Styles.customStyle("smallBlack"),
+                        focusNode: _focus,
+                        controller: _controller,
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          hintText: "ex: Love this place",
+                          hintStyle: Styles.customStyle("smallGray"),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Styles.gray),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Styles.black),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(right: 24),
-                          child: Text("Upload Picture/Video",
-                              style: Styles.customStyle("mediumBoldBlack")),
-                        ),
-                        Image.asset(
-                          "assets/icon/upload.png",
-                          width: 24,
-                          height: 24,
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(right: 24),
+                            child: Text("Upload Picture/Video",
+                                style: Styles.customStyle("mediumBoldBlack")),
+                          ),
+                          Image.asset(
+                            "assets/icon/upload.png",
+                            width: 24,
+                            height: 24,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: _getStar()),
-                  Container(
-                    width: 400,
-                    child: RaisedButton(
-                      child: Text("Confirm",
-                          style: Styles.customStyle("mediumBoldWhite")),
-                      color: Styles.orange,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      onPressed: () {
-                        Navigator.of(context, rootNavigator: true).pop();
-                      },
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(right: 24),
+                              child: Text("Rate",
+                                  style: Styles.customStyle("mediumBoldBlack")),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() {
+                                stars != 1 ? stars = 1 : stars = 0;
+                              }),
+                              child: Icon(
+                                stars >= 1
+                                    ? FontAwesomeIcons.solidStar
+                                    : FontAwesomeIcons.star,
+                                color: Styles.orange,
+                                size: 24,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() {
+                                stars != 2 ? stars = 2 : stars = 0;
+                              }),
+                              child: Icon(
+                                stars >= 2
+                                    ? FontAwesomeIcons.solidStar
+                                    : FontAwesomeIcons.star,
+                                color: Styles.orange,
+                                size: 24,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() {
+                                stars != 3 ? stars = 3 : stars = 0;
+                              }),
+                              child: Icon(
+                                stars >= 3
+                                    ? FontAwesomeIcons.solidStar
+                                    : FontAwesomeIcons.star,
+                                color: Styles.orange,
+                                size: 24,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() {
+                                stars != 4 ? stars = 4 : stars = 0;
+                              }),
+                              child: Icon(
+                                stars >= 4
+                                    ? FontAwesomeIcons.solidStar
+                                    : FontAwesomeIcons.star,
+                                color: Styles.orange,
+                                size: 24,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () => setState(() {
+                                stars != 5 ? stars = 5 : stars = 0;
+                              }),
+                              child: Icon(
+                                stars >= 5
+                                    ? FontAwesomeIcons.solidStar
+                                    : FontAwesomeIcons.star,
+                                color: Styles.orange,
+                                size: 24,
+                              ),
+                            ),
+                          ],
+                        )),
+                    Container(
+                      width: 400,
+                      child: RaisedButton(
+                        child: Text("Confirm",
+                            style: Styles.customStyle("mediumBoldWhite")),
+                        color: Styles.orange,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        onPressed: () {
+                          Navigator.of(context, rootNavigator: true).pop();
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        );
+                  ],
+                ),
+              )
+            ],
+          );
+        });
       },
-    );
-  }
-
-  _getStar() {
-    return Row(
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(right: 24),
-          child: Text("Rate", style: Styles.customStyle("mediumBoldBlack")),
-        ),
-        Icon(
-          FontAwesomeIcons.star,
-          color: Styles.orange,
-          size: 24,
-        ),
-        Icon(
-          FontAwesomeIcons.star,
-          color: Styles.orange,
-          size: 24,
-        ),
-        Icon(
-          FontAwesomeIcons.star,
-          color: Styles.orange,
-          size: 24,
-        ),
-        Icon(
-          FontAwesomeIcons.star,
-          color: Styles.orange,
-          size: 24,
-        ),
-        Icon(
-          FontAwesomeIcons.star,
-          color: Styles.orange,
-          size: 24,
-        ),
-      ],
     );
   }
 }

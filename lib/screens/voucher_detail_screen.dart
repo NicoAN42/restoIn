@@ -5,9 +5,9 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VoucherDetailScreen extends StatefulWidget {
-  String voucherCode = "CODE145";
+  final String voucherCode;
 
-  VoucherDetailScreen({this.voucherCode});
+  VoucherDetailScreen({this.voucherCode = "CODE145"});
 
   @override
   _VoucherDetailScreenState createState() => _VoucherDetailScreenState();

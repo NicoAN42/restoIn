@@ -24,6 +24,7 @@ class _CustomButtonState extends State<CustomButton> {
             maxLines: 1, style: Styles.customStyle("mediumGray")),
         color: Styles.white,
         onPressed: () {
+          widget.addHistory(widget.text);
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -71,6 +72,7 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
             MaterialPageRoute(
               builder: (context) => SearchResultScreen(
                 query: widget.text,
+                addSearchHistory: widget.addHistory,
               ),
             ));
       },

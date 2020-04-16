@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VoucherSearchScreen extends StatefulWidget {
-  String voucherCode;
+  final String voucherCode;
   VoucherSearchScreen({this.voucherCode});
 
   @override
@@ -13,8 +13,6 @@ class VoucherSearchScreen extends StatefulWidget {
 }
 
 class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
-  @override
-
   List<String> voucherList = ["CODE145", "CODE155", "CODE175"];
 
   List<VoucherSection> displayList = new List();
@@ -24,17 +22,19 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
   void init() {
     if (counter > 0) return;
     counter++;
-    for (int i = 0; i < voucherList.length; i++){
-      displayList.add(VoucherSection(code: voucherList[i], used: voucherList[i] == widget.voucherCode));
+    for (int i = 0; i < voucherList.length; i++) {
+      displayList.add(VoucherSection(
+          code: voucherList[i], used: voucherList[i] == widget.voucherCode));
     }
   }
 
   void search(String query) {
     displayList.clear();
     if (query == "") query = "code";
-    for (int i = 0; i < voucherList.length; i++){
-      if (voucherList[i].toLowerCase().contains(query.toLowerCase())){
-          displayList.add(VoucherSection(code: voucherList[i], used: voucherList[i] == widget.voucherCode));
+    for (int i = 0; i < voucherList.length; i++) {
+      if (voucherList[i].toLowerCase().contains(query.toLowerCase())) {
+        displayList.add(VoucherSection(
+            code: voucherList[i], used: voucherList[i] == widget.voucherCode));
       }
     }
   }
@@ -78,8 +78,8 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
-                  0, screenWidth * 0.05, 15),
+              padding: EdgeInsets.fromLTRB(
+                  screenWidth * 0.05, 0, screenWidth * 0.05, 15),
               child: Container(
                 padding: EdgeInsets.only(left: 10),
                 width: screenWidth * 0.9,
@@ -89,18 +89,19 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
                 ),
                 child: Row(
                   children: <Widget>[
-                    Image.asset("assets/icon/g_search.png", width: 20, height: 20),
+                    Image.asset("assets/icon/g_search.png",
+                        width: 20, height: 20),
                     SizedBox(width: 10),
                     Flexible(
                       child: TextField(
-                        onChanged: (query){
+                        onChanged: (query) {
                           setState(() {
                             search(query);
                             print(query);
                           });
                         },
                         decoration: InputDecoration(
-                          border: InputBorder.none,                    
+                          border: InputBorder.none,
                           hintText: "Search voucher code",
                         ),
                       ),
@@ -109,17 +110,14 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
                 ),
               ),
             ),
-
             Container(
               width: screenWidth * 0.9,
               height: 2,
               color: Styles.white,
             ),
-
             Column(
               children: displayList,
             ),
-
           ],
         ),
       ),
@@ -128,9 +126,9 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
 }
 
 class VoucherSection extends StatefulWidget {
-  String code;
-  bool used;
- 
+  final String code;
+  final bool used;
+
   VoucherSection({this.code, this.used});
 
   @override
@@ -138,80 +136,81 @@ class VoucherSection extends StatefulWidget {
 }
 
 class _VoucherSectionState extends State<VoucherSection> {
-  
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {
-        Navigator.push(context, 
-          MaterialPageRoute(builder: (context) => VoucherDetailScreen(voucherCode: widget.code)
-          )
-        );
-      },
-      child: Container(  
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
-                10, screenWidth * 0.05, 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      VoucherDetailScreen(voucherCode: widget.code)));
+        },
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                  padding: EdgeInsets.fromLTRB(
+                      screenWidth * 0.05, 10, screenWidth * 0.05, 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Container(
-                        width: screenWidth * 0.15,
-                        height: screenWidth * 0.15,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.red,
-                        ),
-                      ),
-                      SizedBox(width: 10),
-                      Column(
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            padding: EdgeInsets.only(left: 6, top: 2, right: 6, bottom: 2),
+                            width: screenWidth * 0.15,
+                            height: screenWidth * 0.15,
                             decoration: BoxDecoration(
-                              color: Color(0xFFFFE6B0),
-                              borderRadius: BorderRadius.circular(4),
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.red,
                             ),
-                            child: Text("Reward", style: Styles.customStyle("midorange")),
                           ),
-                          SizedBox(height: 4),
-                          Container(
-                            width: screenWidth * 0.65,
-                            child: Text(widget.code + " - Discount 40%", style: Styles.customStyle("mediumblack"))
+                          SizedBox(width: 10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: 6, top: 2, right: 6, bottom: 2),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFFFE6B0),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Text("Reward",
+                                    style: Styles.customStyle("midorange")),
+                              ),
+                              SizedBox(height: 4),
+                              Container(
+                                  width: screenWidth * 0.65,
+                                  child: Text(widget.code + " - Discount 40%",
+                                      style:
+                                          Styles.customStyle("mediumblack"))),
+                              SizedBox(height: 10),
+                              Text("Valid until 24 June 2021",
+                                  style: Styles.customStyle("midgray")),
+                            ],
                           ),
-                          SizedBox(height: 10),
-                          Text("Valid until 24 June 2021", style: Styles.customStyle("midgray")),
                         ],
                       ),
+                      widget.used
+                          ? Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Styles.orange))
+                          : Container()
                     ],
-                  ),
-                  widget.used ?
-                  Container(
-                    width: 15,
-                    height: 15,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Styles.orange
-                    )
-                  ) : Container()
-                ],
-              )
-            ),
-            Container(
-              width: screenWidth * 0.9,
-              height: 2,
-              color: Styles.white,
-            ),
-          ],
-        ),
-      )
-    );
+                  )),
+              Container(
+                width: screenWidth * 0.9,
+                height: 2,
+                color: Styles.white,
+              ),
+            ],
+          ),
+        ));
   }
 }

@@ -19,8 +19,14 @@ class SearchResultScreen extends StatefulWidget {
   final String query;
   final Function addToCart;
   final Cart lastCart;
+  final Function addSearchHistory;
 
-  const SearchResultScreen({Key key, this.query, this.addToCart, this.lastCart})
+  const SearchResultScreen(
+      {Key key,
+      this.query,
+      this.addToCart,
+      this.lastCart,
+      this.addSearchHistory})
       : super(key: key);
 
   @override
@@ -118,15 +124,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     ];
   }
 
-  void _addHistory(String s) {
-    _searchController.clear();
-    s.trim();
-    if (s.isNotEmpty)
-      // setState(() {
-      searchHistory.add(s);
-    // });
-  }
-
   @override
   void initState() {
     restoList.clear();
@@ -193,8 +190,8 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               height: 37,
                               child: CustomSearchField(
                                   controller: _searchController,
-                                  addHistory: _addHistory,
-                                  addToCart: widget.addToCart)),
+                                  addToCart: widget.addToCart,
+                                  addSearchHistory: widget.addSearchHistory)),
                         ],
                       ),
                     )),

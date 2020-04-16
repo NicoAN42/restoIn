@@ -34,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _rateButton = false;
   bool _discountButton = false;
 
+  //Cart Management
+
   Future _getResto;
 
   Cart _curCart = new Cart();
@@ -65,8 +67,30 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _addToCart(Cart c) {
+    setState(() => _curCart = c);
+  }
+
+  //Search History
+  List<String> searchHistory = [];
+
+  void _addSearchHistory(String s) {
+    s = s.trim();
     setState(() {
-      _curCart = c;
+      searchHistory.insert(0, s);
+    });
+  }
+
+  List<String> _getSearchHistory() => searchHistory;
+
+  void _deleteSearchHistory(String s) {
+    setState(() {
+      searchHistory.remove(s);
+    });
+  }
+
+  void _clearSearchHistory() {
+    setState(() {
+      searchHistory.clear();
     });
   }
 
@@ -140,8 +164,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SearchScreen(
-                                      addToCart: _addToCart,
-                                      lastCart: _curCart))),
+                                        addToCart: _addToCart,
+                                        lastCart: _curCart,
+                                        addSearchHistory: _addSearchHistory,
+                                        deleteSearchHistory:
+                                            _deleteSearchHistory,
+                                        clearSearchHistory: _clearSearchHistory,
+                                        getSearchHistory: _getSearchHistory,
+                                      ))),
                           child: Row(children: <Widget>[
                             Padding(
                               padding: EdgeInsets.only(right: 8.0),
@@ -159,7 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => FilterScreen(
-                                  addToCart: _addToCart, lastCart: _curCart))),
+                                    addToCart: _addToCart,
+                                    lastCart: _curCart,
+                                    addSearchHistory: _addSearchHistory,
+                                  ))),
                       child: Container(
                         child: Image.asset('assets/icon/g_filter.png',
                             width: 24, height: 24),

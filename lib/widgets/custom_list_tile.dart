@@ -33,14 +33,19 @@ class _CustomRestoTileState extends State<CustomRestoTile> {
       Container(
           height: 12, width: widget.screenWidth * 0.9, color: Styles.white),
       GestureDetector(
-        onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => RestoMenuScreen(
-                      addToCart: widget.addToCart,
-                      r: widget.r,
-                      lastCart: widget.lastCart,
-                    ))),
+        onTap: () => {
+          if (!widget.r.isClosed)
+            {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => RestoMenuScreen(
+                            addToCart: widget.addToCart,
+                            r: widget.r,
+                            lastCart: widget.lastCart,
+                          )))
+            }
+        },
         child: Container(
             width: widget.screenWidth * 0.9,
             color: Colors.white,

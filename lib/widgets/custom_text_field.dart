@@ -134,12 +134,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
 class CustomSearchField extends StatefulWidget {
   final TextEditingController controller;
-  final Function addHistory;
   final Function addToCart;
   final Cart lastCart;
+  final Function addSearchHistory;
+  final bool isPop;
 
   CustomSearchField(
-      {this.controller, this.addHistory, this.addToCart, this.lastCart});
+      {this.controller,
+      this.addToCart,
+      this.lastCart,
+      this.addSearchHistory,
+      this.isPop = true});
 
   @override
   _CustomSearchFieldState createState() => new _CustomSearchFieldState();
@@ -171,8 +176,8 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
       controller: widget.controller,
       onSubmitted: (String str) {
         if (str.isNotEmpty) {
-          widget.addHistory(str);
-          Navigator.pop(context);
+          widget.addSearchHistory(str);
+          if (widget.isPop) Navigator.pop(context);
           Navigator.push(
               context,
               MaterialPageRoute(
