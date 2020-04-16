@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/screens/change_order_type_screen.dart';
 import 'package:restoin/screens/voucher_search_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
@@ -16,13 +17,34 @@ class OrderMainScreen extends StatefulWidget {
 }
 
 class _OrderMainScreenState extends State<OrderMainScreen> {
+  String orderType = "Take Away";
+  OrderTypeResult orderTypeResult = OrderTypeResult(
+    orderType: "Take Away",
+    date: "21/6/20", 
+    time: "6:30pm",
+    guest: 77,
+  );
+
   int paymentType = 0;
+
+  void updateOrderType() async {
+    orderTypeResult = await Navigator.push(context, 
+        MaterialPageRoute<OrderTypeResult>(builder: (context) => ChangeOrderTypeScreen()
+      )
+    );
+
+    orderType = orderTypeResult.orderType;
+  }
 
   void updatePaymentType() async {
     paymentType = await Navigator.push(context,
       MaterialPageRoute<int>(builder: (context) => ChangePaymentScreen(paymentType: paymentType)
       )
     );
+  }
+
+  void updateVoucherCode() async {
+    
   }
 
   String getVoucherCode() {
@@ -440,10 +462,15 @@ class _OrderMainScreenState extends State<OrderMainScreen> {
                               ),
                             ),
                             SizedBox(width: 10),
-                            Text("Take Away", style: Styles.customStyle("mediumblack"))
+                            Text(orderTypeResult.orderType == null ? "Take Away" : orderTypeResult.orderType, style: Styles.customStyle("mediumblack"))
                           ],
                         ),
-                        Text("Change", style: Styles.customStyle("midgray"))
+                        GestureDetector(
+                          onTap: () {
+                            updateOrderType();
+                          },
+                          child: Text("Change", style: Styles.customStyle("midgray")),
+                        )
                       ],
                     ),
                   ),
@@ -455,6 +482,58 @@ class _OrderMainScreenState extends State<OrderMainScreen> {
                     color: Styles.white,
                   ),
                 ],
+              ),
+            ),
+
+            Visibility(
+              visible: !(orderType == "Take Away"),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
+                    10, screenWidth * 0.05, 0),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: screenWidth * 0.9,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("Date", style: Styles.customStyle("mediumblack")),
+                          Text(orderTypeResult.date == null ? "Null" : orderTypeResult.date, style: Styles.customStyle("mediumblack")),
+                        ]
+                      ),
+                    ),
+                    Container(
+                      width: screenWidth * 0.9,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text("Time", style: Styles.customStyle("mediumblack")),
+                          Text(orderTypeResult.time == null ? "Null" : orderTypeResult.time, style: Styles.customStyle("mediumblack")),
+                        ]
+                      ),
+                    ),
+                    Visibility(
+                      visible: orderType == "Dine In" || orderType == "Book Place",
+                      child: Container(
+                        width: screenWidth * 0.9,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text("Guest", style: Styles.customStyle("mediumblack")),
+                            Text(orderTypeResult.guest == null ? 0 : orderTypeResult.guest.toString(), style: Styles.customStyle("mediumblack")),
+                          ]
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    // Garis
+                    Container(
+                      width: screenWidth * 0.9,
+                      height: 1,
+                      color: Styles.white,
+                    ),
+                  ],
+                ),
               ),
             ),
 
@@ -564,7 +643,7 @@ class _OrderMainScreenState extends State<OrderMainScreen> {
                               )
                             );
                           },
-                          child: Text("Change", style: Styles.customStyle("midgray")),
+                          child: Text("Use Voucher", style: Styles.customStyle("midgray")),
                         )
                       ],
                     ),
