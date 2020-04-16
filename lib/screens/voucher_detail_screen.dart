@@ -120,10 +120,7 @@ class _CustomUseVoucherButtonState extends State<CustomUseVoucherButton> {
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
         onPressed: () {
-          //TODO : Pop until restoMenu (di mana cart dipanggil duluan)
-          Navigator.popUntil(context, 
-            ModalRoute.withName("/restoMenu")
-          );
+          //TODO : Confirm Button
           Navigator.push(context,
             MaterialPageRoute(
               builder: (context) => OrderMainScreen(voucherCode: widget.voucherCode)

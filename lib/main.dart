@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Futura',
       ),
-      initialRoute: '/home',
+      initialRoute: '/restoMenu',
       routes: {
         '/': (context) => FingerLoginScreen(),
         '/search': (context) => SearchScreen(),
@@ -42,17 +42,15 @@ class MyApp extends StatelessWidget {
         '/home': (context) => HomeScreen(),
         '/filter': (context) => FilterScreen(),
         '/foodDetail': (context) => FoodDetailScreen(),
-        '/restoMenu': (context) => RestoMenuScreen(),
         // '/initData': (context) => InitData(),
         '/activity': (context) => ActivityScreen(),
         '/orderReceipt': (context) => OrderReceiptScreen(),
-        '/orderStatus': (context) => OrderStatusScreen(),
-        '/order': (context) => OrderMainScreen(),
-        '/restoMenu': (context) => RestoMenuScreen(),
-        '/voucherSearch': (context) => VoucherSearchScreen(),
-        '/voucherDetail': (context) =>
-            VoucherDetailScreen(voucherCode: "CODE145"),
-        '/changePayment': (context) => ChangePaymentScreen()
+        '/orderStatus' : (context) => OrderStatusScreen(),
+        '/order' : (context) => OrderMainScreen(),
+        '/restoMenu' : (context) => RestoMenuScreen(),
+        '/voucherSearch' : (context) => VoucherSearchScreen(),
+        '/voucherDetail' : (context) => VoucherDetailScreen(voucherCode: "CODE145"),
+        '/changePayment' : (context) => ChangePaymentScreen()
       },
     );
   }
