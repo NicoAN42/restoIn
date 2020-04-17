@@ -6,7 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VoucherSearchScreen extends StatefulWidget {
   final String voucherCode;
-  VoucherSearchScreen({this.voucherCode});
+  final Function editVoucherCode;
+
+  VoucherSearchScreen({this.voucherCode, this.editVoucherCode});
 
   @override
   _VoucherSearchScreenState createState() => _VoucherSearchScreenState();
@@ -17,14 +19,16 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
 
   List<VoucherSection> displayList = new List();
 
-  int counter = 0;
+  @override
+  void initState() {
+    super.initState();
 
-  void init() {
-    if (counter > 0) return;
-    counter++;
     for (int i = 0; i < voucherList.length; i++) {
       displayList.add(VoucherSection(
-          code: voucherList[i], used: voucherList[i] == widget.voucherCode));
+        code: voucherList[i],
+        isUsed: voucherList[i] == widget.voucherCode,
+        editVoucherCode: widget.editVoucherCode,
+      ));
     }
   }
 
@@ -34,7 +38,9 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
     for (int i = 0; i < voucherList.length; i++) {
       if (voucherList[i].toLowerCase().contains(query.toLowerCase())) {
         displayList.add(VoucherSection(
-            code: voucherList[i], used: voucherList[i] == widget.voucherCode));
+            code: voucherList[i],
+            isUsed: voucherList[i] == widget.voucherCode,
+            editVoucherCode: widget.editVoucherCode));
       }
     }
   }
@@ -42,8 +48,6 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
-    init();
 
     return new Scaffold(
       backgroundColor: Colors.white,
@@ -96,7 +100,7 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
                       child: TextField(
                         onChanged: (query) {
                           setState(() {
-                            search(query);
+                            search(query.trim());
                             print(query);
                           });
                         },
@@ -127,9 +131,10 @@ class _VoucherSearchScreenState extends State<VoucherSearchScreen> {
 
 class VoucherSection extends StatefulWidget {
   final String code;
-  final bool used;
+  final bool isUsed;
+  final Function editVoucherCode;
 
-  VoucherSection({this.code, this.used});
+  VoucherSection({this.code, this.isUsed, this.editVoucherCode});
 
   @override
   _VoucherSectionState createState() => _VoucherSectionState();
@@ -141,11 +146,15 @@ class _VoucherSectionState extends State<VoucherSection> {
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
         onTap: () {
+          Navigator.pop(context);
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      VoucherDetailScreen(voucherCode: widget.code)));
+                  builder: (context) => VoucherDetailScreen(
+                        voucherCode: widget.code,
+                        isUsed: widget.isUsed,
+                        editVoucherCode: widget.editVoucherCode,
+                      )));
         },
         child: Container(
           child: Column(
@@ -194,7 +203,7 @@ class _VoucherSectionState extends State<VoucherSection> {
                           ),
                         ],
                       ),
-                      widget.used
+                      widget.isUsed
                           ? Container(
                               width: 15,
                               height: 15,

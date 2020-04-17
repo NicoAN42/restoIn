@@ -52,6 +52,7 @@ abstract class Styles {
     if (s.contains("bold")) weight = FontWeight.w700;
 
     if (s.contains("underline")) deco = TextDecoration.underline;
+    if (s.contains("linethrough")) deco = TextDecoration.lineThrough;
 
     return (TextStyle(
       fontSize: size,

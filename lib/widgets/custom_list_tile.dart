@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/models/cart.dart';
 import 'package:restoin/models/restaurant.dart';
-import 'package:restoin/screens/resto_menu_screen.dart';
+import 'package:restoin/screens/resto_and_food/resto_menu_screen.dart';
 
 import '../styles.dart';
 

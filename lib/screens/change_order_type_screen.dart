@@ -6,9 +6,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 var _value = "Take Away";
 int _timeOption = 1;
 int _guestCounter = 1;
-OrderTypeResult orderTypeResult;
 DateTime dateTime;
-List<String> timeOptions = ["8.30am", "10:30am", "12:30pm", "2:30pm", "4:30pm", "6:30pm", "8:30pm"];
+List<String> timeOptions = [
+  "8.30am",
+  "10:30am",
+  "12:30pm",
+  "2:30pm",
+  "4:30pm",
+  "6:30pm",
+  "8:30pm"
+];
 
 class OrderTypeResult extends StatelessWidget {
   final String orderType;
@@ -25,37 +32,25 @@ class OrderTypeResult extends StatelessWidget {
 }
 
 class ChangeOrderTypeScreen extends StatefulWidget {
+  final Function editOrderType;
+
+  const ChangeOrderTypeScreen({Key key, this.editOrderType}) : super(key: key);
+
   @override
   _ChangeOrderTypeScreenState createState() => _ChangeOrderTypeScreenState();
 }
 
 class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
-  List<Widget> getTimeOptionsButton(){
+  List<Widget> getTimeOptionsButton() {
     List<Widget> result = new List();
 
-    for (int i = 0; i < timeOptions.length; i++){
+    for (int i = 0; i < timeOptions.length; i++) {
       if (_value == "Dine In" && i == 0) {
-        result.add(
-          FlatButton(
-            child: Text("Now", style: _timeOption == i ? Styles.customStyle("midwhite") : Styles.customStyle("midblack")),
-            color: _timeOption == i ? Styles.orange : Styles.white,
-            onPressed: () {
-              setState(() {
-                _timeOption = i;
-              });
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-              side: BorderSide(color: Styles.white, width: 1)
-            ),
-          )
-        );
-        continue;
-      }
-
-      result.add(
-        FlatButton(
-          child: Text(timeOptions[i], style: _timeOption == i ? Styles.customStyle("midwhite") : Styles.customStyle("midblack")),
+        result.add(FlatButton(
+          child: Text("Now",
+              style: _timeOption == i
+                  ? Styles.customStyle("midwhite")
+                  : Styles.customStyle("midblack")),
           color: _timeOption == i ? Styles.orange : Styles.white,
           onPressed: () {
             setState(() {
@@ -63,44 +58,59 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
             });
           },
           shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+              side: BorderSide(color: Styles.white, width: 1)),
+        ));
+        continue;
+      }
+
+      result.add(FlatButton(
+        child: Text(timeOptions[i],
+            style: _timeOption == i
+                ? Styles.customStyle("midwhite")
+                : Styles.customStyle("midblack")),
+        color: _timeOption == i ? Styles.orange : Styles.white,
+        onPressed: () {
+          setState(() {
+            _timeOption = i;
+          });
+        },
+        shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
-            side: BorderSide(color: Styles.white, width: 1)
-          ),
-        )
-      );
+            side: BorderSide(color: Styles.white, width: 1)),
+      ));
     }
     return result;
   }
 
   DropdownButton _orderType() => DropdownButton<String>(
-      style: Styles.customStyle("largeboldblack"),
-      underline: SizedBox(),
-      items: [
-        DropdownMenuItem<String>(
-          value: "Take Away",
-          child: Text("Take Away"),
-        ),
-        DropdownMenuItem<String>(
-          value: "Book Place",
-          child: Text("Book Place"),
-        ),
-        DropdownMenuItem<String>(
-          value: "Dine In",
-          child: Text("Dine In"),
-        ),
-        DropdownMenuItem<String>(
-          value: "Pick Later",
-          child: Text("Pick Later"),
-        ),
-      ],
-      onChanged: (value) {
-        setState(() {
-          _value = value;
-        });
-      },
-      value: _value,
-    );
-
+        style: Styles.customStyle("largeboldblack"),
+        underline: SizedBox(),
+        items: [
+          DropdownMenuItem<String>(
+            value: "Take Away",
+            child: Text("Take Away"),
+          ),
+          DropdownMenuItem<String>(
+            value: "Book Place",
+            child: Text("Book Place"),
+          ),
+          DropdownMenuItem<String>(
+            value: "Dine In",
+            child: Text("Dine In"),
+          ),
+          DropdownMenuItem<String>(
+            value: "Pick Later",
+            child: Text("Pick Later"),
+          ),
+        ],
+        onChanged: (value) {
+          setState(() {
+            _value = value;
+          });
+        },
+        value: _value,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -164,9 +174,11 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Image.asset("assets/icon/date.png", width: 20, height: 20),
+                        Image.asset("assets/icon/date.png",
+                            width: 20, height: 20),
                         SizedBox(width: 10),
-                        Text("Date & Time", style: Styles.customStyle("mediumblack"))
+                        Text("Date & Time",
+                            style: Styles.customStyle("mediumblack"))
                       ],
                     ),
                     SizedBox(height: 10),
@@ -175,26 +187,38 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Text("Date : " + (dateTime == null ? "Please choose a date" : dateTime.day.toString() + "/" + dateTime.month.toString() + "/" + dateTime.year.toString()), style: Styles.customStyle("midblack")),
+                          Text(
+                              "Date : " +
+                                  (dateTime == null
+                                      ? "Please choose a date"
+                                      : dateTime.day.toString() +
+                                          "/" +
+                                          dateTime.month.toString() +
+                                          "/" +
+                                          dateTime.year.toString()),
+                              style: Styles.customStyle("midblack")),
                           FlatButton(
-                            child: Text("Pick Date", style: Styles.customStyle("midblack")),
+                            child: Text("Pick Date",
+                                style: Styles.customStyle("midblack")),
                             color: Styles.white,
                             onPressed: () {
                               showDatePicker(
-                                context: context, 
-                                initialDate: dateTime == null ? DateTime.now() : dateTime, 
-                                firstDate: DateTime(2001), 
-                                lastDate: DateTime(2222)
-                              ).then((date){
+                                      context: context,
+                                      initialDate: dateTime == null
+                                          ? DateTime.now()
+                                          : dateTime,
+                                      firstDate: DateTime(2001),
+                                      lastDate: DateTime(2222))
+                                  .then((date) {
                                 setState(() {
                                   dateTime = date;
                                 });
                               });
                             },
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              side: BorderSide(color: Styles.white, width: 1)
-                            ),
+                                borderRadius: BorderRadius.circular(8),
+                                side:
+                                    BorderSide(color: Styles.white, width: 1)),
                           )
                         ],
                       ),
@@ -203,11 +227,8 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                     Container(
                       width: screenWidth * 0.9,
                       child: Center(
-                        child: Wrap(
-                          spacing: 5,
-                          children: getTimeOptionsButton()
-                        )
-                      ),
+                          child: Wrap(
+                              spacing: 5, children: getTimeOptionsButton())),
                     )
                   ],
                 ),
@@ -224,7 +245,7 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                         Icon(
+                        Icon(
                           FontAwesomeIcons.clock,
                           color: Styles.black,
                           size: 20,
@@ -237,11 +258,8 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                     Container(
                       width: screenWidth * 0.9,
                       child: Center(
-                        child: Wrap(
-                          spacing: 5,
-                          children: getTimeOptionsButton()
-                        )
-                      ),
+                          child: Wrap(
+                              spacing: 5, children: getTimeOptionsButton())),
                     )
                   ],
                 ),
@@ -258,7 +276,8 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Image.asset("assets/icon/guest.png", width: 20, height: 20),
+                        Image.asset("assets/icon/guest.png",
+                            width: 20, height: 20),
                         SizedBox(width: 10),
                         Text("Guest", style: Styles.customStyle("mediumblack"))
                       ],
@@ -290,7 +309,8 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                               ),
                             ),
                           ),
-                          Text(" " + _guestCounter.toString() + " ", style: Styles.customStyle("largeboldblack")),
+                          Text(" " + _guestCounter.toString() + " ",
+                              style: Styles.customStyle("largeboldblack")),
                           ButtonTheme(
                             minWidth: 0,
                             child: FlatButton(
@@ -315,8 +335,6 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
                         ],
                       ),
                     ),
-
-
                   ],
                 ),
               ),
@@ -324,10 +342,12 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
           ],
         ),
       ),
-
       floatingActionButton: Container(
         width: screenWidth * 0.9,
-        child: CustomConfirmButton(text: "Confirm"),
+        child: CustomConfirmButton(
+          text: "Confirm",
+          editOrderType: widget.editOrderType,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -340,8 +360,10 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
 
 class CustomConfirmButton extends StatefulWidget {
   final String text;
+  final Function editOrderType;
 
-  const CustomConfirmButton({Key key, this.text}) : super(key: key);
+  const CustomConfirmButton({Key key, this.text, this.editOrderType})
+      : super(key: key);
 
   @override
   _CustomConfirmButtonState createState() => _CustomConfirmButtonState();
@@ -353,14 +375,17 @@ class _CustomConfirmButtonState extends State<CustomConfirmButton> {
     return FloatingActionButton.extended(
         onPressed: () {
           if (dateTime == null) dateTime = DateTime.now();
-          Navigator.pop(context,
-            OrderTypeResult(
-              orderType: _value,
-              date: dateTime.day.toString() + "/" + dateTime.month.toString() + "/" + dateTime.year.toString(), 
-              time: timeOptions[_timeOption],
-              guest: _guestCounter,
-            )
-          );
+          widget.editOrderType(new OrderTypeResult(
+            orderType: _value,
+            date: dateTime.day.toString() +
+                "/" +
+                dateTime.month.toString() +
+                "/" +
+                dateTime.year.toString(),
+            time: timeOptions[_timeOption],
+            guest: _guestCounter,
+          ));
+          Navigator.pop(context);
         },
         backgroundColor: Styles.orange,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

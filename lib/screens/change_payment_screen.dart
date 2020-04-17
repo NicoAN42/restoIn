@@ -6,7 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 int paymentType = 0;
 
 class ChangePaymentScreen extends StatefulWidget {
-  ChangePaymentScreen({paymentType});
+  final Function editPaymentType;
+
+  ChangePaymentScreen({this.editPaymentType});
 
   @override
   _ChangePaymentScreenState createState() => _ChangePaymentScreenState();
@@ -50,10 +52,12 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
               color: Styles.white,
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(screenWidth * 0.05, 10, screenWidth * 0.05, 10),
+              padding: EdgeInsets.fromLTRB(
+                  screenWidth * 0.05, 10, screenWidth * 0.05, 10),
               child: Row(
                 children: <Widget>[
-                  Text("Payment Type", style: Styles.customStyle("mediumblack")),
+                  Text("Payment Type",
+                      style: Styles.customStyle("mediumblack")),
                 ],
               ),
             ),
@@ -62,7 +66,6 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
               height: 2,
               color: Styles.white,
             ),
-
             GestureDetector(
               onTap: () {
                 setState(() {
@@ -70,8 +73,8 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
                 });
               },
               child: Container(
-                padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
-                    10, screenWidth * 0.05, 0),
+                padding: EdgeInsets.fromLTRB(
+                    screenWidth * 0.05, 10, screenWidth * 0.05, 0),
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -89,25 +92,22 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
                                   size: 15,
                                 ),
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 1
-                                  )
-                                ),
+                                    border: Border.all(
+                                        color: Colors.black, width: 1)),
                               ),
                               SizedBox(width: 10),
-                              Text("Cash", style: Styles.customStyle("mediumblack")),
+                              Text("Cash",
+                                  style: Styles.customStyle("mediumblack")),
                             ],
                           ),
-                          paymentType == 0 ?
-                          Container(
-                            width: 15,
-                            height: 15,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Styles.orange
-                            )
-                          ) : Container(),
+                          paymentType == 0
+                              ? Container(
+                                  width: 15,
+                                  height: 15,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Styles.orange))
+                              : Container(),
                         ],
                       ),
                     ),
@@ -122,7 +122,6 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
                 ),
               ),
             ),
-
             GestureDetector(
               onTap: () {
                 setState(() {
@@ -130,8 +129,8 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
                 });
               },
               child: Container(
-                padding: EdgeInsets.fromLTRB(screenWidth * 0.05,
-                    10, screenWidth * 0.05, 0),
+                padding: EdgeInsets.fromLTRB(
+                    screenWidth * 0.05, 10, screenWidth * 0.05, 0),
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -143,32 +142,28 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
                             children: <Widget>[
                               Container(
                                 padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                                child: Text("UVU", 
+                                child: Text(
+                                  "UVU",
                                   style: TextStyle(
-                                    color: Styles.black,
-                                    fontSize: 8
-                                  ),
+                                      color: Styles.black, fontSize: 8),
                                 ),
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 1
-                                  )
-                                ),
+                                    border: Border.all(
+                                        color: Colors.black, width: 1)),
                               ),
                               SizedBox(width: 10),
-                              Text("129.500", style: Styles.customStyle("mediumblack"))
+                              Text("129.500",
+                                  style: Styles.customStyle("mediumblack"))
                             ],
                           ),
-                          paymentType == 1 ?
-                          Container(
-                            width: 15,
-                            height: 15,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Styles.orange
-                            )
-                          ) : Container(),
+                          paymentType == 1
+                              ? Container(
+                                  width: 15,
+                                  height: 15,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Styles.orange))
+                              : Container(),
                         ],
                       ),
                     ),
@@ -187,10 +182,20 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
           ],
         ),
       ),
-
       floatingActionButton: Container(
         width: screenWidth * 0.9,
-        child: CustomConfirmPaymentTypeButton(text: "Confirm"),
+        child: FloatingActionButton.extended(
+            onPressed: () {
+              widget.editPaymentType(paymentType);
+              Navigator.pop(context);
+            },
+            backgroundColor: Styles.orange,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            label: Text(
+              "Confirm",
+              style: Styles.customStyle("mediumboldwhite"),
+            )),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -198,30 +203,5 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
         child: Container(height: 0),
       ),
     );
-  }
-}
-
-class CustomConfirmPaymentTypeButton extends StatefulWidget {
-  final String text;
-
-  const CustomConfirmPaymentTypeButton({Key key, this.text}) : super(key: key);
-
-  @override
-  _CustomConfirmPaymentTypeButtonState createState() => _CustomConfirmPaymentTypeButtonState();
-}
-
-class _CustomConfirmPaymentTypeButtonState extends State<CustomConfirmPaymentTypeButton> {
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.pop(context, paymentType);
-        },
-        backgroundColor: Styles.orange,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        label: Text(
-          widget.text,
-          style: Styles.customStyle("mediumboldwhite"),
-        ));
   }
 }

@@ -6,6 +6,7 @@ import 'package:restoin/models/cart.dart';
 import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/screens/filter_screen.dart';
 import 'package:restoin/screens/location_screen.dart';
+import 'package:restoin/screens/order_main_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:restoin/widgets/custom_list_tile.dart';
@@ -1559,8 +1560,11 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: _curCart.foods != null &&
                 _curCart.foods.length > 0
             ? new FloatingActionButton(
-                //TODO to order
-                onPressed: null,
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OrderMainScreen(
+                            c: _curCart, addToCart: _addToCart))),
                 backgroundColor: Colors.white,
                 child: Stack(
                   overflow: Overflow.visible,

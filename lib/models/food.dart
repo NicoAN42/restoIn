@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../styles.dart';
 
@@ -35,6 +36,12 @@ class Food {
     String r = res.join(".");
 
     return Text("IDR $r", style: Styles.customStyle("smallBlack"));
+  }
+
+  String getPrice() {
+    final formatter =
+        NumberFormat.currency(locale: "id", symbol: "", decimalDigits: 0);
+    return formatter.format(price);
   }
 
   Text getTypeText() {
