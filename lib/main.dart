@@ -7,6 +7,8 @@ import 'package:restoin/screens/voucher_search_screen.dart';
 
 import 'screens/login_and_register/finger_login_screen.dart';
 import 'screens/location_screen.dart';
+import 'screens/notification_screen.dart';
+import 'screens/profile_screen.dart';
 import 'screens/search_result_screen.dart';
 import 'screens/search_screen.dart';
 import 'screens/favorite_screen.dart';
@@ -47,7 +49,9 @@ class MyApp extends StatelessWidget {
         '/voucherSearch': (context) => VoucherSearchScreen(),
         '/voucherDetail': (context) =>
             VoucherDetailScreen(voucherCode: "CODE145"),
-        '/changePayment': (context) => ChangePaymentScreen()
+        '/changePayment': (context) => ChangePaymentScreen(),
+        '/profile': (context) => ProfileScreen(),
+        '/notification': (context) => NotificationScreen()
       },
     );
   }
