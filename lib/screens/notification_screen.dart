@@ -12,7 +12,7 @@ class NotificationScreen extends StatefulWidget {
 class _NotificationScreenState extends State<NotificationScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final items = List<String>.generate(5, (i) => "Item ${i + 1}");
-  int _currentIndex = 3;
+  int _currentIndex = 1;
   bool isClearAll = false;
 
   void showDeletePopUp() async{
@@ -207,11 +207,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ],
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          switch(index) {
+            case 0:
+              Navigator.pushNamed(context, "/home");
+              break;
+            case 1:
+              // Do nothing
+              break;
+            case 2:
+              Navigator.pushNamed(context, "/wallet");
+              break;  
+            case 3:
+              Navigator.pushNamed(context, "/activity");
+              break;
+            case 4:
+              Navigator.pushNamed(context, "/profile");
+              break;
+          }
         },
-      )
+      ),
     );
   }
 }

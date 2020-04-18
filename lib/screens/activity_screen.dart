@@ -160,21 +160,21 @@ class _ActivityScreenState extends State<ActivityScreen> {
           ),
         ],
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
           switch (index) {
             case 0:
               Navigator.pop(context);
               break;
             case 1:
-              // Notification
+              Navigator.pushNamed(context, "/notification");
               break;
             case 2:
-              //  Wallet
+              Navigator.pushNamed(context, "/wallet");
+              break;
+            case 3:
+              // Do nothing
               break;
             case 4:
-              // Profile
+              Navigator.pushNamed(context, "/profile");
               break;
           }
         },
