@@ -1,15 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/models/cart.dart';
+import 'package:restoin/models/food.dart';
+import 'package:restoin/models/restaurant.dart';
+import 'package:restoin/screens/change_order_type_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'order_receipt_screen.dart';
+
 class ActivityScreen extends StatefulWidget {
+  final Cart c;
+  final OrderTypeResult otr;
+
+  const ActivityScreen({Key key, this.c, this.otr}) : super(key: key);
   @override
   _ActivityScreenState createState() => _ActivityScreenState();
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
   int _currentIndex = 3;
+  Cart _bufferCart;
+
+  @override
+  void initState() {
+    super.initState();
+    _bufferCart = widget.c;
+    if (widget.c.resto?.name == null) {
+      _bufferCart = new Cart(
+          foods: [],
+          extras: [],
+          qtys: [],
+          notes: [],
+          resto: new Restaurant(
+            name: "Louise Branz",
+          ));
+      _bufferCart.foods.add(new Food(name: "Chunky Pie", price: 75000));
+      _bufferCart.qtys.add(1);
+      _bufferCart.notes.add("Don't use too much milk");
+      _bufferCart.extras.add(new Extra(name: "Wafflepuff", price: 7500));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +90,12 @@ class _ActivityScreenState extends State<ActivityScreen> {
             ActivitySection(
               date: "21/06/2020 12:10",
               orderId: "LB-018271",
-              orderType: "Take away",
-              restaurantName: "Louise Branz",
+              orderType: widget.otr.orderType ?? "Take away",
+              restaurantName: _bufferCart.resto.name,
               screenWidth: screenWidth,
               status: "Preparing",
+              c: _bufferCart,
+              otr: widget.otr,
             ),
 
             ActivitySection(
@@ -82,11 +115,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
               screenWidth: screenWidth,
               status: "Canceled",
             ),
-
-            
-
-
-            
           ],
         ),
       ),
@@ -135,19 +163,19 @@ class _ActivityScreenState extends State<ActivityScreen> {
           setState(() {
             _currentIndex = index;
           });
-          switch(index) {
+          switch (index) {
             case 0:
-              Navigator.pushNamed(context, '/home');
-            break;
+              Navigator.pop(context);
+              break;
             case 1:
               // Notification
-            break;
+              break;
             case 2:
               //  Wallet
-            break;
+              break;
             case 4:
               // Profile
-            break;
+              break;
           }
         },
       ),
@@ -162,73 +190,98 @@ class ActivitySection extends StatelessWidget {
   final String date;
   final String status;
   final double screenWidth;
+  final Cart c;
+  final OrderTypeResult otr;
 
-  ActivitySection({this.restaurantName, this.orderId, this.orderType, this.date, this.status, this.screenWidth});
+  ActivitySection(
+      {this.restaurantName,
+      this.orderId,
+      this.orderType,
+      this.date,
+      this.status,
+      this.screenWidth,
+      this.c,
+      this.otr});
 
   Text getRestaurantName() {
     if (status.contains("Done") || status.contains("Canceled")) {
-      return Text(restaurantName, style: Styles.customStyle("largeboldgray"));
+      return Text(restaurantName, style: Styles.customStyle("largeboldblack"));
     }
     return Text(restaurantName, style: Styles.customStyle("largeboldorange"));
   }
 
   Text getOrderType() {
-    if (status.contains("Done") || status.contains("Canceled")) {
-      return Text(status, style: Styles.customStyle("midboldgray"));
+    if (status.contains("Done")) {
+      return Text(status, style: Styles.customStyle("mediumboldBlack"));
     }
-    return Text(status, style: Styles.customStyle("midboldorange"));
+    if (status.contains("Canceled"))
+      return Text(status, style: Styles.customStyle("mediumboldRed"));
+    return Text(status, style: Styles.customStyle("mediumboldorange"));
+  }
+
+  String getDate() {
+    if (status.contains("Done")) return "Apr 20";
+    if (status.contains("Canceled")) return "Mar 16";
+    return "Now";
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      width: screenWidth,
-      padding: EdgeInsets.only(left: screenWidth * 0.05, right: screenWidth * 0.05),
-      child: Column(
-        children: <Widget>[
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    OrderReceiptScreen(c: c, otr: otr, status: status)));
+      },
+      child: Container(
+          color: Colors.white,
+          width: screenWidth,
+          padding: EdgeInsets.only(
+              left: screenWidth * 0.05, right: screenWidth * 0.05),
+          child: Column(
             children: <Widget>[
-              Container(
-                height: 80,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    getRestaurantName(),
-                    SizedBox(height: 5),
-                    Text("Order Id", style: Styles.customStyle("mediumblack")),
-                    SizedBox(height: 5),
-                    Text(orderId, style: Styles.customStyle("mediumboldblack")),
-                  ],
-                ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    height: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        getRestaurantName(),
+                        SizedBox(height: 5),
+                        Text(otr?.orderType ?? "Take away",
+                            style: Styles.customStyle("mediumgray")),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text(getDate(),
+                            style: Styles.customStyle("mediumblack")),
+                        SizedBox(height: 7.5),
+                        getOrderType(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(height: 20),
               Container(
-                height: 80,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(orderType, style: Styles.customStyle("midgray")),
-                    SizedBox(height: 7.5),
-                    Text(date, style: Styles.customStyle("midblack")),
-                    SizedBox(height: 7.5),
-                    getOrderType(),
-                  ],
-                ),
-              ),
+                width: screenWidth,
+                height: 2,
+                color: Styles.white,
+              )
             ],
-          ),
-          SizedBox(height: 20),
-          Container(
-            width: screenWidth,
-            height: 2,
-            color: Styles.white,
-          )
-        ],
-      )
+          )),
     );
   }
 }

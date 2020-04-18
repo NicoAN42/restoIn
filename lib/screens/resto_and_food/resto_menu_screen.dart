@@ -16,8 +16,10 @@ class RestoMenuScreen extends StatefulWidget {
   final Restaurant r;
   final Function addToCart;
   final Cart lastCart;
+  final Function addActivity;
 
-  const RestoMenuScreen({Key key, this.r, this.addToCart, this.lastCart})
+  const RestoMenuScreen(
+      {Key key, this.r, this.addToCart, this.lastCart, this.addActivity})
       : super(key: key);
 
   @override
@@ -312,6 +314,7 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
                         builder: (context) => OrderMainScreen(
                               c: _curCart,
                               addToCart: widget.addToCart,
+                              addActivity: widget.addActivity,
                             )));
               },
               backgroundColor: Styles.orange,

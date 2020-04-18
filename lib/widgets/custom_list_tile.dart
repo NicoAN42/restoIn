@@ -200,6 +200,7 @@ class CustomRestoRecommendedTile extends StatefulWidget {
   final double screenHeight;
   final Function addToCart;
   final Cart c;
+  final Function addActivity;
 
   const CustomRestoRecommendedTile(
       {Key key,
@@ -207,7 +208,8 @@ class CustomRestoRecommendedTile extends StatefulWidget {
       this.screenWidth,
       this.screenHeight,
       this.addToCart,
-      this.c})
+      this.c,
+      this.addActivity})
       : super(key: key);
 
   @override
@@ -227,6 +229,7 @@ class _CustomRestoRecommendedTileState
                     r: widget.r,
                     addToCart: widget.addToCart,
                     lastCart: widget.c,
+                    addActivity: widget.addActivity,
                   ))),
       child: Stack(
         overflow: Overflow.visible,

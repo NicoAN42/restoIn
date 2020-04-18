@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restoin/models/cart.dart';
 import 'package:restoin/screens/change_order_type_screen.dart';
+import 'package:restoin/screens/order_receipt_screen.dart';
 import 'package:restoin/screens/voucher_search_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
@@ -11,8 +12,9 @@ import 'change_payment_screen.dart';
 class OrderMainScreen extends StatefulWidget {
   final Cart c;
   final Function addToCart;
+  final Function addActivity;
 
-  OrderMainScreen({this.c, this.addToCart});
+  OrderMainScreen({this.c, this.addToCart, this.addActivity});
 
   @override
   _OrderMainScreenState createState() => _OrderMainScreenState();
@@ -486,7 +488,26 @@ class _OrderMainScreenState extends State<OrderMainScreen> {
         ),
         floatingActionButton: Container(
           width: screenWidth * 0.9,
-          child: CustomPlaceOrderButton(text: "Place Order"),
+          child: FloatingActionButton.extended(
+              onPressed: () {
+                widget.addActivity(_curCart, _orderTypeResult);
+                widget.addToCart(new Cart());
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OrderReceiptScreen(
+                              c: _curCart,
+                              otr: _orderTypeResult,
+                            )));
+              },
+              backgroundColor: Styles.orange,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              label: Text(
+                "Place Order",
+                style: Styles.customStyle("mediumboldwhite"),
+              )),
         ),
         bottomNavigationBar: BottomAppBar(
           color: Colors.yellow,

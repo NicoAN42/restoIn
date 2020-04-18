@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/models/cart.dart';
 import 'package:restoin/models/restaurant.dart';
+import 'package:restoin/screens/change_order_type_screen.dart';
 import 'package:restoin/screens/filter_screen.dart';
 import 'package:restoin/screens/location_screen.dart';
 import 'package:restoin/screens/order_main_screen.dart';
@@ -11,6 +12,7 @@ import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:restoin/widgets/custom_list_tile.dart';
 
+import 'activity_screen.dart';
 import 'search_screen.dart';
 
 List<Restaurant> restoList = [];
@@ -40,6 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Future _getResto;
 
   Cart _curCart = new Cart();
+
+  Cart _activityCart = new Cart();
+  OrderTypeResult _activityOtr = new OrderTypeResult();
+
+  _addActivity(Cart c, OrderTypeResult otr) => setState(() {
+        _activityCart = c;
+        _activityOtr = otr;
+      });
 
   Future<String> getResto() async {
     List<DocumentSnapshot> restaurantList;
@@ -925,6 +935,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         screenHeight: screenHeight,
                                         addToCart: _addToCart,
                                         c: _curCart,
+                                        addActivity: _addActivity,
                                       );
                                     }),
                               ));
@@ -1536,10 +1547,10 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text('Wallet'),
             ),
             BottomNavigationBarItem(
-              icon: _currentIndex == 3
-                  ? Image.asset("assets/icon/o_note.png", width: 20, height: 20)
-                  : Image.asset("assets/icon/b_note.png",
-                      width: 20, height: 20),
+              activeIcon:
+                  Image.asset("assets/icon/o_note.png", width: 20, height: 20),
+              icon:
+                  Image.asset("assets/icon/b_note.png", width: 20, height: 20),
               title: Text('Note'),
             ),
             BottomNavigationBarItem(
@@ -1555,6 +1566,17 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {
               _currentIndex = index;
             });
+            switch (_currentIndex) {
+              case 3:
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ActivityScreen(
+                            c: _activityCart, otr: _activityOtr)));
+                break;
+              default:
+                break;
+            }
           },
         ),
         floatingActionButton: _curCart.foods != null &&
@@ -1564,7 +1586,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => OrderMainScreen(
-                            c: _curCart, addToCart: _addToCart))),
+                            c: _curCart,
+                            addToCart: _addToCart,
+                            addActivity: _addActivity))),
                 backgroundColor: Colors.white,
                 child: Stack(
                   overflow: Overflow.visible,

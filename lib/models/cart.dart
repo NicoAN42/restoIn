@@ -9,7 +9,7 @@ class Cart {
   List<int> qtys = [];
   List<String> notes = [];
 
-  Cart({this.resto, this.foods, this.qtys, this.notes});
+  Cart({this.resto, this.foods, this.qtys, this.notes, this.extras});
 
   String getPrice() {
     int p = 0;
