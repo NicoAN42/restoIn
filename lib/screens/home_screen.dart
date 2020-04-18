@@ -384,12 +384,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           Container(
                               margin:
                                   EdgeInsets.only(right: screenWidth * 0.05),
-                              width: screenWidth * 0.425 + 6,
+                              width: screenWidth * 0.425 + 9,
                               height: screenWidth * 2),
                           Positioned(
                               left: 6,
                               child: Container(
-                                width: screenWidth * 0.425 + 2,
+                                width: screenWidth * 0.425 + 3,
                                 height: screenWidth * 0.50,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
@@ -452,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             top: screenWidth * 0.5 + 10,
                             left: 6,
                             child: Container(
-                                width: screenWidth * 0.425 + 2,
+                                width: screenWidth * 0.425 + 3,
                                 child: Container(
                                   child: Row(
                                     mainAxisAlignment:
