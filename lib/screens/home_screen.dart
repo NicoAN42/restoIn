@@ -389,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Positioned(
                               left: 6,
                               child: Container(
-                                width: screenWidth * 0.425,
+                                width: screenWidth * 0.425 + 2,
                                 height: screenWidth * 0.50,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
@@ -452,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             top: screenWidth * 0.5 + 10,
                             left: 6,
                             child: Container(
-                                width: screenWidth * 0.425,
+                                width: screenWidth * 0.425 + 2,
                                 child: Container(
                                   child: Row(
                                     mainAxisAlignment:
@@ -1571,7 +1571,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Do nothing
                 break;
               case 1:
-                 Navigator.push(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => NotificationScreen(
