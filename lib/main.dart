@@ -17,6 +17,7 @@ import 'screens/filter_screen.dart';
 import 'screens/activity_screen.dart';
 import 'screens/order_receipt_screen.dart';
 import 'screens/order_status_screen.dart';
+import 'screens/wallet_screen.dart';
 import 'styles.dart';
 
 void main() => runApp(MyApp());
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
             VoucherDetailScreen(voucherCode: "CODE145"),
         '/changePayment': (context) => ChangePaymentScreen(),
         '/profile': (context) => ProfileScreen(),
-        '/notification': (context) => NotificationScreen()
+        '/notification': (context) => NotificationScreen(),
+        '/wallet': (context) => WalletScreen()
       },
     );
   }

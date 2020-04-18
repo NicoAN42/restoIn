@@ -100,18 +100,22 @@ class _ActivityScreenState extends State<ActivityScreen> {
           BottomNavigationBarItem(
             icon: _currentIndex == 0
                 ? Image.asset("assets/icon/o_home.png", width: 20, height: 20)
-                : Image.asset("assets/icon/b_home.png", width: 20, height: 20),
+                : Image.asset("assets/icon/b_home.png",
+                    width: 20, height: 20),
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
             icon: _currentIndex == 1
-                ? Image.asset("assets/icon/o_notif.png", width: 20, height: 20)
-                : Image.asset("assets/icon/b_notif.png", width: 20, height: 20),
+                ? Image.asset("assets/icon/o_notif.png",
+                    width: 20, height: 20)
+                : Image.asset("assets/icon/b_notif.png",
+                    width: 20, height: 20),
             title: Text('Notification'),
           ),
           BottomNavigationBarItem(
             icon: _currentIndex == 2
-                ? Image.asset("assets/icon/o_wallet.png", width: 20, height: 20)
+                ? Image.asset("assets/icon/o_wallet.png",
+                    width: 20, height: 20)
                 : Image.asset("assets/icon/b_wallet.png",
                     width: 20, height: 20),
             title: Text('Wallet'),
@@ -119,7 +123,8 @@ class _ActivityScreenState extends State<ActivityScreen> {
           BottomNavigationBarItem(
             icon: _currentIndex == 3
                 ? Image.asset("assets/icon/o_note.png", width: 20, height: 20)
-                : Image.asset("assets/icon/b_note.png", width: 20, height: 20),
+                : Image.asset("assets/icon/b_note.png",
+                    width: 20, height: 20),
             title: Text('Note'),
           ),
           BottomNavigationBarItem(
@@ -132,22 +137,22 @@ class _ActivityScreenState extends State<ActivityScreen> {
           ),
         ],
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
           switch(index) {
             case 0:
-              Navigator.pushNamed(context, '/home');
-            break;
+              Navigator.pushNamed(context, "/home");
+              break;
             case 1:
-              // Notification
-            break;
+              Navigator.pushNamed(context, "/notification");
+              break;
             case 2:
-              //  Wallet
-            break;
+              Navigator.pushNamed(context, "/wallet");
+              break;  
+            case 3:
+              // Do nothing
+              break;
             case 4:
-              // Profile
-            break;
+              Navigator.pushNamed(context, "/profile");
+              break;
           }
         },
       ),

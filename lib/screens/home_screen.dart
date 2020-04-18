@@ -11,7 +11,10 @@ import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:restoin/widgets/custom_list_tile.dart';
 
+import 'notification_screen.dart';
+import 'profile_screen.dart';
 import 'search_screen.dart';
+import 'wallet_screen.dart';
 
 List<Restaurant> restoList = [];
 
@@ -1552,9 +1555,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
           onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
+            switch(index) {
+              case 0:
+                // Do nothing
+                break;
+              case 1:
+                Navigator.pushNamed(context, "/notification");
+                break;
+              case 2:
+                Navigator.pushNamed(context, "/wallet");
+                break;  
+              case 3:
+                Navigator.pushNamed(context, "/activity");
+                break;
+              case 4:
+                Navigator.pushNamed(context, "/profile");
+                break;
+            }
           },
         ),
         floatingActionButton: _curCart.foods != null &&

@@ -448,9 +448,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          switch(index) {
+            case 0:
+              Navigator.pushNamed(context, "/home");
+              break;
+            case 1:
+              Navigator.pushNamed(context, "/notification");
+              break;
+            case 2:
+              Navigator.pushNamed(context, "/wallet");
+              break;  
+            case 3:
+              Navigator.pushNamed(context, "/activity");
+              break;
+            case 4:
+              // Do nothing
+              break;
+          }
         },
       ),
     );
