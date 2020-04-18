@@ -405,7 +405,7 @@ class _OrderMainScreenState extends State<OrderMainScreen> {
                                     Container(
                                       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                                       child: Text(
-                                        "UVU",
+                                        "OYO",
                                         style: TextStyle(
                                             color: Styles.black, fontSize: 8),
                                       ),

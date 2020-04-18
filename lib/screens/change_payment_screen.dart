@@ -143,7 +143,7 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
                               Container(
                                 padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                                 child: Text(
-                                  "UVU",
+                                  "OYO",
                                   style: TextStyle(
                                       color: Styles.black, fontSize: 8),
                                 ),
@@ -152,7 +152,7 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
                                         color: Colors.black, width: 1)),
                               ),
                               SizedBox(width: 10),
-                              Text("129.500",
+                              Text("750.000",
                                   style: Styles.customStyle("mediumblack"))
                             ],
                           ),

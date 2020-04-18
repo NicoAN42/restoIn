@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:restoin/models/cart.dart';
+import 'package:restoin/screens/change_order_type_screen.dart';
+import 'package:restoin/screens/wallet_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 
+import 'activity_screen.dart';
+import 'notification_screen.dart';
+
 class EditProfileScreen extends StatefulWidget {
+  final Cart c;
+  final OrderTypeResult otr;
+
+  const EditProfileScreen({Key key, this.c, this.otr}) : super(key: key);
+
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
 }
@@ -207,9 +218,42 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
         ],
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          switch (index) {
+            case 0:
+              Navigator.pop(context);
+              Navigator.pop(context);
+              break;
+            case 1:
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          NotificationScreen(c: widget.c, otr: widget.otr)));
+              break;
+            case 2:
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          WalletScreen(c: widget.c, otr: widget.otr)));
+              break;
+            case 3:
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ActivityScreen(c: widget.c, otr: widget.otr)));
+              break;
+            case 4:
+              Navigator.pop(context);
+              break;
+          }
         },
       ),
     );

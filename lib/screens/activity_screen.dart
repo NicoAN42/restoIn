@@ -7,7 +7,10 @@ import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'notification_screen.dart';
 import 'order_receipt_screen.dart';
+import 'profile_screen.dart';
+import 'wallet_screen.dart';
 
 class ActivityScreen extends StatefulWidget {
   final Cart c;
@@ -165,16 +168,31 @@ class _ActivityScreenState extends State<ActivityScreen> {
               Navigator.pop(context);
               break;
             case 1:
-              Navigator.pushNamed(context, "/notification");
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          NotificationScreen(c: widget.c, otr: widget.otr)));
               break;
             case 2:
-              Navigator.pushNamed(context, "/wallet");
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          WalletScreen(c: widget.c, otr: widget.otr)));
               break;
             case 3:
               // Do nothing
               break;
             case 4:
-              Navigator.pushNamed(context, "/profile");
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ProfileScreen(c: widget.c, otr: widget.otr)));
               break;
           }
         },

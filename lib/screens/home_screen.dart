@@ -1571,10 +1571,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Do nothing
                 break;
               case 1:
-                Navigator.pushNamed(context, "/notification");
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationScreen(
+                            c: _activityCart, otr: _activityOtr)));
                 break;
               case 2:
-                Navigator.pushNamed(context, "/wallet");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            WalletScreen(c: _activityCart, otr: _activityOtr)));
                 break;
               case 3:
                 Navigator.push(
@@ -1584,7 +1592,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             c: _activityCart, otr: _activityOtr)));
                 break;
               case 4:
-                Navigator.pushNamed(context, "/profile");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfileScreen(
+                            c: _activityCart, otr: _activityOtr)));
                 break;
             }
           },

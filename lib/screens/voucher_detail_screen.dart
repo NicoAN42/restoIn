@@ -39,7 +39,7 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/restaurant/louiseBranz.jpg")),
+                        image: AssetImage("assets/icon/phone_banner.jpg")),
                   ),
                 ),
                 Positioned(
@@ -86,6 +86,9 @@ class _VoucherDetailScreenState extends State<VoucherDetailScreen> {
                       children: <Widget>[
                         Text("Description",
                             style: Styles.customStyle("mediumblack")),
+                        Text(
+                            "This is the voucher detail page. The content of this page is the detail of the voucher.",
+                            style: Styles.customStyle("midBlack")),
                         Text(
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique ipsum a suscipit venenatis. Pellentesque nulla nisl, molestie gravida congue in, laoreet facilisis dui. Vestibulum at molestie metus. Suspendisse eleifend eros a magna finibus, id hendrerit turpis blandit. Ut pharetra tincidunt vulputate. Donec at turpis euismod, aliquam libero ut, mattis arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas aliquam risus non tincidunt cursus. Suspendisse ultrices ex magna, eget aliquet risus pulvinar ut.",
                             style: Styles.customStyle("midblack"))
