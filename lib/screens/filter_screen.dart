@@ -9,9 +9,14 @@ class FilterScreen extends StatefulWidget {
   final Function addToCart;
   final Cart lastCart;
   final Function addSearchHistory;
+  final Function addActivity;
 
   const FilterScreen(
-      {Key key, this.addToCart, this.lastCart, this.addSearchHistory})
+      {Key key,
+      this.addToCart,
+      this.lastCart,
+      this.addSearchHistory,
+      this.addActivity})
       : super(key: key);
 
   @override
@@ -549,6 +554,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                       addToCart: widget.addToCart,
                                       lastCart: widget.lastCart,
                                       addSearchHistory: widget.addSearchHistory,
+                                      addActivity: widget.addActivity,
                                     )));
                       });
                     },

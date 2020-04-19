@@ -92,7 +92,6 @@ class _MyVoucherScreenState extends State<MyVoucherScreen> {
                         onChanged: (query) {
                           setState(() {
                             search(query.trim());
-                            print(query);
                           });
                         },
                         decoration: InputDecoration(

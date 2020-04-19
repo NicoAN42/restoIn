@@ -93,7 +93,6 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
   }
 
   _addToCurCart(Food f, int qty, String note, List<Extra> e) {
-    print(qty);
     setState(() {
       if (_curCart.foods.contains(f)) {
         int idx = _curCart.foods.indexOf(f);
@@ -107,6 +106,7 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
         _curCart.notes.add(note);
       }
     });
+
     widget.addToCart(_curCart);
   }
 

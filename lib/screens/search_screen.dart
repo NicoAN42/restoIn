@@ -16,6 +16,7 @@ class SearchScreen extends StatefulWidget {
   final Function deleteSearchHistory;
   final Function clearSearchHistory;
   final Function getSearchHistory;
+  final Function addActivity;
 
   const SearchScreen(
       {Key key,
@@ -24,7 +25,8 @@ class SearchScreen extends StatefulWidget {
       this.addSearchHistory,
       this.deleteSearchHistory,
       this.clearSearchHistory,
-      this.getSearchHistory})
+      this.getSearchHistory,
+      this.addActivity})
       : super(key: key);
 
   @override
@@ -103,6 +105,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 addToCart: widget.addToCart,
                                 lastCart: widget.lastCart,
                                 isPop: false,
+                                addActivity: widget.addActivity,
                               )),
                         ],
                       )),
@@ -120,32 +123,77 @@ class _SearchScreenState extends State<SearchScreen> {
                       spacing: 10,
                       children: <Widget>[
                         CustomButton(
-                            text: "Bowl", addHistory: widget.addSearchHistory),
+                          text: "Bowl",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Sea Food",
-                            addHistory: widget.addSearchHistory),
+                          text: "Sea Food",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Pancake",
-                            addHistory: widget.addSearchHistory),
+                          text: "Pancake",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
                             text: "Cafe", addHistory: widget.addSearchHistory),
                         CustomButton(
-                            text: "Vegetarian",
-                            addHistory: widget.addSearchHistory),
+                          text: "Vegetarian",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Soup", addHistory: widget.addSearchHistory),
+                          text: "Soup",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Open Now",
-                            addHistory: widget.addSearchHistory),
+                          text: "Open Now",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Tea", addHistory: widget.addSearchHistory),
+                          text: "Tea",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Sushi", addHistory: widget.addSearchHistory),
+                          text: "Sushi",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Bubble Drink",
-                            addHistory: widget.addSearchHistory),
+                          text: "Bubble Drink",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                         CustomButton(
-                            text: "Pizza", addHistory: widget.addSearchHistory),
+                          text: "Pizza",
+                          addHistory: widget.addSearchHistory,
+                          addToCart: widget.addToCart,
+                          lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
+                        ),
                       ],
                     ),
                   ),
@@ -187,6 +235,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               CustomHistoryButton(
                                 text: "${searchHistory[index]}",
                                 addHistory: widget.addSearchHistory,
+                                addToCart: widget.addToCart,
+                                lastCart: widget.lastCart,
+                                addActivity: widget.addActivity,
                               ),
                               GestureDetector(
                                 child: new Icon(

@@ -9,8 +9,10 @@ import 'package:restoin/widgets/custom_list_tile.dart';
 class FavoriteScreen extends StatefulWidget {
   final Function addToCart;
   final Cart lastCart;
+  final Function addActivity;
 
-  const FavoriteScreen({Key key, this.addToCart, this.lastCart})
+  const FavoriteScreen(
+      {Key key, this.addToCart, this.lastCart, this.addActivity})
       : super(key: key);
 
   @override
@@ -161,11 +163,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         // shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return CustomRestoTile(
-                              r: restoList[index],
-                              screenWidth: screenWidth,
-                              screenHeight: screenHeight,
-                              addToCart: widget.addToCart,
-                              lastCart: widget.lastCart);
+                            r: restoList[index],
+                            screenWidth: screenWidth,
+                            screenHeight: screenHeight,
+                            addToCart: widget.addToCart,
+                            lastCart: widget.lastCart,
+                            addActivity: widget.addActivity,
+                          );
                         })))
 
             // Code the contents here

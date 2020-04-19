@@ -20,13 +20,15 @@ class SearchResultScreen extends StatefulWidget {
   final Function addToCart;
   final Cart lastCart;
   final Function addSearchHistory;
+  final Function addActivity;
 
   const SearchResultScreen(
       {Key key,
       this.query,
       this.addToCart,
       this.lastCart,
-      this.addSearchHistory})
+      this.addSearchHistory,
+      this.addActivity})
       : super(key: key);
 
   @override
@@ -149,6 +151,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     ];
 
     _searchController.text = widget.query;
+
     super.initState();
   }
 
@@ -250,11 +253,13 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                               physics: ClampingScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) {
                                 return CustomRestoTile(
-                                    r: restoList[index],
-                                    screenWidth: screenWidth,
-                                    screenHeight: screenHeight,
-                                    addToCart: widget.addToCart,
-                                    lastCart: widget.lastCart);
+                                  r: restoList[index],
+                                  screenWidth: screenWidth,
+                                  screenHeight: screenHeight,
+                                  addToCart: widget.addToCart,
+                                  lastCart: widget.lastCart,
+                                  addActivity: widget.addActivity,
+                                );
                               })));
                 }
                 return Padding(

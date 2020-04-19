@@ -12,6 +12,7 @@ class CustomRestoTile extends StatefulWidget {
   final double screenHeight;
   final Function addToCart;
   final Cart lastCart;
+  final Function addActivity;
 
   const CustomRestoTile(
       {Key key,
@@ -19,7 +20,8 @@ class CustomRestoTile extends StatefulWidget {
       this.screenWidth,
       this.screenHeight,
       this.addToCart,
-      this.lastCart})
+      this.lastCart,
+      this.addActivity})
       : super(key: key);
 
   @override
@@ -36,6 +38,7 @@ class _CustomRestoTileState extends State<CustomRestoTile> {
         onTap: () => {
           // if (!widget.r.isClosed)
           {
+            Navigator.pop(context),
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -43,6 +46,7 @@ class _CustomRestoTileState extends State<CustomRestoTile> {
                           addToCart: widget.addToCart,
                           r: widget.r,
                           lastCart: widget.lastCart,
+                          addActivity: widget.addActivity,
                         )))
           }
         },

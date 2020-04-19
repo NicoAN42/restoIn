@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/models/cart.dart';
 import 'package:restoin/screens/search_result_screen.dart';
 
 import '../styles.dart';
@@ -7,8 +8,18 @@ import '../styles.dart';
 class CustomButton extends StatefulWidget {
   final String text;
   final Function addHistory;
+  final Cart lastCart;
+  final Function addToCart;
+  final Function addActivity;
 
-  const CustomButton({Key key, this.text, this.addHistory}) : super(key: key);
+  const CustomButton(
+      {Key key,
+      this.text,
+      this.addHistory,
+      this.addToCart,
+      this.lastCart,
+      this.addActivity})
+      : super(key: key);
 
   @override
   _CustomButtonState createState() => new _CustomButtonState();
@@ -30,6 +41,9 @@ class _CustomButtonState extends State<CustomButton> {
               MaterialPageRoute(
                 builder: (context) => SearchResultScreen(
                   query: widget.text,
+                  addToCart: widget.addToCart,
+                  lastCart: widget.lastCart,
+                  addActivity: widget.addActivity,
                 ),
               ));
         },
@@ -42,8 +56,17 @@ class _CustomButtonState extends State<CustomButton> {
 class CustomHistoryButton extends StatefulWidget {
   final String text;
   final Function addHistory;
+  final Cart lastCart;
+  final Function addToCart;
+  final Function addActivity;
 
-  const CustomHistoryButton({Key key, this.text, this.addHistory})
+  const CustomHistoryButton(
+      {Key key,
+      this.text,
+      this.addHistory,
+      this.lastCart,
+      this.addToCart,
+      this.addActivity})
       : super(key: key);
 
   @override
@@ -73,6 +96,9 @@ class _CustomHistoryButtonState extends State<CustomHistoryButton> {
               builder: (context) => SearchResultScreen(
                 query: widget.text,
                 addSearchHistory: widget.addHistory,
+                addToCart: widget.addToCart,
+                lastCart: widget.lastCart,
+                addActivity: widget.addActivity,
               ),
             ));
       },

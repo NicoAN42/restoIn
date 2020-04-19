@@ -138,13 +138,15 @@ class CustomSearchField extends StatefulWidget {
   final Cart lastCart;
   final Function addSearchHistory;
   final bool isPop;
+  final Function addActivity;
 
   CustomSearchField(
       {this.controller,
       this.addToCart,
       this.lastCart,
       this.addSearchHistory,
-      this.isPop = true});
+      this.isPop = true,
+      this.addActivity});
 
   @override
   _CustomSearchFieldState createState() => new _CustomSearchFieldState();
@@ -182,9 +184,11 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
               context,
               MaterialPageRoute(
                 builder: (context) => SearchResultScreen(
-                    query: str,
-                    addToCart: widget.addToCart,
-                    lastCart: widget.lastCart),
+                  query: str,
+                  addToCart: widget.addToCart,
+                  lastCart: widget.lastCart,
+                  addActivity: widget.addActivity,
+                ),
               ));
         }
       },

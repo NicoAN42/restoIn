@@ -158,7 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => FavoriteScreen(
-                                  addToCart: _addToCart, lastCart: _curCart))),
+                                    addToCart: _addToCart,
+                                    lastCart: _curCart,
+                                    addActivity: _addActivity,
+                                  ))),
                       child: Container(
                         child: Image.asset('assets/icon/fav.png',
                             width: 20, height: 20),
@@ -191,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             _deleteSearchHistory,
                                         clearSearchHistory: _clearSearchHistory,
                                         getSearchHistory: _getSearchHistory,
+                                        addActivity: _addActivity,
                                       ))),
                           child: Row(children: <Widget>[
                             Padding(
@@ -212,6 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     addToCart: _addToCart,
                                     lastCart: _curCart,
                                     addSearchHistory: _addSearchHistory,
+                                    addActivity: _addActivity,
                                   ))),
                       child: Container(
                         child: Image.asset('assets/icon/g_filter.png',
@@ -393,6 +398,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       addToCart: _addToCart,
                                       lastCart: _curCart,
                                       r: restoList[0],
+                                      addActivity: _addActivity,
                                     ))),
                         child: Stack(
                           children: <Widget>[
@@ -525,6 +531,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       addToCart: _addToCart,
                                       lastCart: _curCart,
                                       r: restoList[1],
+                                      addActivity: _addActivity,
                                     ))),
                         child: Stack(
                           children: <Widget>[
@@ -657,6 +664,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       addToCart: _addToCart,
                                       lastCart: _curCart,
                                       r: restoList[3],
+                                      addActivity: _addActivity,
                                     ))),
                         child: Stack(
                           children: <Widget>[
@@ -798,6 +806,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       addToCart: _addToCart,
                                       lastCart: _curCart,
                                       r: restoList[1],
+                                      addActivity: _addActivity,
                                     ))),
                         child: Stack(
                           children: <Widget>[
@@ -1036,6 +1045,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     addToCart: _addToCart,
                                     lastCart: _curCart,
                                     r: restoList[2],
+                                    addActivity: _addActivity,
                                   ))),
                       child: Stack(
                         children: <Widget>[
@@ -1136,6 +1146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     addToCart: _addToCart,
                                     lastCart: _curCart,
                                     r: restoList[4],
+                                    addActivity: _addActivity,
                                   ))),
                       child: Stack(
                         children: <Widget>[
@@ -1246,6 +1257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     addToCart: _addToCart,
                                     lastCart: _curCart,
                                     r: restoList[5],
+                                    addActivity: _addActivity,
                                   ))),
                       child: Stack(
                         children: <Widget>[
@@ -1408,6 +1420,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     addToCart: _addToCart,
                                     lastCart: _curCart,
                                     r: restoList[3],
+                                    addActivity: _addActivity,
                                   ))),
                       child: Stack(
                         children: <Widget>[
@@ -1508,6 +1521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     addToCart: _addToCart,
                                     lastCart: _curCart,
                                     r: restoList[5],
+                                    addActivity: _addActivity,
                                   ))),
                       child: Stack(
                         children: <Widget>[
