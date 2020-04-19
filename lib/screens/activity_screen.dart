@@ -5,7 +5,6 @@ import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/screens/change_order_type_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'notification_screen.dart';
 import 'order_receipt_screen.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/models/cart.dart';
-import 'package:restoin/models/food.dart';
 import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
