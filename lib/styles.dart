@@ -13,9 +13,24 @@ abstract class Styles {
   static const Color green = Color(0xFF1DDB00);
   static const Color red = Color(0xFFDB0000);
 
-  static bool isSmall = false;
-  static void editSize() {
-    isSmall = !isSmall;
+  static TextStyle smCustomStyle(String s) {
+    s = s.toLowerCase();
+    double size;
+    Color color;
+    FontWeight weight = FontWeight.w500;
+    TextDecoration deco = TextDecoration.none;
+
+    if (s.contains("small"))
+      size = 10;
+    else if (s.contains("mid"))
+      size = 12;
+    else if (s.contains("medium"))
+      size = 14;
+    else if (s.contains("xlarge"))
+      size = 33;
+    else if (s.contains("larger"))
+      size = 24;
+    else if (s.contains("large")) size = 18;
   }
 
   static TextStyle customStyle(String s) {
@@ -25,17 +40,29 @@ abstract class Styles {
     FontWeight weight = FontWeight.w500;
     TextDecoration deco = TextDecoration.none;
 
-    if (s.contains("small"))
-      isSmall ? size = 10 : size = 12;
+    if (s.contains("smssmall"))
+      size = 10;
+    else if (s.contains("smsmid"))
+      size = 12;
+    else if (s.contains("smsmedium"))
+      size = 14;
+    else if (s.contains("smsxlarge"))
+      size = 33;
+    else if (s.contains("smslarger"))
+      size = 24;
+    else if (s.contains("smslarge"))
+      size = 18;
+    else if (s.contains("small"))
+      size = 12;
     else if (s.contains("mid"))
-      isSmall ? size = 12 : size = 14;
+      size = 14;
     else if (s.contains("medium"))
-      isSmall ? size = 14 : size = 16;
+      size = 16;
     else if (s.contains("xlarge"))
-      isSmall ? size = 33 : size = 37;
+      size = 37;
     else if (s.contains("larger"))
-      isSmall ? size = 24 : size = 28;
-    else if (s.contains("large")) isSmall ? size = 18 : size = 21;
+      size = 28;
+    else if (s.contains("large")) size = 21;
 
     if (s.contains("white"))
       color = Colors.white;

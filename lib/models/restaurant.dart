@@ -81,6 +81,11 @@ class Restaurant {
     );
   }
 
+  String getType() {
+    if (type.length == 1) return "${type[0]}";
+    return "${type[0]}    ${type[1]}";
+  }
+
   Column getDistanceText() {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.end,

@@ -219,20 +219,16 @@ class CustomRestoRecommendedTile extends StatefulWidget {
 
 class _CustomRestoRecommendedTileState
     extends State<CustomRestoRecommendedTile> {
+  bool isSmall = false;
   @override
   void initState() {
-    super.initState();
-    if (widget.screenWidth < 390.0) Styles.editSize();
-  }
+    if (widget.screenWidth < 390.0) isSmall = true;
 
-  Future<void> execAfterBuild() async {
-    Styles.editSize();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    execAfterBuild();
-
     return GestureDetector(
       onTap: () => Navigator.push(
           context,
@@ -275,19 +271,30 @@ class _CustomRestoRecommendedTileState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text("${widget.r.name}",
-                                style: Styles.customStyle("mediumBlack")),
+                                style: isSmall
+                                    ? Styles.customStyle("smsmediumBlack")
+                                    : Styles.customStyle("mediumBlack")),
                             Row(
                               children: <Widget>[
                                 Text("${widget.r.getRating()}",
-                                    style:
-                                        Styles.customStyle("mediumBoldOrange")),
+                                    style: isSmall
+                                        ? Styles.customStyle(
+                                            "smsmediumBoldOrange")
+                                        : Styles.customStyle(
+                                            "mediumBoldOrange")),
                                 Image.asset("assets/icon/o_star.png",
                                     width: 16, height: 16),
                               ],
                             )
                           ]),
-                      widget.r.getTimeText(),
-                      widget.r.getTypeText(),
+                      Text(widget.r.getTime(),
+                          style: isSmall
+                              ? Styles.customStyle("smssmallBlack")
+                              : Styles.customStyle("smallBlack")),
+                      Text(widget.r.getType(),
+                          style: isSmall
+                              ? Styles.customStyle("smssmallGrey")
+                              : Styles.customStyle("smallGrey")),
                     ],
                   ),
                 ),
@@ -299,8 +306,13 @@ class _CustomRestoRecommendedTileState
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text("${widget.r.distance}",
-                            style: Styles.customStyle("largeBoldBlack")),
-                        Text("KM", style: Styles.customStyle("mediumBlack")),
+                            style: isSmall
+                                ? Styles.customStyle("smslargeBoldBlack")
+                                : Styles.customStyle("largeBoldBlack")),
+                        Text("KM",
+                            style: isSmall
+                                ? Styles.customStyle("smsmediumBlack")
+                                : Styles.customStyle("mediumBlack")),
                       ]),
                   decoration: BoxDecoration(
                     border: Border(left: BorderSide(color: Styles.gray)),
