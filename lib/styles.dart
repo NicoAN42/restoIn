@@ -13,26 +13,6 @@ abstract class Styles {
   static const Color green = Color(0xFF1DDB00);
   static const Color red = Color(0xFFDB0000);
 
-  static TextStyle smCustomStyle(String s) {
-    s = s.toLowerCase();
-    double size;
-    Color color;
-    FontWeight weight = FontWeight.w500;
-    TextDecoration deco = TextDecoration.none;
-
-    if (s.contains("small"))
-      size = 10;
-    else if (s.contains("mid"))
-      size = 12;
-    else if (s.contains("medium"))
-      size = 14;
-    else if (s.contains("xlarge"))
-      size = 33;
-    else if (s.contains("larger"))
-      size = 24;
-    else if (s.contains("large")) size = 18;
-  }
-
   static TextStyle customStyle(String s) {
     s = s.toLowerCase();
     double size;
