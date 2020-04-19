@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:restoin/models/cart.dart';
 import 'package:restoin/screens/change_order_type_screen.dart';
+import 'package:restoin/screens/my_voucher_screen.dart';
 import 'package:restoin/screens/notification_screen.dart';
 import 'package:restoin/screens/profile_screen.dart';
+import 'package:restoin/screens/scan_qr_screen.dart';
+import 'package:restoin/screens/top_up_screen.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/widgets/upload_icon_icons.dart';
 
 import 'activity_screen.dart';
 
@@ -78,99 +82,120 @@ class _WalletScreenState extends State<WalletScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Container(
-                            width: screenHeight * 0.08,
-                            height: screenHeight * 0.08,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(screenHeight * 0.015),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Styles.lightGray,
-                                  blurRadius:
-                                      9, // has the effect of softening the shadow
-                                  spreadRadius:
-                                      3, // has the effect of extending the shadow
-                                  offset: Offset(
-                                    0, // horizontal, move right 10
-                                    0, // vertical, move down 10
-                                  ),
-                                )
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.upload,
-                                    color: Color(0xFFFF6D00),
-                                    size: screenHeight * 0.04),
-                                Text("Pay",
-                                    style: Styles.customStyle("midorange"))
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: screenHeight * 0.08,
-                            height: screenHeight * 0.08,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(screenHeight * 0.015),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Styles.lightGray,
-                                  blurRadius:
-                                      9, // has the effect of softening the shadow
-                                  spreadRadius:
-                                      3, // has the effect of extending the shadow
-                                  offset: Offset(
-                                    0, // horizontal, move right 10
-                                    0, // vertical, move down 10
-                                  ),
-                                )
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.plus,
-                                    color: Color(0xFFFF6D00),
-                                    size: screenHeight * 0.04),
-                                Text("Top Up",
-                                    style: Styles.customStyle("midorange"))
-                              ],
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ScanQRScreen())),
+                            child: Container(
+                              width: screenHeight * 0.08,
+                              height: screenHeight * 0.08,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(screenHeight * 0.015),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Styles.gray,
+                                    blurRadius:
+                                        9, // has the effect of softening the shadow
+                                    spreadRadius:
+                                        1, // has the effect of extending the shadow
+                                    offset: Offset(
+                                      0, // horizontal, move right 10
+                                      0, // vertical, move down 10
+                                    ),
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Icon(UploadIcon.upload,
+                                      color: Color(0xFFFF6D00),
+                                      size: screenHeight * 0.04),
+                                  Text("Pay",
+                                      style: Styles.customStyle("midorange"))
+                                ],
+                              ),
                             ),
                           ),
-                          Container(
-                            width: screenHeight * 0.08,
-                            height: screenHeight * 0.08,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(screenHeight * 0.015),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Styles.lightGray,
-                                  blurRadius:
-                                      9, // has the effect of softening the shadow
-                                  spreadRadius:
-                                      3, // has the effect of extending the shadow
-                                  offset: Offset(
-                                    0, // horizontal, move right 10
-                                    0, // vertical, move down 10
-                                  ),
-                                )
-                              ],
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TopUpScreen())),
+                            child: Container(
+                              width: screenHeight * 0.08,
+                              height: screenHeight * 0.08,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(screenHeight * 0.015),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Styles.gray,
+                                    blurRadius:
+                                        9, // has the effect of softening the shadow
+                                    spreadRadius:
+                                        1, // has the effect of extending the shadow
+                                    offset: Offset(
+                                      0, // horizontal, move right 10
+                                      0, // vertical, move down 10
+                                    ),
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Icon(FontAwesomeIcons.plus,
+                                      color: Color(0xFFFF6D00),
+                                      size: screenHeight * 0.04),
+                                  Text("Top Up",
+                                      style: Styles.customStyle("midorange"))
+                                ],
+                              ),
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Image.asset("assets/icon/o_voucher.png",
-                                    height: screenHeight * 0.04),
-                                Text("Voucher",
-                                    style: Styles.customStyle("midorange"))
-                              ],
+                          ),
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyVoucherScreen())),
+                            child: Container(
+                              width: screenHeight * 0.08,
+                              height: screenHeight * 0.08,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(screenHeight * 0.015),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Styles.gray,
+                                    blurRadius:
+                                        9, // has the effect of softening the shadow
+                                    spreadRadius:
+                                        1, // has the effect of extending the shadow
+                                    offset: Offset(
+                                      0, // horizontal, move right 10
+                                      0, // vertical, move down 10
+                                    ),
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Image.asset("assets/icon/o_voucher.png",
+                                      height: screenHeight * 0.04),
+                                  Text("Voucher",
+                                      style: Styles.customStyle("midorange"))
+                                ],
+                              ),
                             ),
                           )
                         ],

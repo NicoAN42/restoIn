@@ -105,15 +105,12 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                 ),
                 SizedBox(height: 5),
                 Container(
-                  width: screenWidth * 0.5,
-                  child: widget.f.name == "Chunky Pie"
-                      ? Text(
-                          "Chocolate, milk, cream, waffle, honey",
-                          style: Styles.customStyle("mediumlightGray"),
-                          textAlign: TextAlign.center,
-                        )
-                      : Text(""),
-                )
+                    width: screenWidth * 0.6,
+                    child: Text(
+                      widget.f.desc,
+                      style: Styles.customStyle("mediumlightGray"),
+                      textAlign: TextAlign.center,
+                    ))
               ],
             ),
           ),

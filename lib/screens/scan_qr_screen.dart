@@ -44,19 +44,24 @@ class ScanQRScreen extends StatelessWidget {
                 )),
             Positioned(
                 top: screenHeight * 0.35,
-                left: (screenWidth - screenHeight * 0.15) / 2,
+                left: (screenWidth - screenHeight * 0.25) / 2,
                 child: Container(
-                  height: screenHeight * 0.15,
-                  width: screenHeight * 0.15,
+                  height: screenHeight * 0.25,
+                  width: screenHeight * 0.25,
                   color: Styles.gray,
-                  child: Text("#AREASCAN",
-                      style: Styles.customStyle("largeOrange")),
+                  child: Text(
+                    "#AREASCAN",
+                    style: Styles.customStyle("largeOrange"),
+                    textAlign: TextAlign.center,
+                  ),
                 )),
             Positioned(
                 bottom: screenHeight * 0.1,
+                left: screenWidth / 2 - 20,
                 child: Icon(
                   FontAwesomeIcons.camera,
                   color: Styles.orange,
+                  size: 40,
                 ))
           ],
         ),

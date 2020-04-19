@@ -30,7 +30,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: SingleChildScrollView(
           child: Container(
         padding: EdgeInsets.fromLTRB(
-            screenWidth * 0.05, screenWidth * 0.1, screenWidth * 0.05, 0),
+            screenWidth * 0.05, screenWidth * 0.15, screenWidth * 0.05, 0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
             Widget>[
           Container(

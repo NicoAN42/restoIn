@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SingleChildScrollView(
           child: Container(
         padding: EdgeInsets.fromLTRB(
-            screenWidth * 0.05, screenWidth * 0.1, screenWidth * 0.05, 0),
+            screenWidth * 0.05, screenWidth * 0.15, screenWidth * 0.05, 0),
         width: screenWidth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -566,6 +566,9 @@ class LogoutPopUp extends StatelessWidget {
                     padding: EdgeInsets.only(
                         left: 40, top: 10, right: 40, bottom: 10),
                     onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.pop(context);
                       Navigator.pushReplacementNamed(context, "/");
                     },
                     child:

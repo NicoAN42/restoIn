@@ -54,12 +54,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(FontAwesomeIcons.angleLeft,
-                          color: Colors.black, size: 28)),
+                  Container(),
                   Text("Notification",
                       style: Styles.customStyle("largeboldblack")),
                   GestureDetector(

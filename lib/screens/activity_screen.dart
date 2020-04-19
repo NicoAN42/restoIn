@@ -62,18 +62,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
               child: Stack(
                 children: <Widget>[
                   Container(width: screenWidth, height: 20),
-                  Positioned(
-                    child: GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Container(
-                        child: new Icon(
-                          FontAwesomeIcons.angleLeft,
-                          color: Styles.black,
-                          size: 28,
-                        ),
-                      ),
-                    ),
-                  ),
                   Align(
                     child: Text(
                       "Activity",

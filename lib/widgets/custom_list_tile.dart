@@ -34,17 +34,17 @@ class _CustomRestoTileState extends State<CustomRestoTile> {
           height: 12, width: widget.screenWidth * 0.9, color: Styles.white),
       GestureDetector(
         onTap: () => {
-          if (!widget.r.isClosed)
-            {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RestoMenuScreen(
-                            addToCart: widget.addToCart,
-                            r: widget.r,
-                            lastCart: widget.lastCart,
-                          )))
-            }
+          // if (!widget.r.isClosed)
+          {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => RestoMenuScreen(
+                          addToCart: widget.addToCart,
+                          r: widget.r,
+                          lastCart: widget.lastCart,
+                        )))
+          }
         },
         child: Container(
             width: widget.screenWidth * 0.9,
@@ -220,7 +220,19 @@ class CustomRestoRecommendedTile extends StatefulWidget {
 class _CustomRestoRecommendedTileState
     extends State<CustomRestoRecommendedTile> {
   @override
+  void initState() {
+    super.initState();
+    if (widget.screenWidth < 390.0) Styles.editSize();
+  }
+
+  Future<void> execAfterBuild() async {
+    Styles.editSize();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    execAfterBuild();
+
     return GestureDetector(
       onTap: () => Navigator.push(
           context,

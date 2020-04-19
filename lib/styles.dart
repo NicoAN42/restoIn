@@ -13,10 +13,10 @@ abstract class Styles {
   static const Color green = Color(0xFF1DDB00);
   static const Color red = Color(0xFFDB0000);
 
-  // static const TextStyle mediumGray = TextStyle(
-  //   fontSize: 16,
-  //   color: gray,
-  // );
+  static bool isSmall = false;
+  static void editSize() {
+    isSmall = !isSmall;
+  }
 
   static TextStyle customStyle(String s) {
     s = s.toLowerCase();
@@ -26,16 +26,16 @@ abstract class Styles {
     TextDecoration deco = TextDecoration.none;
 
     if (s.contains("small"))
-      size = 12;
+      isSmall ? size = 10 : size = 12;
     else if (s.contains("mid"))
-      size = 14;
+      isSmall ? size = 12 : size = 14;
     else if (s.contains("medium"))
-      size = 16;
+      isSmall ? size = 14 : size = 16;
     else if (s.contains("xlarge"))
-      size = 37;
+      isSmall ? size = 33 : size = 37;
     else if (s.contains("larger"))
-      size = 28;
-    else if (s.contains("large")) size = 21;
+      isSmall ? size = 24 : size = 28;
+    else if (s.contains("large")) isSmall ? size = 18 : size = 21;
 
     if (s.contains("white"))
       color = Colors.white;

@@ -30,38 +30,43 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
   int menu;
   Future _getMenu;
   Cart _curCart = new Cart();
+  List<bool> pressedList = [true, false, false, false, false];
 
   List<FlatButton> createCategory() {
-    List<bool> pressedList = [false, false, false, false, false];
     List<FlatButton> list = new List();
     TextStyle bold = Styles.customStyle("mediumBoldBlack");
     TextStyle normal = Styles.customStyle("mediumBlack");
 
     list.add(new FlatButton(
         onPressed: () => setState(() {
+              pressedList = [false, false, false, false, false];
               pressedList[0] = !pressedList[0];
             }),
         child: Text("Recommended", style: pressedList[0] ? bold : normal)));
     list.add(new FlatButton(
         onPressed: () => setState(() {
+              pressedList = [false, false, false, false, false];
               pressedList[1] = !pressedList[1];
             }),
-        child: Text("Main", style: pressedList[0] ? bold : normal)));
+        child: Text("Main", style: pressedList[1] ? bold : normal)));
     list.add(new FlatButton(
         onPressed: () => setState(() {
+              pressedList = [false, false, false, false, false];
               pressedList[2] = !pressedList[2];
             }),
-        child: Text("Dessert", style: pressedList[0] ? bold : normal)));
+        child: Text("Dessert", style: pressedList[2] ? bold : normal)));
     list.add(new FlatButton(
         onPressed: () => setState(() {
+              pressedList = [false, false, false, false, false];
               pressedList[3] = !pressedList[3];
             }),
-        child: Text("Lunch", style: pressedList[0] ? bold : normal)));
+        child: Text("Lunch", style: pressedList[3] ? bold : normal)));
     list.add(new FlatButton(
         onPressed: () => setState(() {
+              pressedList = [false, false, false, false, false];
               pressedList[4] = !pressedList[4];
             }),
-        child: Text("Breakfast", style: pressedList[0] ? bold : normal)));
+        child: Text("Breakfast", style: pressedList[4] ? bold : normal)));
     return list;
   }
 
@@ -76,12 +81,12 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
       DocumentSnapshot food = foodList[i];
       if (widget.r.menu.contains(food.documentID)) {
         widget.r.featuredFoods.add(new Food(
-          image: food["image"],
-          name: food["name"],
-          price: food["price"],
-          type: food["type"].cast<String>(),
-          rating: food["rating"].cast<double>(),
-        ));
+            image: food["image"],
+            name: food["name"],
+            price: food["price"],
+            type: food["type"].cast<String>(),
+            rating: food["rating"].cast<double>(),
+            desc: food["desc"]));
       }
     }
     return "done";
@@ -258,6 +263,7 @@ class _RestoMenuScreenState extends State<RestoMenuScreen> {
                                     image: widget.r.featuredFoods[index].image,
                                     name: widget.r.featuredFoods[index].name,
                                     price: widget.r.featuredFoods[index].price,
+                                    desc: widget.r.featuredFoods[index].desc,
                                     screenWidth: screenWidth,
                                   ),
                                 );
@@ -329,10 +335,11 @@ class RestoMenuSection extends StatefulWidget {
   final String image;
   final String name;
   final int price;
+  final String desc;
   final double screenWidth;
 
   const RestoMenuSection(
-      {Key key, this.image, this.name, this.price, this.screenWidth})
+      {Key key, this.image, this.name, this.price, this.screenWidth, this.desc})
       : super(key: key);
   @override
   _RestoMenuSectionState createState() => _RestoMenuSectionState();
@@ -341,18 +348,6 @@ class RestoMenuSection extends StatefulWidget {
 class _RestoMenuSectionState extends State<RestoMenuSection> {
   final formatter =
       NumberFormat.currency(locale: "id", symbol: "", decimalDigits: 0);
-  String desc = "";
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.name == "Chunky Pie")
-      desc = "Chocolate, milk, cream, waffle, honey";
-    else if (widget.name == "F' Bread")
-      desc = "Tofu, garlic, chicken, egg, mayo";
-    else if (widget.name == "Eggplant Curry")
-      desc = "Egg, garlic, chicken, curry, rice, eggplant";
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -391,8 +386,7 @@ class _RestoMenuSectionState extends State<RestoMenuSection> {
                     Container(
                       width: widget.screenWidth * 0.4,
                       child: Text(
-                        // widget.desc,
-                        desc,
+                        widget.desc,
                         style: Styles.customStyle("smallgray"),
                       ),
                     ),

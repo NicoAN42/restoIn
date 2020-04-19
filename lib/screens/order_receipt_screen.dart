@@ -279,7 +279,7 @@ class OrderReceiptSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text("Total", style: Styles.customStyle("largeboldblack")),
-                Text("IDR ${cart.getPrice()}",
+                Text("IDR ${cart.getTotal()}",
                     style: Styles.customStyle("largeboldblack"))
               ],
             ),

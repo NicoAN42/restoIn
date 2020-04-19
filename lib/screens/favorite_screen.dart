@@ -1,14 +1,115 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:restoin/models/cart.dart';
+import 'package:restoin/models/food.dart';
+import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/styles.dart';
 import 'package:flutter/rendering.dart';
+import 'package:restoin/widgets/custom_list_tile.dart';
 
 class FavoriteScreen extends StatefulWidget {
+  final Function addToCart;
+  final Cart lastCart;
+
+  const FavoriteScreen({Key key, this.addToCart, this.lastCart})
+      : super(key: key);
+
   @override
   _FavoriteScreenState createState() => _FavoriteScreenState();
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+  List<Restaurant> restoList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    restoList.clear();
+    restoList.add(new Restaurant(
+      image: "assets/restaurant/louiseBranz.jpg",
+      rating: [4.9],
+      name: "Louise Branz",
+      open: "7am",
+      close: "11pm",
+      location: "No. 17 Large River, Tangerang",
+      type: ["Western", "Indonesian"],
+      distance: 4,
+      featuredFoods: [
+        // new Food(
+        //     image: "assets/food/louise_branz/chunkypie.jpg",
+        //     name: "Chunky Pie",
+        //     price: 75000,
+        //     type: ["Western"],
+        //     rating: [5.0]),
+        // new Food(
+        //     image: "assets/food/louise_branz/fbread.jpg",
+        //     name: "F' Bread Tofu",
+        //     price: 35000,
+        //     type: ["Western"],
+        //     rating: [5.0]),
+      ],
+      menu: [
+        '9CHK8MuV2qxPwYtEs9zV',
+        'wh257CI3uoUnEoRBGEUx',
+        'DTSCBAOpBIX26aEaufra',
+        'Gn6mEWodhOPwHGqlJTUx',
+        'vXD1EroLdRF1y88AReyn'
+      ],
+    ));
+    restoList.add(new Restaurant(
+      image: "assets/restaurant/geraldVenue.jpg",
+      rating: [4.9],
+      name: "Gerald Venue",
+      open: "10am",
+      close: "10pm",
+      location: "Plaza Terra, Fl. 5, Bandung",
+      type: ["Western", "Soup"],
+      distance: 9.3,
+      featuredFoods: [
+        // new Food(
+        //     image: "assets/food/gerald_venue/frutelamina.jpg",
+        //     name: "Frute La Mina",
+        //     price: 195000,
+        //     type: ["Western", "Breakfast"],
+        //     rating: [4.9]),
+      ],
+      menu: [
+        '3A0UPfIJD9rp2cpv9EmL',
+        'Jr4PFBmnWXwUrD1FLzCH',
+        'cv4g1TC8omRuoVJKvBFu',
+        'ieQkZ9qtKCMCMDTM9vjz',
+        'uDgDI6ZoXfj2DLK9wE7e',
+        'yJO2TQGpQhmFlpfMlTQw'
+      ],
+    ));
+    restoList.add(new Restaurant(
+      image: "assets/restaurant/queenRe.png",
+      rating: [4.9],
+      name: "Queen Re",
+      open: "7am",
+      close: "11pm",
+      location: "No. 11 Long River, Banten",
+      type: ["Western", "Indonesian"],
+      distance: 15,
+      featuredFoods: [
+        // new Food(
+        //     image: "assets/food/queen_re/mackcorne.jpg",
+        //     name: "Mack Corne",
+        //     price: 75000,
+        //     type: ["Western", "Indonesian"],
+        //     rating: [5.0]),
+      ],
+      menu: [
+        'OXe0uNdq3hTQstRckPsQ',
+        '1h8ASbuWUpVLaARmFnrH',
+        'CzP0c6EkUAEWJ7S9M1Cp',
+        'fgkinwiCHxwecIkbyWQk',
+        'mCTGv8GysJrzcXAzIenL',
+        'yCiIo7xrmeLhfSSkZgZm'
+      ],
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -51,776 +152,22 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
             // Content
             Container(
-                color: Color(0xFFF7F7F7),
-                child: Column(
-                  children: <Widget>[
-                    // Restaurant 1
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(top: 10),
-                      child: Column(
-                        children: <Widget>[
-                          // Favorite's Content
-                          Container(
-                            padding: EdgeInsets.fromLTRB(
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05),
-                            child: Column(
-                              children: <Widget>[
-                                Stack(
-                                  children: <Widget>[
-                                    Container(
-                                      width: screenWidth * 0.9,
-                                      height: screenWidth * 0.22,
-                                    ),
-                                    Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        child: Stack(
-                                          children: <Widget>[
-                                            // Restaurant Image
-                                            Container(
-                                                width: screenWidth * 0.22 + 4,
-                                                height: screenWidth * 0.22),
-                                            Positioned(
-                                                left: 4,
-                                                child: Container(
-                                                  width: screenWidth * 0.22,
-                                                  height: screenWidth * 0.22,
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            "assets/restaurant/chineseResident.png"),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  8.0))),
-                                                )),
-                                            Positioned(
-                                              top: 10,
-                                              left: 0,
-                                              child: Container(
-                                                  width: 40,
-                                                  height: 18,
-                                                  child: Image.asset(
-                                                      "assets/icon/rating_page.png")),
-                                            ),
-                                            Positioned(
-                                              top: 11,
-                                              left: 3,
-                                              child: Container(
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      "4.9 ",
-                                                      style: Styles.customStyle(
-                                                          "smallwhite"),
-                                                    ),
-                                                    Image.asset(
-                                                        "assets/icon/w_star.png",
-                                                        width: 12,
-                                                        height: 12)
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            // End of image
-                                          ],
-                                        )),
-                                    // Text
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        left: screenWidth * 0.22 + 20,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              "Kung Fa Pan",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack"),
-                                            ),
-                                            Text("Open 7am - 11pm",
-                                                style: Styles.customStyle(
-                                                    "smallblack")),
-                                            Text(
-                                                "No. 20 Queen Street, Tangerang",
-                                                style: Styles.customStyle(
-                                                    "smallgray")),
-                                            Text(
-                                              "Thailand Chinese",
-                                              style: Styles.customStyle(
-                                                  "smallgray"),
-                                            )
-                                          ],
-                                        )),
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        right: 0,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Column(
-                                              children: <Widget>[
-                                                Text("40",
-                                                    style: Styles.customStyle(
-                                                        "mediumboldblack")),
-                                                Text("KM",
-                                                    style: Styles.customStyle(
-                                                        "smallblack")),
-                                              ],
-                                            ),
-                                            Image.asset("assets/icon/fav.png",
-                                                width: 18, height: 18)
-                                          ],
-                                        )),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ), // End of Favorite Content
-                        ],
-                      ),
-                    ),
-
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(top: 10),
-                      child: Column(
-                        children: <Widget>[
-                          // Favorite's Content
-                          Container(
-                            padding: EdgeInsets.fromLTRB(
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05),
-                            child: Column(
-                              children: <Widget>[
-                                Stack(
-                                  children: <Widget>[
-                                    Container(
-                                      width: screenWidth * 0.9,
-                                      height: screenWidth * 0.22,
-                                    ),
-                                    Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        child: Stack(
-                                          children: <Widget>[
-                                            // Restaurant Image
-                                            Container(
-                                                width: screenWidth * 0.22 + 4,
-                                                height: screenWidth * 0.22),
-                                            Positioned(
-                                                left: 4,
-                                                child: Container(
-                                                  width: screenWidth * 0.22,
-                                                  height: screenWidth * 0.22,
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            "assets/restaurant/louiseBranz.jpg"),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  8.0))),
-                                                )),
-                                            Positioned(
-                                              top: 10,
-                                              left: 0,
-                                              child: Container(
-                                                  width: 40,
-                                                  height: 18,
-                                                  child: Image.asset(
-                                                      "assets/icon/rating_page.png")),
-                                            ),
-                                            Positioned(
-                                              top: 11,
-                                              left: 3,
-                                              child: Container(
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      "4.9 ",
-                                                      style: Styles.customStyle(
-                                                          "smallwhite"),
-                                                    ),
-                                                    Image.asset(
-                                                        "assets/icon/w_star.png",
-                                                        width: 12,
-                                                        height: 12)
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            // End of image
-                                          ],
-                                        )),
-                                    // Text
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        left: screenWidth * 0.22 + 20,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              "Louise Branz",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack"),
-                                            ),
-                                            Text("Open 7am - 11pm",
-                                                style: Styles.customStyle(
-                                                    "smallblack")),
-                                            Text(
-                                                "No. 17 Large River, Tangerang",
-                                                style: Styles.customStyle(
-                                                    "smallgray")),
-                                            Text(
-                                              "Western Indonesian",
-                                              style: Styles.customStyle(
-                                                  "smallgray"),
-                                            )
-                                          ],
-                                        )),
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        right: 0,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Column(
-                                              children: <Widget>[
-                                                Text("40",
-                                                    style: Styles.customStyle(
-                                                        "mediumboldblack")),
-                                                Text("KM",
-                                                    style: Styles.customStyle(
-                                                        "smallblack")),
-                                              ],
-                                            ),
-                                            Image.asset("assets/icon/fav.png",
-                                                width: 18, height: 18)
-                                          ],
-                                        )),
-                                  ],
-                                ),
-
-                                // Food from Restaurant
-                                Container(
-                                  padding:
-                                      EdgeInsets.only(top: screenWidth * 0.05),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Container(
-                                        width: screenWidth * 0.9,
-                                        height: screenWidth * 0.14,
-                                      ),
-                                      Positioned(
-                                          left: screenWidth * 0.18,
-                                          child: Container(
-                                            width: screenWidth * 0.14,
-                                            height: screenWidth * 0.14,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                      "assets/food/louise_branz/chunkypie.jpg"),
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8.0))),
-                                          )),
-                                      Positioned(
-                                          left: screenWidth * 0.32 + 20,
-                                          height: screenWidth * 0.14,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Row(
-                                                children: <Widget>[
-                                                  Text(
-                                                    "Chunky Pie  ",
-                                                    style: Styles.customStyle(
-                                                        "mediumblack"),
-                                                  ),
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            4, 2, 4, 2),
-                                                    child: Text(
-                                                      "5.0",
-                                                      style: Styles.customStyle(
-                                                          "smallboldwhite"),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  4)),
-                                                      color: Styles.orange,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text("IDR 75.000",
-                                                  style: Styles.customStyle(
-                                                      "smallblack")),
-                                              Text(
-                                                "Western",
-                                                style: Styles.customStyle(
-                                                    "smallgray"),
-                                              )
-                                            ],
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  padding:
-                                      EdgeInsets.only(top: screenWidth * 0.05),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Container(
-                                        width: screenWidth * 0.9,
-                                        height: screenWidth * 0.14,
-                                      ),
-                                      Positioned(
-                                          left: screenWidth * 0.18,
-                                          child: Container(
-                                            width: screenWidth * 0.14,
-                                            height: screenWidth * 0.14,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                      "assets/food/louise_branz/fbread.jpg"),
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8.0))),
-                                          )),
-                                      Positioned(
-                                          left: screenWidth * 0.32 + 20,
-                                          height: screenWidth * 0.14,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Row(
-                                                children: <Widget>[
-                                                  Text(
-                                                    "F' Bread Tofu  ",
-                                                    style: Styles.customStyle(
-                                                        "mediumblack"),
-                                                  ),
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            4, 2, 4, 2),
-                                                    child: Text(
-                                                      "5.0",
-                                                      style: Styles.customStyle(
-                                                          "smallboldwhite"),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  4)),
-                                                      color: Styles.orange,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text("IDR 35.000",
-                                                  style: Styles.customStyle(
-                                                      "smallblack")),
-                                              Text(
-                                                "Western Indonesian",
-                                                style: Styles.customStyle(
-                                                    "smallgray"),
-                                              )
-                                            ],
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                // End of Food Content
-                              ],
-                            ),
-                          ), // End of Favorite Content
-                        ],
-                      ),
-                    ),
-
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(top: 10),
-                      child: Column(
-                        children: <Widget>[
-                          // Favorite's Content
-                          Container(
-                            padding: EdgeInsets.fromLTRB(
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05),
-                            child: Column(
-                              children: <Widget>[
-                                Stack(
-                                  children: <Widget>[
-                                    Container(
-                                      width: screenWidth * 0.9,
-                                      height: screenWidth * 0.22,
-                                    ),
-                                    Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        child: Stack(
-                                          children: <Widget>[
-                                            // Restaurant Image
-                                            Container(
-                                                width: screenWidth * 0.22 + 4,
-                                                height: screenWidth * 0.22),
-                                            Positioned(
-                                                left: 4,
-                                                child: Container(
-                                                  width: screenWidth * 0.22,
-                                                  height: screenWidth * 0.22,
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            "assets/restaurant/hakagureRamen.jpg"),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  8.0))),
-                                                )),
-                                            Positioned(
-                                              top: 10,
-                                              left: 0,
-                                              child: Container(
-                                                  width: 40,
-                                                  height: 18,
-                                                  child: Image.asset(
-                                                      "assets/icon/rating_page.png")),
-                                            ),
-                                            Positioned(
-                                              top: 11,
-                                              left: 3,
-                                              child: Container(
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      "4.9 ",
-                                                      style: Styles.customStyle(
-                                                          "smallwhite"),
-                                                    ),
-                                                    Image.asset(
-                                                        "assets/icon/w_star.png",
-                                                        width: 12,
-                                                        height: 12)
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            // End of image
-                                          ],
-                                        )),
-                                    // Text
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        left: screenWidth * 0.22 + 20,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              "Hakagure Ramen",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack"),
-                                            ),
-                                            Text("Open 10am - 10pm",
-                                                style: Styles.customStyle(
-                                                    "smallblack")),
-                                            Text("No. 61 Tokyo Ghoul, Sentul",
-                                                style: Styles.customStyle(
-                                                    "smallgray")),
-                                            Text(
-                                              "Japanese",
-                                              style: Styles.customStyle(
-                                                  "smallgray"),
-                                            )
-                                          ],
-                                        )),
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        right: 0,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Column(
-                                              children: <Widget>[
-                                                Text("30",
-                                                    style: Styles.customStyle(
-                                                        "mediumboldblack")),
-                                                Text("KM",
-                                                    style: Styles.customStyle(
-                                                        "smallblack")),
-                                              ],
-                                            ),
-                                            Image.asset("assets/icon/fav.png",
-                                                width: 18, height: 18)
-                                          ],
-                                        )),
-                                  ],
-                                ),
-
-                                // Food from Restaurant
-                                Container(
-                                  padding:
-                                      EdgeInsets.only(top: screenWidth * 0.05),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Container(
-                                        width: screenWidth * 0.9,
-                                        height: screenWidth * 0.14,
-                                      ),
-                                      Positioned(
-                                          left: screenWidth * 0.18,
-                                          child: Container(
-                                            width: screenWidth * 0.14,
-                                            height: screenWidth * 0.14,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: AssetImage(
-                                                      "assets/food/hakagure_ramen/yakiudon.jpg"),
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8.0))),
-                                          )),
-                                      Positioned(
-                                          left: screenWidth * 0.32 + 20,
-                                          height: screenWidth * 0.14,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Row(
-                                                children: <Widget>[
-                                                  Text(
-                                                    "Ramen Yu Na  ",
-                                                    style: Styles.customStyle(
-                                                        "mediumblack"),
-                                                  ),
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            4, 2, 4, 2),
-                                                    child: Text(
-                                                      "4.9",
-                                                      style: Styles.customStyle(
-                                                          "smallboldwhite"),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  4)),
-                                                      color: Styles.orange,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text("IDR 195.000",
-                                                  style: Styles.customStyle(
-                                                      "smallblack")),
-                                              Text(
-                                                "Japanese",
-                                                style: Styles.customStyle(
-                                                    "smallgray"),
-                                              )
-                                            ],
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                // End of Food Content
-                              ],
-                            ),
-                          ), // End of Favorite Content
-                        ],
-                      ),
-                    ),
-
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(top: 10),
-                      child: Column(
-                        children: <Widget>[
-                          // Favorite's Content
-                          Container(
-                            padding: EdgeInsets.fromLTRB(
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05,
-                                screenWidth * 0.05),
-                            child: Column(
-                              children: <Widget>[
-                                Stack(
-                                  children: <Widget>[
-                                    Container(
-                                      width: screenWidth * 0.9,
-                                      height: screenWidth * 0.22,
-                                    ),
-                                    Positioned(
-                                        top: 0,
-                                        left: 0,
-                                        child: Stack(
-                                          children: <Widget>[
-                                            // Restaurant Image
-                                            Container(
-                                                width: screenWidth * 0.22 + 4,
-                                                height: screenWidth * 0.22),
-                                            Positioned(
-                                                left: 4,
-                                                child: Container(
-                                                  width: screenWidth * 0.22,
-                                                  height: screenWidth * 0.22,
-                                                  decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                            "assets/restaurant/5cf3dc9b57ad28bc6434f828e11fd83f.jpg"),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  8.0))),
-                                                )),
-                                            Positioned(
-                                              top: 10,
-                                              left: 0,
-                                              child: Container(
-                                                  width: 40,
-                                                  height: 18,
-                                                  child: Image.asset(
-                                                      "assets/icon/rating_page.png")),
-                                            ),
-                                            Positioned(
-                                              top: 11,
-                                              left: 3,
-                                              child: Container(
-                                                child: Row(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      "4.2 ",
-                                                      style: Styles.customStyle(
-                                                          "smallwhite"),
-                                                    ),
-                                                    Image.asset(
-                                                        "assets/icon/w_star.png",
-                                                        width: 12,
-                                                        height: 12)
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            // End of image
-                                          ],
-                                        )),
-                                    // Text
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        left: screenWidth * 0.22 + 20,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              "Mexican Rud",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack"),
-                                            ),
-                                            Text("Open 7am - 11pm",
-                                                style: Styles.customStyle(
-                                                    "smallblack")),
-                                            Text("No. 1 Snow Street, Surabaya",
-                                                style: Styles.customStyle(
-                                                    "smallgray")),
-                                            Text(
-                                              "American Coffee",
-                                              style: Styles.customStyle(
-                                                  "smallgray"),
-                                            )
-                                          ],
-                                        )),
-                                    Positioned(
-                                        height: screenWidth * 0.22,
-                                        right: 0,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
-                                          children: <Widget>[
-                                            Column(
-                                              children: <Widget>[
-                                                Text("16",
-                                                    style: Styles.customStyle(
-                                                        "mediumboldblack")),
-                                                Text("KM",
-                                                    style: Styles.customStyle(
-                                                        "smallblack")),
-                                              ],
-                                            ),
-                                            Image.asset("assets/icon/fav.png",
-                                                width: 18, height: 18)
-                                          ],
-                                        )),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ), // End of Favorite Content
-                        ],
-                      ),
-                    ),
-                  ],
-                ))
+                color: Colors.white,
+                height: screenHeight - 88,
+                child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                        itemCount: restoList.length,
+                        // shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CustomRestoTile(
+                              r: restoList[index],
+                              screenWidth: screenWidth,
+                              screenHeight: screenHeight,
+                              addToCart: widget.addToCart,
+                              lastCart: widget.lastCart);
+                        })))
 
             // Code the contents here
           ],

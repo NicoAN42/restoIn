@@ -9,8 +9,9 @@ class Food {
   int price;
   List<String> type;
   List<double> rating;
+  String desc;
 
-  Food({this.image, this.name, this.price, this.type, this.rating});
+  Food({this.image, this.name, this.price, this.type, this.rating, this.desc});
 
   DecorationImage getImage() {
     return DecorationImage(image: AssetImage(image), fit: BoxFit.cover);

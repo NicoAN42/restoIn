@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:restoin/models/cart.dart';
 import 'package:restoin/models/restaurant.dart';
 import 'package:restoin/screens/change_order_type_screen.dart';
+import 'package:restoin/screens/favorite_screen.dart';
 import 'package:restoin/screens/filter_screen.dart';
 import 'package:restoin/screens/location_screen.dart';
 import 'package:restoin/screens/order_main_screen.dart';
@@ -15,6 +16,7 @@ import 'package:restoin/widgets/custom_list_tile.dart';
 import 'activity_screen.dart';
 import 'notification_screen.dart';
 import 'profile_screen.dart';
+import 'resto_and_food/resto_menu_screen.dart';
 import 'search_screen.dart';
 import 'wallet_screen.dart';
 
@@ -152,7 +154,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, "/favorite"),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => FavoriteScreen(
+                                  addToCart: _addToCart, lastCart: _curCart))),
                       child: Container(
                         child: Image.asset('assets/icon/fav.png',
                             width: 20, height: 20),
@@ -379,510 +385,550 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     children: <Widget>[
                       // Produk - 1
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                              margin:
-                                  EdgeInsets.only(right: screenWidth * 0.05),
-                              width: screenWidth * 0.425 + 9,
-                              height: screenWidth * 2),
-                          Positioned(
-                              left: 6,
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RestoMenuScreen(
+                                      addToCart: _addToCart,
+                                      lastCart: _curCart,
+                                      r: restoList[0],
+                                    ))),
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                                margin:
+                                    EdgeInsets.only(right: screenWidth * 0.05),
+                                width: screenWidth * 0.425 + 9,
+                                height: screenWidth * 2),
+                            Positioned(
+                                left: 6,
+                                child: Container(
+                                  width: screenWidth * 0.425 + 3,
+                                  height: screenWidth * 0.50,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            "assets/food/square/chunkyPie.jpg"),
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0))),
+                                )),
+                            Positioned(
+                              top: screenWidth * 0.05,
+                              left: 0,
                               child: Container(
-                                width: screenWidth * 0.425 + 3,
-                                height: screenWidth * 0.50,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          "assets/food/square/chunkyPie.jpg"),
+                                  width: 60,
+                                  height: 28,
+                                  child: Image.asset(
+                                      "assets/icon/rating_page.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.02,
+                              left: screenWidth * 0.30,
+                              child: Container(
+                                  width: 50,
+                                  height: 52,
+                                  child: Image.asset(
+                                      "assets/icon/disc_circle.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.05 + 3,
+                              left: 8,
+                              child: Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "5.0 ",
+                                      style: Styles.customStyle("mediumwhite"),
                                     ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8.0))),
-                              )),
-                          Positioned(
-                            top: screenWidth * 0.05,
-                            left: 0,
-                            child: Container(
-                                width: 60,
-                                height: 28,
-                                child:
-                                    Image.asset("assets/icon/rating_page.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.02,
-                            left: screenWidth * 0.30,
-                            child: Container(
-                                width: 50,
-                                height: 52,
-                                child:
-                                    Image.asset("assets/icon/disc_circle.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.05 + 3,
-                            left: 8,
-                            child: Container(
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    "5.0 ",
-                                    style: Styles.customStyle("mediumwhite"),
-                                  ),
-                                  Image.asset("assets/icon/w_star.png",
-                                      width: 16, height: 16)
-                                ],
+                                    Image.asset("assets/icon/w_star.png",
+                                        width: 16, height: 16)
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.05,
-                            left: screenWidth * 0.3 + 8,
-                            child: Container(
-                                child: Column(
-                              children: <Widget>[
-                                Text("30%",
-                                    style:
-                                        Styles.customStyle("mediumboldorange")),
-                                Text("Off",
-                                    style: Styles.customStyle("smallorange"))
-                              ],
-                            )),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.5 + 10,
-                            left: 6,
-                            child: Container(
-                                width: screenWidth * 0.425 + 3,
-                                child: Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("Chunky Pie",
-                                              style: Styles.customStyle(
-                                                  "mediumblack")),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text("IDR 75.000",
-                                                  style: Styles.customStyle(
-                                                      "smallblack")),
-                                              Text(" Western",
-                                                  style: Styles.customStyle(
-                                                      "smallGray"))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 2,
-                                        height: 30,
-                                        color: Styles.gray,
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Text("40",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack")),
-                                          Text("MINS",
-                                              style: Styles.customStyle(
-                                                  "smallblack")),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          )
-                        ],
+                            Positioned(
+                              top: screenWidth * 0.05,
+                              left: screenWidth * 0.3 + 8,
+                              child: Container(
+                                  child: Column(
+                                children: <Widget>[
+                                  Text("30%",
+                                      style: Styles.customStyle(
+                                          "mediumboldorange")),
+                                  Text("Off",
+                                      style: Styles.customStyle("smallorange"))
+                                ],
+                              )),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.5 + 10,
+                              left: 6,
+                              child: Container(
+                                  width: screenWidth * 0.425 + 3,
+                                  child: Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("Chunky Pie",
+                                                style: Styles.customStyle(
+                                                    "mediumblack")),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text("IDR 75.000",
+                                                    style: Styles.customStyle(
+                                                        "smallblack")),
+                                                Text(" Western",
+                                                    style: Styles.customStyle(
+                                                        "smallGray"))
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                          width: 2,
+                                          height: 30,
+                                          color: Styles.gray,
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text("4",
+                                                style: Styles.customStyle(
+                                                    "mediumboldblack")),
+                                            Text("KM",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                            )
+                          ],
+                        ),
                       ),
                       // Produk 2
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                              margin:
-                                  EdgeInsets.only(right: screenWidth * 0.05),
-                              width: screenWidth * 0.425 + 6,
-                              height: screenWidth * 2),
-                          Positioned(
-                              left: 6,
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RestoMenuScreen(
+                                      addToCart: _addToCart,
+                                      lastCart: _curCart,
+                                      r: restoList[1],
+                                    ))),
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                                margin:
+                                    EdgeInsets.only(right: screenWidth * 0.05),
+                                width: screenWidth * 0.425 + 6,
+                                height: screenWidth * 2),
+                            Positioned(
+                                left: 6,
+                                child: Container(
+                                  width: screenWidth * 0.425,
+                                  height: screenWidth * 0.50,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            "assets/food/square/zucchini-chickpea-feta-veggie-burgers-GF-square1.jpg"),
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0))),
+                                )),
+                            Positioned(
+                              top: screenWidth * 0.05,
+                              left: 0,
                               child: Container(
-                                width: screenWidth * 0.425,
-                                height: screenWidth * 0.50,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          "assets/food/square/zucchini-chickpea-feta-veggie-burgers-GF-square1.jpg"),
+                                  width: 60,
+                                  height: 28,
+                                  child: Image.asset(
+                                      "assets/icon/rating_page.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.02,
+                              left: screenWidth * 0.30,
+                              child: Container(
+                                  width: 50,
+                                  height: 52,
+                                  child: Image.asset(
+                                      "assets/icon/disc_circle.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.05 + 3,
+                              left: 8,
+                              child: Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "4.5 ",
+                                      style: Styles.customStyle("mediumwhite"),
                                     ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8.0))),
-                              )),
-                          Positioned(
-                            top: screenWidth * 0.05,
-                            left: 0,
-                            child: Container(
-                                width: 60,
-                                height: 28,
-                                child:
-                                    Image.asset("assets/icon/rating_page.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.02,
-                            left: screenWidth * 0.30,
-                            child: Container(
-                                width: 50,
-                                height: 52,
-                                child:
-                                    Image.asset("assets/icon/disc_circle.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.05 + 3,
-                            left: 8,
-                            child: Container(
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    "4.5 ",
-                                    style: Styles.customStyle("mediumwhite"),
-                                  ),
-                                  Image.asset("assets/icon/w_star.png",
-                                      width: 16, height: 16)
-                                ],
+                                    Image.asset("assets/icon/w_star.png",
+                                        width: 16, height: 16)
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.05,
-                            left: screenWidth * 0.3 + 8,
-                            child: Container(
-                                child: Column(
-                              children: <Widget>[
-                                Text("60%",
-                                    style:
-                                        Styles.customStyle("mediumboldorange")),
-                                Text("Off",
-                                    style: Styles.customStyle("smallorange"))
-                              ],
-                            )),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.5 + 10,
-                            left: 6,
-                            child: Container(
-                                width: screenWidth * 0.425,
-                                child: Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("Mega Burger",
-                                              style: Styles.customStyle(
-                                                  "mediumblack")),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text("IDR 40.000",
-                                                  style: Styles.customStyle(
-                                                      "smallblack")),
-                                              Text(" Western",
-                                                  style: Styles.customStyle(
-                                                      "smallGray"))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 2,
-                                        height: 30,
-                                        color: Styles.gray,
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Text("25",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack")),
-                                          Text("MINS",
-                                              style: Styles.customStyle(
-                                                  "smallblack")),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          )
-                        ],
+                            Positioned(
+                              top: screenWidth * 0.05,
+                              left: screenWidth * 0.3 + 8,
+                              child: Container(
+                                  child: Column(
+                                children: <Widget>[
+                                  Text("60%",
+                                      style: Styles.customStyle(
+                                          "mediumboldorange")),
+                                  Text("Off",
+                                      style: Styles.customStyle("smallorange"))
+                                ],
+                              )),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.5 + 10,
+                              left: 6,
+                              child: Container(
+                                  width: screenWidth * 0.425,
+                                  child: Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("Zucchini Chickpea",
+                                                style: Styles.customStyle(
+                                                    "mediumblack")),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text("IDR 55.000",
+                                                    style: Styles.customStyle(
+                                                        "smallblack")),
+                                                Text(" Western",
+                                                    style: Styles.customStyle(
+                                                        "smallGray"))
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                          width: 2,
+                                          height: 30,
+                                          color: Styles.gray,
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text("15",
+                                                style: Styles.customStyle(
+                                                    "mediumboldblack")),
+                                            Text("KM",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                            )
+                          ],
+                        ),
                       ),
                       // Produk 3
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                              margin:
-                                  EdgeInsets.only(right: screenWidth * 0.05),
-                              width: screenWidth * 0.425 + 6,
-                              height: screenWidth * 2),
-                          Positioned(
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RestoMenuScreen(
+                                      addToCart: _addToCart,
+                                      lastCart: _curCart,
+                                      r: restoList[3],
+                                    ))),
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                                margin:
+                                    EdgeInsets.only(right: screenWidth * 0.05),
+                                width: screenWidth * 0.425 + 6,
+                                height: screenWidth * 2),
+                            Positioned(
+                                left: 6,
+                                child: Container(
+                                  width: screenWidth * 0.425,
+                                  height: screenWidth * 0.50,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            "assets/food/hakagure_ramen/yakiudon.jpg"),
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0))),
+                                )),
+                            Positioned(
+                              top: screenWidth * 0.05,
+                              left: 0,
+                              child: Container(
+                                  width: 60,
+                                  height: 28,
+                                  child: Image.asset(
+                                      "assets/icon/rating_page.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.02,
+                              left: screenWidth * 0.30,
+                              child: Container(
+                                  width: 50,
+                                  height: 52,
+                                  child: Image.asset(
+                                      "assets/icon/disc_circle.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.05 + 3,
+                              left: 8,
+                              child: Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "5.0 ",
+                                      style: Styles.customStyle("mediumwhite"),
+                                    ),
+                                    Image.asset("assets/icon/w_star.png",
+                                        width: 16, height: 16)
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.04,
+                              left: screenWidth * 0.3 + 8,
+                              child: Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Text("Buy",
+                                            style: Styles.customStyle(
+                                                "smallorange")),
+                                        Text("Get",
+                                            style: Styles.customStyle(
+                                                "smallorange")),
+                                      ],
+                                    ),
+                                    Text("1",
+                                        style: Styles.customStyle(
+                                            "largerboldorange")),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.5 + 10,
                               left: 6,
                               child: Container(
-                                width: screenWidth * 0.425,
-                                height: screenWidth * 0.50,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          "assets/food/square/miso-rice-noodle-ramen-vegetarian-lede-62.jpg"),
+                                  width: screenWidth * 0.425,
+                                  child: Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("Yaki Udon",
+                                                style: Styles.customStyle(
+                                                    "mediumblack")),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text("IDR 34.000",
+                                                    style: Styles.customStyle(
+                                                        "smallblack")),
+                                                Text(" Japan",
+                                                    style: Styles.customStyle(
+                                                        "smallGray"))
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                          width: 2,
+                                          height: 30,
+                                          color: Styles.gray,
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text("12",
+                                                style: Styles.customStyle(
+                                                    "mediumboldblack")),
+                                            Text("KM",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                          ],
+                                        )
+                                      ],
                                     ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8.0))),
-                              )),
-                          Positioned(
-                            top: screenWidth * 0.05,
-                            left: 0,
-                            child: Container(
-                                width: 60,
-                                height: 28,
-                                child:
-                                    Image.asset("assets/icon/rating_page.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.02,
-                            left: screenWidth * 0.30,
-                            child: Container(
-                                width: 50,
-                                height: 52,
-                                child:
-                                    Image.asset("assets/icon/disc_circle.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.05 + 3,
-                            left: 8,
-                            child: Container(
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    "5.0 ",
-                                    style: Styles.customStyle("mediumwhite"),
-                                  ),
-                                  Image.asset("assets/icon/w_star.png",
-                                      width: 16, height: 16)
-                                ],
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.04,
-                            left: screenWidth * 0.3 + 8,
-                            child: Container(
-                              child: Row(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Text("Buy",
-                                          style: Styles.customStyle(
-                                              "smallorange")),
-                                      Text("Get",
-                                          style: Styles.customStyle(
-                                              "smallorange")),
-                                    ],
-                                  ),
-                                  Text("1",
-                                      style: Styles.customStyle(
-                                          "largerboldorange")),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.5 + 10,
-                            left: 6,
-                            child: Container(
-                                width: screenWidth * 0.425,
-                                child: Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("Ramen Yu Na",
-                                              style: Styles.customStyle(
-                                                  "mediumblack")),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text("IDR 195.000",
-                                                  style: Styles.customStyle(
-                                                      "smallblack")),
-                                              Text(" Japan",
-                                                  style: Styles.customStyle(
-                                                      "smallGray"))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 2,
-                                        height: 30,
-                                        color: Styles.gray,
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Text("40",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack")),
-                                          Text("MINS",
-                                              style: Styles.customStyle(
-                                                  "smallblack")),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          )
-                        ],
+                                  )),
+                            )
+                          ],
+                        ),
                       ),
                       // Produk 4
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                              margin:
-                                  EdgeInsets.only(right: screenWidth * 0.05),
-                              width: screenWidth * 0.425 + 6,
-                              height: screenWidth * 2),
-                          Positioned(
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RestoMenuScreen(
+                                      addToCart: _addToCart,
+                                      lastCart: _curCart,
+                                      r: restoList[1],
+                                    ))),
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                                margin:
+                                    EdgeInsets.only(right: screenWidth * 0.05),
+                                width: screenWidth * 0.425 + 6,
+                                height: screenWidth * 2),
+                            Positioned(
+                                left: 6,
+                                child: Container(
+                                  width: screenWidth * 0.425,
+                                  height: screenWidth * 0.50,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            "assets/food/square/socca-pesto-pizza-81.jpg"),
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0))),
+                                )),
+                            Positioned(
+                              top: screenWidth * 0.05,
+                              left: 0,
+                              child: Container(
+                                  width: 60,
+                                  height: 28,
+                                  child: Image.asset(
+                                      "assets/icon/rating_page.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.02,
+                              left: screenWidth * 0.30,
+                              child: Container(
+                                  width: 50,
+                                  height: 52,
+                                  child: Image.asset(
+                                      "assets/icon/disc_circle.png")),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.05 + 3,
+                              left: 8,
+                              child: Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Text(
+                                      "5.0 ",
+                                      style: Styles.customStyle("mediumwhite"),
+                                    ),
+                                    Image.asset("assets/icon/w_star.png",
+                                        width: 16, height: 16)
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.04,
+                              left: screenWidth * 0.3 + 8,
+                              child: Container(
+                                child: Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Text("Buy",
+                                            style: Styles.customStyle(
+                                                "smallorange")),
+                                        Text("Get",
+                                            style: Styles.customStyle(
+                                                "smallorange")),
+                                      ],
+                                    ),
+                                    Text("1",
+                                        style: Styles.customStyle(
+                                            "largerboldorange")),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: screenWidth * 0.5 + 10,
                               left: 6,
                               child: Container(
-                                width: screenWidth * 0.425,
-                                height: screenWidth * 0.50,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          "assets/food/square/socca-pesto-pizza-81.jpg"),
+                                  width: screenWidth * 0.425,
+                                  child: Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text("Socca Pizza",
+                                                style: Styles.customStyle(
+                                                    "mediumblack")),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text("IDR 70.000",
+                                                    style: Styles.customStyle(
+                                                        "smallblack")),
+                                                Text(" Western",
+                                                    style: Styles.customStyle(
+                                                        "smallGray"))
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                          width: 2,
+                                          height: 30,
+                                          color: Styles.gray,
+                                        ),
+                                        Column(
+                                          children: <Widget>[
+                                            Text("15",
+                                                style: Styles.customStyle(
+                                                    "mediumboldblack")),
+                                            Text("KM",
+                                                style: Styles.customStyle(
+                                                    "smallblack")),
+                                          ],
+                                        )
+                                      ],
                                     ),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8.0))),
-                              )),
-                          Positioned(
-                            top: screenWidth * 0.05,
-                            left: 0,
-                            child: Container(
-                                width: 60,
-                                height: 28,
-                                child:
-                                    Image.asset("assets/icon/rating_page.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.02,
-                            left: screenWidth * 0.30,
-                            child: Container(
-                                width: 50,
-                                height: 52,
-                                child:
-                                    Image.asset("assets/icon/disc_circle.png")),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.05 + 3,
-                            left: 8,
-                            child: Container(
-                              child: Row(
-                                children: <Widget>[
-                                  Text(
-                                    "5.0 ",
-                                    style: Styles.customStyle("mediumwhite"),
-                                  ),
-                                  Image.asset("assets/icon/w_star.png",
-                                      width: 16, height: 16)
-                                ],
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.04,
-                            left: screenWidth * 0.3 + 8,
-                            child: Container(
-                              child: Row(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Text("Buy",
-                                          style: Styles.customStyle(
-                                              "smallorange")),
-                                      Text("Get",
-                                          style: Styles.customStyle(
-                                              "smallorange")),
-                                    ],
-                                  ),
-                                  Text("1",
-                                      style: Styles.customStyle(
-                                          "largerboldorange")),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: screenWidth * 0.5 + 10,
-                            left: 6,
-                            child: Container(
-                                width: screenWidth * 0.425,
-                                child: Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text("Vegetable Pizza",
-                                              style: Styles.customStyle(
-                                                  "mediumblack")),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text("IDR 240.000",
-                                                  style: Styles.customStyle(
-                                                      "smallblack")),
-                                              Text(" Western",
-                                                  style: Styles.customStyle(
-                                                      "smallGray"))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      Container(
-                                        width: 2,
-                                        height: 30,
-                                        color: Styles.gray,
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Text("60",
-                                              style: Styles.customStyle(
-                                                  "mediumboldblack")),
-                                          Text("MINS",
-                                              style: Styles.customStyle(
-                                                  "smallblack")),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          )
-                        ],
+                                  )),
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -982,311 +1028,351 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: <Widget>[
                     // Food 1
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          width: screenWidth,
-                          height: screenWidth * 0.60 + 80,
-                        ),
-                        Positioned(
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Container(
-                            width: screenWidth * 0.9,
-                            height: screenWidth * 0.60,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/food/landscape/BACKYARD+FARMS+TOMATOES_JUNE+2015_BRIAN+SAMUELS+PHOTOGRAPHY-0295.jpg")),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
-                            ),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestoMenuScreen(
+                                    addToCart: _addToCart,
+                                    lastCart: _curCart,
+                                    r: restoList[2],
+                                  ))),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            width: screenWidth,
+                            height: screenWidth * 0.60 + 80,
                           ),
-                        ),
-                        Positioned(
-                          top: screenWidth * 0.60 + 10,
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("Lamb Da Grilled",
-                                      style: Styles.customStyle("largeblack")),
-                                  Text("IDR 75.000",
-                                      style: Styles.customStyle("mediumblack")),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            "4.0 ",
-                                            style: Styles.customStyle(
-                                                "mediumboldblack"),
-                                          ),
-                                          Image.asset("assets/icon/b_star.png",
-                                              width: 16, height: 16),
-                                        ],
-                                      ),
-                                      Text(
-                                        "Western",
-                                        style: Styles.customStyle(
-                                            "mediumlightGray"),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    width: 2,
-                                    height: 40,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("40",
-                                          style: Styles.customStyle(
-                                              "largeboldblack")),
-                                      Text("MINS",
-                                          style:
-                                              Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    // Food 2
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          width: screenWidth,
-                          height: screenWidth * 0.60 + 80,
-                        ),
-                        Positioned(
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Container(
-                            width: screenWidth * 0.9,
-                            height: screenWidth * 0.60,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/food/landscape/Citrus-Poppy-Seed-Almond-Flour-Pancakes-2.jpg")),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: screenWidth * 0.60 + 10,
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("Fresh Paladise Lone",
-                                      style: Styles.customStyle("largeblack")),
-                                  Row(
-                                    children: <Widget>[
-                                      Text("IDR 175.000  ",
-                                          style: Styles.customStyle(
-                                              "mediumblack")),
-                                      Text("200.000",
-                                          style: TextStyle(
-                                              color: Styles.gray,
-                                              fontSize: 16,
-                                              decoration:
-                                                  TextDecoration.lineThrough)),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            "4.0 ",
-                                            style: Styles.customStyle(
-                                                "mediumboldblack"),
-                                          ),
-                                          Image.asset("assets/icon/b_star.png",
-                                              width: 16, height: 16),
-                                        ],
-                                      ),
-                                      Text(
-                                        "Western",
-                                        style: Styles.customStyle(
-                                            "mediumlightGray"),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    width: 2,
-                                    height: 40,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("40",
-                                          style: Styles.customStyle(
-                                              "largeboldblack")),
-                                      Text("MINS",
-                                          style:
-                                              Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    // Food 3
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          width: screenWidth,
-                          height: screenWidth * 0.60 + 80,
-                        ),
-
-                        Positioned(
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Container(
-                            width: screenWidth * 0.9,
-                            height: screenWidth * 0.60,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/food/landscape/GreenLasadaPasta.jpg")),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
-                            ),
-                          ),
-                        ),
-
-                        // Overlay
-                        Positioned(
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Opacity(
-                            opacity: 0.6,
+                          Positioned(
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
                             child: Container(
                               width: screenWidth * 0.9,
                               height: screenWidth * 0.60,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                  color: Styles.black),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/food/gerald_venue/pumpkinryechoco.jpg")),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          top: screenWidth * 0.30 - 15,
-                          left: 0,
-                          right: 0,
-                          child: Center(
-                            child: Text("Out of Stock",
-                                style: Styles.customStyle("largerboldwhite")),
-                          ),
-                        ),
-
-                        Positioned(
-                          top: screenWidth * 0.60 + 10,
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("Green Lasada Pasta",
-                                      style: Styles.customStyle("largeblack")),
-                                  Row(
-                                    children: <Widget>[
-                                      Text("IDR 55.000  ",
+                          Positioned(
+                            top: screenWidth * 0.60 + 10,
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("Pumpkin Rye Choco",
+                                        style:
+                                            Styles.customStyle("largeblack")),
+                                    Text("IDR 75.000",
+                                        style:
+                                            Styles.customStyle("mediumblack")),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              "4.0 ",
+                                              style: Styles.customStyle(
+                                                  "mediumboldblack"),
+                                            ),
+                                            Image.asset(
+                                                "assets/icon/b_star.png",
+                                                width: 16,
+                                                height: 16),
+                                          ],
+                                        ),
+                                        Text(
+                                          "Western",
                                           style: Styles.customStyle(
-                                              "mediumblack")),
-                                      Text("200.000",
-                                          style: TextStyle(
-                                              color: Styles.gray,
-                                              fontSize: 16,
-                                              decoration:
-                                                  TextDecoration.lineThrough)),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            "4.0 ",
+                                              "mediumlightGray"),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      width: 2,
+                                      height: 40,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("9.3",
                                             style: Styles.customStyle(
-                                                "mediumboldblack"),
-                                          ),
-                                          Image.asset("assets/icon/b_star.png",
-                                              width: 16, height: 16),
-                                        ],
-                                      ),
-                                      Text(
-                                        "Western",
-                                        style: Styles.customStyle(
-                                            "mediumlightGray"),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    width: 2,
-                                    height: 40,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("40",
-                                          style: Styles.customStyle(
-                                              "largeboldblack")),
-                                      Text("MINS",
-                                          style:
-                                              Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
+                                                "largeboldblack")),
+                                        Text("KM",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+
+                    // Food 2
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestoMenuScreen(
+                                    addToCart: _addToCart,
+                                    lastCart: _curCart,
+                                    r: restoList[4],
+                                  ))),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            width: screenWidth,
+                            height: screenWidth * 0.60 + 80,
+                          ),
+                          Positioned(
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Container(
+                              width: screenWidth * 0.9,
+                              height: screenWidth * 0.60,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/food/chinese_resident/tofuasparagusrolls.jpg")),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: screenWidth * 0.60 + 10,
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("Tofu Asparagus Rolls",
+                                        style:
+                                            Styles.customStyle("largeblack")),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("IDR 30.000  ",
+                                            style: Styles.customStyle(
+                                                "mediumblack")),
+                                        Text("50.000",
+                                            style: TextStyle(
+                                                color: Styles.gray,
+                                                fontSize: 16,
+                                                decoration: TextDecoration
+                                                    .lineThrough)),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              "4.0 ",
+                                              style: Styles.customStyle(
+                                                  "mediumboldblack"),
+                                            ),
+                                            Image.asset(
+                                                "assets/icon/b_star.png",
+                                                width: 16,
+                                                height: 16),
+                                          ],
+                                        ),
+                                        Text(
+                                          "Chinese",
+                                          style: Styles.customStyle(
+                                              "mediumlightGray"),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      width: 2,
+                                      height: 40,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("7.0",
+                                            style: Styles.customStyle(
+                                                "largeboldblack")),
+                                        Text("KM",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    // Food 3
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestoMenuScreen(
+                                    addToCart: _addToCart,
+                                    lastCart: _curCart,
+                                    r: restoList[5],
+                                  ))),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            width: screenWidth,
+                            height: screenWidth * 0.60 + 80,
+                          ),
+
+                          Positioned(
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Container(
+                              width: screenWidth * 0.9,
+                              height: screenWidth * 0.60,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/food/altar_ruins_resto/pizzacornbread.jpg")),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
+                            ),
+                          ),
+
+                          // Overlay
+                          Positioned(
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Opacity(
+                              opacity: 0.6,
+                              child: Container(
+                                width: screenWidth * 0.9,
+                                height: screenWidth * 0.60,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                    color: Styles.black),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: screenWidth * 0.30 - 15,
+                            left: 0,
+                            right: 0,
+                            child: Center(
+                              child: Text("Out of Stock",
+                                  style: Styles.customStyle("largerboldwhite")),
+                            ),
+                          ),
+
+                          Positioned(
+                            top: screenWidth * 0.60 + 10,
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("Pizza Cornbread",
+                                        style:
+                                            Styles.customStyle("largeblack")),
+                                    Row(
+                                      children: <Widget>[
+                                        Text("IDR 47.000  ",
+                                            style: Styles.customStyle(
+                                                "mediumblack")),
+                                        Text("80.000",
+                                            style: TextStyle(
+                                                color: Styles.gray,
+                                                fontSize: 16,
+                                                decoration: TextDecoration
+                                                    .lineThrough)),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              "4.0 ",
+                                              style: Styles.customStyle(
+                                                  "mediumboldblack"),
+                                            ),
+                                            Image.asset(
+                                                "assets/icon/b_star.png",
+                                                width: 16,
+                                                height: 16),
+                                          ],
+                                        ),
+                                        Text(
+                                          "Western",
+                                          style: Styles.customStyle(
+                                              "mediumlightGray"),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      width: 2,
+                                      height: 40,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("2.5",
+                                            style: Styles.customStyle(
+                                                "largeboldblack")),
+                                        Text("KM",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -1314,202 +1400,230 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: <Widget>[
                     // Restaurant 1
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          width: screenWidth,
-                          height: screenWidth * 0.60 + 80,
-                        ),
-                        Positioned(
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Container(
-                            width: screenWidth * 0.9,
-                            height: screenWidth * 0.60,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/restaurant/hakagureRamen.jpg")),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
-                            ),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestoMenuScreen(
+                                    addToCart: _addToCart,
+                                    lastCart: _curCart,
+                                    r: restoList[3],
+                                  ))),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            width: screenWidth,
+                            height: screenWidth * 0.60 + 80,
                           ),
-                        ),
-                        Positioned(
-                          top: screenWidth * 0.60 + 10,
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("De Luna Resto",
-                                      style: Styles.customStyle("largeblack")),
-                                  Text("Open 7am - 11pm",
-                                      style: Styles.customStyle("mediumblack")),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            "4.0 ",
-                                            style: Styles.customStyle(
-                                                "mediumboldblack"),
-                                          ),
-                                          Image.asset("assets/icon/b_star.png",
-                                              width: 16, height: 16),
-                                        ],
-                                      ),
-                                      Text(
-                                        "Chinese",
-                                        style: Styles.customStyle(
-                                            "mediumlightGray"),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    width: 2,
-                                    height: 40,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("40",
-                                          style: Styles.customStyle(
-                                              "largeboldblack")),
-                                      Text("MINS",
-                                          style:
-                                              Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    // Restaurant 2
-                    Stack(
-                      children: <Widget>[
-                        Container(
-                          width: screenWidth,
-                          height: screenWidth * 0.60 + 80,
-                        ),
-                        Positioned(
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Container(
-                            width: screenWidth * 0.9,
-                            height: screenWidth * 0.60,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/restaurant/thumb-1920-444393.jpg")),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8.0)),
-                            ),
-                          ),
-                        ),
-
-                        // Overlay
-                        Positioned(
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Opacity(
-                            opacity: 0.6,
+                          Positioned(
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
                             child: Container(
                               width: screenWidth * 0.9,
                               height: screenWidth * 0.60,
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                  color: Styles.black),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/restaurant/hakagureRamen.jpg")),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          top: screenWidth * 0.30 - 15,
-                          left: 0,
-                          right: 0,
-                          child: Center(
-                            child: Text("Restaurant is Closed",
-                                style: Styles.customStyle("largerboldwhite")),
-                          ),
-                        ),
-
-                        Positioned(
-                          top: screenWidth * 0.60 + 10,
-                          left: screenWidth * 0.05,
-                          right: screenWidth * 0.05,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("High Tower Cuisine",
-                                      style: Styles.customStyle("largeblack")),
-                                  Text("Open 9am - 12pm",
-                                      style: Styles.customStyle("mediumblack")),
-                                ],
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            "3.2 ",
-                                            style: Styles.customStyle(
-                                                "mediumboldblack"),
-                                          ),
-                                          Image.asset("assets/icon/b_star.png",
-                                              width: 16, height: 16),
-                                        ],
-                                      ),
-                                      Text(
-                                        "American",
-                                        style: Styles.customStyle(
-                                            "mediumlightGray"),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    width: 2,
-                                    height: 40,
-                                    color: Styles.gray,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Text("20",
+                          Positioned(
+                            top: screenWidth * 0.60 + 10,
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("Hakagure Ramen",
+                                        style:
+                                            Styles.customStyle("largeblack")),
+                                    Text("Open 10am - 10pm",
+                                        style:
+                                            Styles.customStyle("mediumblack")),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              "4.9 ",
+                                              style: Styles.customStyle(
+                                                  "mediumboldblack"),
+                                            ),
+                                            Image.asset(
+                                                "assets/icon/b_star.png",
+                                                width: 16,
+                                                height: 16),
+                                          ],
+                                        ),
+                                        Text(
+                                          "Japanese",
                                           style: Styles.customStyle(
-                                              "largeboldblack")),
-                                      Text("MINS",
-                                          style:
-                                              Styles.customStyle("smallblack")),
-                                    ],
-                                  )
-                                ],
-                              )
-                            ],
+                                              "mediumlightGray"),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      width: 2,
+                                      height: 40,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("12.7",
+                                            style: Styles.customStyle(
+                                                "largeboldblack")),
+                                        Text("KM",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                    ),
+
+                    // Restaurant 2
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RestoMenuScreen(
+                                    addToCart: _addToCart,
+                                    lastCart: _curCart,
+                                    r: restoList[5],
+                                  ))),
+                      child: Stack(
+                        children: <Widget>[
+                          Container(
+                            width: screenWidth,
+                            height: screenWidth * 0.60 + 80,
+                          ),
+                          Positioned(
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Container(
+                              width: screenWidth * 0.9,
+                              height: screenWidth * 0.60,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        "assets/restaurant/altarRuinsResto.jpg")),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
+                            ),
+                          ),
+
+                          // Overlay
+                          Positioned(
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Opacity(
+                              opacity: 0.6,
+                              child: Container(
+                                width: screenWidth * 0.9,
+                                height: screenWidth * 0.60,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                    color: Styles.black),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: screenWidth * 0.30 - 15,
+                            left: 0,
+                            right: 0,
+                            child: Center(
+                              child: Text("Restaurant is Closed",
+                                  style: Styles.customStyle("largerboldwhite")),
+                            ),
+                          ),
+
+                          Positioned(
+                            top: screenWidth * 0.60 + 10,
+                            left: screenWidth * 0.05,
+                            right: screenWidth * 0.05,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text("Altar Ruins Resto",
+                                        style:
+                                            Styles.customStyle("largeblack")),
+                                    Text("Open 7am - 9pm",
+                                        style:
+                                            Styles.customStyle("mediumblack")),
+                                  ],
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      children: <Widget>[
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              "5.0 ",
+                                              style: Styles.customStyle(
+                                                  "mediumboldblack"),
+                                            ),
+                                            Image.asset(
+                                                "assets/icon/b_star.png",
+                                                width: 16,
+                                                height: 16),
+                                          ],
+                                        ),
+                                        Text(
+                                          "Western",
+                                          style: Styles.customStyle(
+                                              "mediumlightGray"),
+                                        ),
+                                      ],
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 10, right: 10),
+                                      width: 2,
+                                      height: 40,
+                                      color: Styles.gray,
+                                    ),
+                                    Column(
+                                      children: <Widget>[
+                                        Text("2.5",
+                                            style: Styles.customStyle(
+                                                "largeboldblack")),
+                                        Text("KM",
+                                            style: Styles.customStyle(
+                                                "smallblack")),
+                                      ],
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
