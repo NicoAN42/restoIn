@@ -197,7 +197,7 @@ class _ChangePaymentScreenState extends State<ChangePaymentScreen> {
               style: Styles.customStyle("mediumboldwhite"),
             )),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomAppBar(
         color: Colors.yellow,
         child: Container(height: 0),

@@ -349,7 +349,7 @@ class _ChangeOrderTypeScreenState extends State<ChangeOrderTypeScreen> {
           editOrderType: widget.editOrderType,
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomAppBar(
         color: Colors.yellow,
         child: Container(height: 0),
